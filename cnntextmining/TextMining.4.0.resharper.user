@@ -1,0 +1,108 @@
+<Configuration>
+  <UnitTestRunner>
+    <CustomStartDirectory>
+    </CustomStartDirectory>
+    <UseShadowCopy>True</UseShadowCopy>
+    <UseCustomFolder>False</UseCustomFolder>
+    <EnableUnitTesting>True</EnableUnitTesting>
+    <Providers />
+  </UnitTestRunner>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Stemming.cs" caret="0" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:IAction.cs" caret="140" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:NewsPageMetaData.cs" caret="0" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Util.cs" caret="549" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Quilifier.cs" caret="20" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Crawler.cs" caret="2539" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:SaveAction.cs" caret="421" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:WordQuilifier.cs" caret="683" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Program.cs" caret="845" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:CNNPage.cs" caret="6703" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/d:data/f:stopWords.txt" caret="0" scrollPosition="0|0" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:CNNPage.cs" caret="1373" scrollPosition="0|32" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:CNNPage.cs" caret="1741" scrollPosition="0|45" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:CNNPage.cs" caret="2421" scrollPosition="0|66" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:CNNPage.cs" caret="2921" scrollPosition="0|82" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:CNNPage.cs" caret="1530" scrollPosition="0|33" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/d:data/f:stopWords.txt" caret="169" scrollPosition="0|15" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Util.cs" caret="790" scrollPosition="0|8" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Quilifier.cs" caret="20" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:SaveAction.cs" caret="506" scrollPosition="0|16" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:WordQuilifier.cs" caret="382" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:WordQuilifier.cs" caret="702" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/d:data/f:stopWords.txt" caret="95" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/d:data/f:stopWords.txt" caret="11" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/d:data/f:stopWords.txt" caret="54" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:CNNPage.cs" caret="6557" scrollPosition="0|196" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:CNNPage.cs" caret="6719" scrollPosition="0|200" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/d:data/f:stopWords.txt" caret="773" scrollPosition="0|94" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/d:data/f:stopWords.txt" caret="734" scrollPosition="0|114" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Program.cs" caret="139" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Program.cs" caret="582" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Program.cs" caret="860" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:SaveAction.cs" caret="958" scrollPosition="0|18" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Crawler.cs" caret="250" scrollPosition="0|0" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Crawler.cs" caret="921" scrollPosition="0|18" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Crawler.cs" caret="1915" scrollPosition="0|25" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:SaveAction.cs" caret="1196" scrollPosition="0|33" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Crawler.cs" caret="1797" scrollPosition="0|25" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Crawler.cs" caret="1363" scrollPosition="0|25" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Crawler.cs" caret="1601" scrollPosition="0|25" />
+      <File id="709DCC1D-589F-483D-804E-733FBDAD6E5D/f:Crawler.cs" caret="1306" scrollPosition="0|25" />
+    </RecentEdits>
+  </RecentFiles>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="livetemplates.csharp.usevar">False</setting>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+      <setting name="UseSolutionBuilder">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="SqlConnection" priority="0" />
+      <Item value="SqlCommandBuilder" priority="1" />
+      <Item value="SqlCommand" priority="0" />
+      <Item value="Parameters" priority="3" />
+      <Item value="AddWithValue" priority="3" />
+      <Item value="uri" priority="1" />
+      <Item value="pureText" priority="2" />
+      <Item value="allLinks" priority="1" />
+      <Item value="words" priority="4" />
+      <Item value="ExecuteNonQuery" priority="0" />
+      <Item value="Open" priority="0" />
+      <Item value="AppendFormat" priority="0" />
+      <Item value="Append" priority="2" />
+      <Item value="builder" priority="0" />
+      <Item value="ToString" priority="1" />
+      <Item value="StringBuilder" priority="0" />
+      <Item value="connectionString" priority="0" />
+      <Item value="SaveAction" priority="0" />
+      <Item value="conn" priority="0" />
+      <Item value="Length" priority="7" />
+      <Item value="Remove" priority="0" />
+      <Item value="Substring" priority="1" />
+      <Item value="Split" priority="0" />
+      <Item value="wordstemp" priority="3" />
+      <Item value="Add" priority="2" />
+      <Item value="Count" priority="0" />
+      <Item value="ReadAllLines" priority="0" />
+      <Item value="ContainsKey" priority="1" />
+      <Item value="Exception" priority="0" />
+      <Item value="WordQuilifier" priority="0" />
+      <Item value="ToLower" priority="0" />
+      <Item value="Trim" priority="1" />
+      <Item value="Dictionary" priority="0" />
+      <Item value="OriginalString" priority="1" />
+      <Item value="links" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+</Configuration>

@@ -1,0 +1,11 @@
+E:\my files\studia\Hurtownie danych i data mining\Projekt\TextMining\TextMining\obj\Debug\ResolveAssemblyReference.cache
+E:\my files\studia\Hurtownie danych i data mining\Projekt\TextMining\TextMining\bin\Debug\TextMining.exe
+E:\my files\studia\Hurtownie danych i data mining\Projekt\TextMining\TextMining\bin\Debug\TextMining.pdb
+E:\my files\studia\Hurtownie danych i data mining\Projekt\TextMining\TextMining\obj\Debug\TextMining.exe
+E:\my files\studia\Hurtownie danych i data mining\Projekt\TextMining\TextMining\obj\Debug\TextMining.pdb
+C:\Users\marcin\Desktop\TextMining\TextMining\TextMining\obj\Debug\TextMining.exe
+C:\Users\marcin\Desktop\TextMining\TextMining\TextMining\obj\Debug\TextMining.pdb
+C:\Users\marcin\Desktop\TextMining\TextMining\TextMining\bin\Debug\TextMining.exe
+C:\Users\marcin\Desktop\TextMining\TextMining\TextMining\bin\Debug\TextMining.pdb
+C:\Users\marcin\Desktop\TextMining\TextMining\TextMining\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\marcin\Desktop\TextMining\TextMining\TextMining\bin\Debug\data\stopWords.txt
