@@ -1,6 +1,0 @@
-namespace TextMining
-{
-    class Quilifier
-    {
-    }
-}

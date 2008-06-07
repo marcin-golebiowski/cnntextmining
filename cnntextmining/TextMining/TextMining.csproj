@@ -57,12 +57,13 @@
     <Compile Include="Crawler.cs" />
     <Compile Include="IAction.cs" />
     <Compile Include="NewsPageMetaData.cs" />
+    <Compile Include="PersistentQueue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Quilifier.cs" />
     <Compile Include="SaveAction.cs" />
     <Compile Include="Stemming.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="VisitedPages.cs" />
     <Compile Include="WordQuilifier.cs" />
   </ItemGroup>
   <ItemGroup>

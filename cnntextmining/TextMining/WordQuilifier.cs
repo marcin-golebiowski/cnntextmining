@@ -3,10 +3,19 @@ using System.IO;
 
 namespace TextMining
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class WordQuilifier
     {
-        static Dictionary<string, string> stopWords = new Dictionary<string, string>();
+        static readonly Dictionary<string, string> stopWords = new Dictionary<string, string>();
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
         public static bool WordIsOK(string word)
         {
             if (stopWords.Count == 0)

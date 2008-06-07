@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace TextMining
 {
-    class CNNPage
+    public class CNNPage
     {
         public enum Topic { TRAVEL, SPORT, SHOWBIZ, TECH, BUSINESS, ASIA, EUROPE, US, WORLD };
 
@@ -209,8 +209,8 @@ namespace TextMining
                 string word = wordstemp[i].ToLower().Trim();
 
                 // steaming
-                word = Util.DoPorterStemming(word); 
-                
+                word = Util.DoPorterStemming(word);
+
                 if (WordQuilifier.WordIsOK(word))
                 {
                     words.Add(word);
@@ -220,7 +220,7 @@ namespace TextMining
 
         private void DontMissLinks(string page)
         {
-            Regex dontMissReg = 
+            Regex dontMissReg =
                 new Regex("<div class=\"cnnStoryElementBox\".*", RegexOptions.Singleline);
             Match md = dontMissReg.Match(page);
             string dontmiss = md.Value;
@@ -249,6 +249,44 @@ namespace TextMining
                     allLinks.Add(tmp);
                 }
             }
+        }
+
+        private Uri[] GetLinks()
+        {
+            List<Uri> links = new List<Uri>();
+
+            if (CNNPage.isTopicPage(uri))
+            {
+                Regex regex = new Regex("<a href=\"http:[^\"#?]+[\"#?]");
+                foreach (Match m in regex.Matches(Util.FetchPage(uri)))
+                {
+                    Uri tmp = new Uri(m.Value.Substring(9, m.Value.Length - 10));
+                    if (!links.Contains(tmp))
+                        links.Add(tmp);
+                }
+            }
+            else
+            {
+                CNNPage curr;
+                try
+                {
+                    curr = new CNNPage(uri);
+                    links.AddRange(curr.allLinks);
+                }
+                catch (Exception) { }
+            }
+
+            var nl = new List<Uri>();
+
+            foreach (Uri u in links)
+            {
+                if (CNNPage.IsNewsPage(u.OriginalString)
+                    || CNNPage.isTopicPage(u.OriginalString))
+                {
+                    nl.Add(u);
+                }
+            }
+            return nl.ToArray();
         }
     }
 }

@@ -1,68 +1,84 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 
 namespace TextMining
 {
-    class Crawler
+    public class Crawler
     {
-        public static Dictionary<string, bool> visititedPages =
-            new Dictionary<string, bool>();
+        private readonly SqlConnection conn;
 
-        public static void run(IAction action, int num, string[] beginUri, int delay, int max)
+        private readonly VisitedPages history;
+        private readonly PersistentQueue queue;
+        private readonly IAction action;
+        private DateTime saveTime = DateTime.MinValue;
+        
+
+        public Crawler(IAction action, SqlConnection conn)
         {
-            Queue<Uri> toProcess = new Queue<Uri>();
-
-            foreach (string url in beginUri)
-            {
-                toProcess.Enqueue(new Uri(url));
-            }
-
-            for (int i = 0; i < num; i++)
+            this.action = action;
+            this.conn = conn;
+            queue = new PersistentQueue(conn);
+            history = new VisitedPages(conn);
+        }
+        
+        public void Run()
+        {
+            while (true)
             {
                 try
                 {
-                    if (toProcess.Count == 0)
+                    Console.WriteLine("QUEUE: " + queue.Count);
+                    if (queue.Count == 0)
                     {
+                        Console.WriteLine("END");
                         break;
                     }
+                    
 
-                    Uri curr = toProcess.Dequeue();
+                    Uri curr = queue.Dequeue();
 
-                    if (!visititedPages.ContainsKey(curr.OriginalString))
+                    Console.WriteLine("PROCESSING: " + curr );
+
+                    if (!history.WasVisited(curr.OriginalString))
                     {
                         if (CNNPage.IsNewsPage(curr.OriginalString))
                         {
                             action.Do(new CNNPage(curr.OriginalString));
-                            visititedPages[curr.OriginalString] = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Not NEWS");
+                            history.Add(curr.OriginalString);
                         }
 
-                        Uri[] links = getLinks(curr.OriginalString);
+                        Uri[] links = GetLinks(curr.OriginalString);
 
-                        for (int j = 0; (j < max) && (j < links.Length); j++)
+                        foreach (var uri in links)
                         {
-                            toProcess.Enqueue(links[j]);
+                            queue.Enqueue(uri);
                         }
                     }
                     else
                     {
-                        Console.WriteLine("Skip: have been already visited");
+                        Console.WriteLine("SKIP: Page have been already visited");
                     }
-
-                  
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
                 }
+                Console.WriteLine("--");
+
+                if ((saveTime - DateTime.Now) < TimeSpan.FromSeconds(10))
+                {
+                    saveTime = DateTime.Now;
+                    queue.Save();
+                    Console.WriteLine("QUEUE SAVED");
+                }
             }
         }
 
-        private static Uri[] getLinks(string uri)
+
+
+        private static Uri[] GetLinks(string uri)
         {
             List<Uri> links = new List<Uri>();
 
@@ -87,7 +103,7 @@ namespace TextMining
                 catch (Exception) { }
             }
 
-            List<Uri> nl = new List<Uri>();
+            var nl = new List<Uri>();
 
             foreach (Uri u in links)
             {
@@ -100,4 +116,6 @@ namespace TextMining
             return nl.ToArray();
         }
     }
+
+   
 }

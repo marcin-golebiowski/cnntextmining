@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TextMining
 {
-    interface IAction
+    public interface IAction
     {
         void Do(CNNPage page);
     }
