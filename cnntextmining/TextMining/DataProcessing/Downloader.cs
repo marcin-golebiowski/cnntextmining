@@ -17,15 +17,5 @@ namespace TextMining
             response.Close();
             return responseFromServer;
         }
-
-
-        public static string DoPorterStemming(string word)
-        {
-            Stemmer s = new Stemmer();
-            s.add(word.ToCharArray(), word.Length);
-            s.stem();
-            return s.ToString();
-        }
-
     }
 }

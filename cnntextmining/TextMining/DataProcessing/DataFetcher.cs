@@ -21,7 +21,7 @@ namespace TextMining.Clastering
 
             int count = 0;
             using (var command
-                    = new SqlCommand("SELECT * FROM dbo.[News]", conn))
+                    = new SqlCommand("SELECT URL, Words, Links FROM dbo.[News]", conn))
             {
                 using (SqlDataReader reader =  command.ExecuteReader())
                 {
@@ -33,14 +33,14 @@ namespace TextMining.Clastering
                             string url = reader["URL"].ToString();
                             string words = reader["Words"].ToString();
                             string links = reader["Links"].ToString();
-                            string rawData = reader["RawData"].ToString();
+                            //string rawData = reader["RawData"].ToString();
 
 
                             var element = new News();
                             element.url = url;
                             element.words.AddRange(words.Split(';'));
                             element.links.AddRange(links.Split(';'));
-                            element.rawData = rawData;
+                            //element.rawData = rawData;
                             result.Add(element);
 
                             count++;

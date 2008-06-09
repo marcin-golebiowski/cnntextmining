@@ -59,6 +59,14 @@ namespace TextMining {
 			i_end = 0;
 		}
 
+        public static string DoPorterStemming(string word)
+        {
+            var s = new Stemmer();
+            s.add(word.ToCharArray(), word.Length);
+            s.stem();
+            return s.ToString();
+        }
+
 		/**
 		 * Add a character to the word being stemmed.  When you are finished
 		 * adding characters, you can call stem(void) to stem the word.
