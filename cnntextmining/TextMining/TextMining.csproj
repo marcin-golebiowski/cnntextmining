@@ -103,9 +103,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="sql\QueueInitialize.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Clastering\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
