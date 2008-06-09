@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using TextMining.Clastering;
 
 namespace TextMining
 {
@@ -17,8 +20,13 @@ namespace TextMining
                //crawler.Run();
 
 
-                var clastering = new Clastering(conn);
+                var dataFetcher = new Clastering.DataFetcher(conn);
 
+                DateTime start = DateTime.Now;
+                List<News> pages = dataFetcher.GetAllNews();
+                Console.WriteLine("PAGES COUNT: " + pages.Count);
+                DateTime end = DateTime.Now;
+                Console.WriteLine(end - start);
 
             }
         }

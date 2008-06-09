@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-namespace TextMining
+namespace TextMining.Crawling
 {
     public class VisitedPages
     {
@@ -43,7 +43,7 @@ namespace TextMining
         public bool WasVisited(string url)
         {
             using (var command2
-                         = new SqlCommand("SELECT Visited FROM dbo.[Pages] WHERE URL = @url", conn))
+                = new SqlCommand("SELECT Visited FROM dbo.[Pages] WHERE URL = @url", conn))
             {
                 command2.Parameters.AddWithValue("@url", url);
 
@@ -55,7 +55,7 @@ namespace TextMining
         public void SetVisited(Uri url)
         {
             using (var command2
-                     = new SqlCommand("UPDATE dbo.[Pages] SET Visited = GETDATE() WHERE URL = @url", conn))
+                = new SqlCommand("UPDATE dbo.[Pages] SET Visited = GETDATE() WHERE URL = @url", conn))
             {
                 command2.Parameters.AddWithValue("@url", url.OriginalString);
 

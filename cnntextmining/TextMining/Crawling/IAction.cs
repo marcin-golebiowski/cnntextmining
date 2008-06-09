@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TextMining.Crawling;
 
-namespace TextMining
+namespace TextMining.Crawling
 {
     public interface IAction
     {

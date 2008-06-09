@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace TextMining
+namespace TextMining.Crawling
 {
     public class PersistentQueue
     {
@@ -32,7 +32,7 @@ namespace TextMining
         public void Enqueue(Uri url)
         {
             using (var command2
-                     = new SqlCommand("INSERT INTO dbo.[Pages](URL, Created) VALUES(@url, GETDATE())", conn))
+                = new SqlCommand("INSERT INTO dbo.[Pages](URL, Created) VALUES(@url, GETDATE())", conn))
             {
                 command2.Parameters.AddWithValue("@url", url.OriginalString);
 
@@ -43,7 +43,7 @@ namespace TextMining
         public Uri Dequeue()
         {
             using (var command2
-                     = new SqlCommand("SELECT TOP 1 URL FROM dbo.[Pages] WHERE Visited IS NULL ORDER BY Created ASC", conn))
+                = new SqlCommand("SELECT TOP 1 URL FROM dbo.[Pages] WHERE Visited IS NULL ORDER BY Created ASC", conn))
             {
                 return new Uri(command2.ExecuteScalar().ToString());
             }

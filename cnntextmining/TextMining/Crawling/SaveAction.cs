@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlClient;
+using TextMining.Crawling;
 
-namespace TextMining
+namespace TextMining.Crawling
 {
     class SaveAction : IAction
     {

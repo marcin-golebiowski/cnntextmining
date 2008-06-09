@@ -53,7 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clastering\Clastering.cs" />
+    <Compile Include="Clastering\DataFetcher.cs" />
+    <Compile Include="Clastering\News.cs" />
     <Compile Include="Crawling\CNNPage.cs" />
     <Compile Include="Crawling\Crawler.cs" />
     <Compile Include="Crawling\IAction.cs" />

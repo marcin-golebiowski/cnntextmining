@@ -1,6 +1,7 @@
 using System;
+using TextMining.Crawling;
 
-namespace TextMining
+namespace TextMining.Crawling
 {
     class NewsPageMetaData
     {

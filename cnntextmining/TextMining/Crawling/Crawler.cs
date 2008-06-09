@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
+using TextMining.Crawling;
 
-namespace TextMining
+namespace TextMining.Crawling
 {
     public class Crawler
     {
@@ -54,8 +55,8 @@ namespace TextMining
                     finally
                     {
                         using (var command
-                         = new SqlCommand("UPDATE dbo.[TopicsTmp] SET Visited = GETDATE()" 
-                         + " WHERE TopicURL = @url", conn))
+                            = new SqlCommand("UPDATE dbo.[TopicsTmp] SET Visited = GETDATE()" 
+                                             + " WHERE TopicURL = @url", conn))
                         {
                             command.Parameters.AddWithValue("@url", result.ToString());
                             command.ExecuteNonQuery();
@@ -222,5 +223,5 @@ namespace TextMining
             }
             return nl.ToArray();
         }
-    }   
+    }
 }

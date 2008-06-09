@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace TextMining
+namespace TextMining.Crawling
 {
     class TopicAction 
     {
