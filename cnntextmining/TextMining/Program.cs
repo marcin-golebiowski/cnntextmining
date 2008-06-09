@@ -13,9 +13,12 @@ namespace TextMining
             {
                 conn.Open();
 
-                var crawler = new Crawler(new SaveAction(conn) , conn);
-                
-                crawler.Run();
+                //var crawler = new Crawler(new SaveAction(conn) , conn);
+               //crawler.Run();
+
+
+                var clastering = new Clastering(conn);
+
 
             }
         }

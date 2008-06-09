@@ -53,19 +53,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CNNPage.cs" />
-    <Compile Include="Crawler.cs" />
-    <Compile Include="IAction.cs" />
-    <Compile Include="NewsPageMetaData.cs" />
-    <Compile Include="PersistentQueue.cs" />
+    <Compile Include="Clastering\Clastering.cs" />
+    <Compile Include="Crawling\CNNPage.cs" />
+    <Compile Include="Crawling\Crawler.cs" />
+    <Compile Include="Crawling\IAction.cs" />
+    <Compile Include="Crawling\NewsPageMetaData.cs" />
+    <Compile Include="Crawling\PersistentQueue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SaveAction.cs" />
+    <Compile Include="Crawling\SaveAction.cs" />
     <Compile Include="Stemming.cs" />
-    <Compile Include="TopicAction.cs" />
-    <Compile Include="Topics.cs" />
+    <Compile Include="Crawling\TopicAction.cs" />
+    <Compile Include="Crawling\Topics.cs" />
     <Compile Include="Util.cs" />
-    <Compile Include="VisitedPages.cs" />
+    <Compile Include="Crawling\VisitedPages.cs" />
     <Compile Include="WordQuilifier.cs" />
   </ItemGroup>
   <ItemGroup>
