@@ -1,5 +1,5 @@
 using System;
-using TextMining.Crawling;
+using TextMining.Model;
 
 namespace TextMining.Crawling
 {

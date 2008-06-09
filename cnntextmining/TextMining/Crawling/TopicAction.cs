@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 using System.Text.RegularExpressions;
+using TextMining.DataProcessing;
 
 namespace TextMining.Crawling
 {
@@ -21,7 +22,7 @@ namespace TextMining.Crawling
             var topics = new Topics(conn);
 
             Regex regex = new Regex("<a href=\"http:[^\"#?]+[\"#?]");
-            string content = Util.FetchPage(topicURL);
+            string content = Downloader.FetchPage(topicURL);
 
             foreach (Match m in regex.Matches(content))
             {

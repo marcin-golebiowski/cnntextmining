@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using TextMining.Clastering;
+using TextMining.Model;
+using DataFetcher=TextMining.DataProcessing.DataFetcher;
 
 namespace TextMining
 {
@@ -20,7 +21,7 @@ namespace TextMining
                //crawler.Run();
 
 
-                var dataFetcher = new Clastering.DataFetcher(conn);
+                var dataFetcher = new DataFetcher(conn);
 
                 DateTime start = DateTime.Now;
                 List<News> pages = dataFetcher.GetAllNews();

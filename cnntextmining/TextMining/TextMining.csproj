@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataProcessing\DataFetcher.cs" />
+    <Compile Include="DataLoading\DataFetcher.cs" />
     <Compile Include="Model\News.cs" />
     <Compile Include="Model\CNNPage.cs" />
     <Compile Include="Crawling\Crawler.cs" />
@@ -66,7 +66,7 @@
     <Compile Include="TextStuff\Stemming.cs" />
     <Compile Include="Crawling\TopicAction.cs" />
     <Compile Include="Crawling\Topics.cs" />
-    <Compile Include="DataProcessing\Downloader.cs" />
+    <Compile Include="DataLoading\Downloader.cs" />
     <Compile Include="Crawling\VisitedPages.cs" />
     <Compile Include="TextStuff\WordQuilifier.cs" />
   </ItemGroup>

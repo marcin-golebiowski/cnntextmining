@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TextMining.Clastering
+namespace TextMining.Model
 {
     public class News
     {

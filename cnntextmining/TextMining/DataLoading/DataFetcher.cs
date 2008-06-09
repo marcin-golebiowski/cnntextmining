@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using TextMining.Crawling;
+using TextMining.Model;
 
-namespace TextMining.Clastering
+namespace TextMining.DataProcessing
 {
     class DataFetcher
     {
@@ -21,7 +21,7 @@ namespace TextMining.Clastering
 
             int count = 0;
             using (var command
-                    = new SqlCommand("SELECT URL, Words, Links FROM dbo.[News]", conn))
+                = new SqlCommand("SELECT URL, Words, Links FROM dbo.[News]", conn))
             {
                 using (SqlDataReader reader =  command.ExecuteReader())
                 {
@@ -47,7 +47,7 @@ namespace TextMining.Clastering
 
                             if (count % 1000 ==0)
                             {
-                                    Console.WriteLine(count);
+                                Console.WriteLine(count);
                             }
                         }
                     }

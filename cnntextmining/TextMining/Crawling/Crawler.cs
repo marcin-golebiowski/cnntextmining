@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using TextMining.Crawling;
+using TextMining.DataProcessing;
+using TextMining.Model;
 
 namespace TextMining.Crawling
 {
@@ -192,7 +194,7 @@ namespace TextMining.Crawling
             if (CNNPage.isTopicPage(uri))
             {
                 Regex regex = new Regex("<a href=\"http:[^\"#?]+[\"#?]");
-                string page = Util.FetchPage(uri);
+                string page = Downloader.FetchPage(uri);
                 foreach (Match m in regex.Matches(page))
                 {
                     Uri tmp = new Uri(m.Value.Substring(9, m.Value.Length - 10));

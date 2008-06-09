@@ -1,9 +1,9 @@
 using System.Net;
 using System.IO;
 
-namespace TextMining
+namespace TextMining.DataProcessing
 {
-    class Util
+    class Downloader
     {
         public static string FetchPage(string uri)
         {

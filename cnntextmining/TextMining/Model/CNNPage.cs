@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using TextMining.DataProcessing;
 
-namespace TextMining.Crawling
+namespace TextMining.Model
 {
     public class CNNPage
     {
@@ -24,7 +25,7 @@ namespace TextMining.Crawling
             words = new List<string>();
             allLinks = new List<Uri>();
 
-            string page = Util.FetchPage(uri);
+            string page = Downloader.FetchPage(uri);
 
             process(uri, page);
         }
@@ -209,7 +210,7 @@ namespace TextMining.Crawling
                 string word = wordstemp[i].ToLower().Trim();
 
                 // steaming
-                word = Util.DoPorterStemming(word);
+                word = Stemmer.DoPorterStemming(word);
 
                 if (WordQuilifier.WordIsOK(word))
                 {
