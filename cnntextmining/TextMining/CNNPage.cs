@@ -250,43 +250,5 @@ namespace TextMining
                 }
             }
         }
-
-        private Uri[] GetLinks()
-        {
-            List<Uri> links = new List<Uri>();
-
-            if (CNNPage.isTopicPage(uri))
-            {
-                Regex regex = new Regex("<a href=\"http:[^\"#?]+[\"#?]");
-                foreach (Match m in regex.Matches(Util.FetchPage(uri)))
-                {
-                    Uri tmp = new Uri(m.Value.Substring(9, m.Value.Length - 10));
-                    if (!links.Contains(tmp))
-                        links.Add(tmp);
-                }
-            }
-            else
-            {
-                CNNPage curr;
-                try
-                {
-                    curr = new CNNPage(uri);
-                    links.AddRange(curr.allLinks);
-                }
-                catch (Exception) { }
-            }
-
-            var nl = new List<Uri>();
-
-            foreach (Uri u in links)
-            {
-                if (CNNPage.IsNewsPage(u.OriginalString)
-                    || CNNPage.isTopicPage(u.OriginalString))
-                {
-                    nl.Add(u);
-                }
-            }
-            return nl.ToArray();
-        }
     }
 }

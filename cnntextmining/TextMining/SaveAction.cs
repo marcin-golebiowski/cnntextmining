@@ -7,7 +7,7 @@ namespace TextMining
 {
     class SaveAction : IAction
     {
-        private const string sql = "INSERT INTO News(URL, Words,Links,RawData) VALUES(@url, @words, @links, @raw)";
+        private const string sql = "INSERT INTO News(URL, Words,Links,RawData, Created) VALUES(@url, @words, @links, @raw, @date)";
         readonly SqlConnection conn;
 
         public SaveAction(SqlConnection conn)
@@ -27,10 +27,11 @@ namespace TextMining
                     command.Parameters.AddWithValue("@words", ToOneString(page.words, 4000));
                     command.Parameters.AddWithValue("@links", ToOneString(page.allLinks, 1000));
                     command.Parameters.AddWithValue("@raw", page.pureText);
+                    command.Parameters.AddWithValue("@date", DateTime.Now.ToString());
 
                     command.ExecuteNonQuery();
 
-                    Console.WriteLine("Saved: " + page.uri);
+                    Console.WriteLine("Saved");
                 }
             } 
             catch (Exception ex)

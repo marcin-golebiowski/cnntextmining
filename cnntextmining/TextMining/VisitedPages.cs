@@ -7,42 +7,60 @@ namespace TextMining
     public class VisitedPages
     {
         private readonly SqlConnection conn;
-        private readonly Dictionary<string, bool> pages = new Dictionary<string, bool>();
+      
 
         public VisitedPages(SqlConnection conn)
         {
             this.conn = conn;
 
-            Load();
         }
 
-        private void Load()
+        public int Count
         {
-            using (var command
-                = new SqlCommand("SELECT URL FROM dbo.[News]", conn))
+            get
             {
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (var command2
+                    = new SqlCommand("SELECT COUNT(*) FROM dbo.[Pages] WHERE Visited IS NOT NULL", conn))
                 {
-                    if (reader != null && reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-                            pages[reader["URL"].ToString()] = true;
-                        }
-                    }
+                    return Convert.ToInt32(command2.ExecuteScalar().ToString());
                 }
             }
         }
 
+        public int NewsCount
+        {
+            get
+            {
+                using (var command2
+                    = new SqlCommand("SELECT COUNT(URL) FROM dbo.[News]", conn))
+                {
+                    return Convert.ToInt32(command2.ExecuteScalar().ToString());
+                }
+            }
+        }
+      
 
         public bool WasVisited(string url)
         {
-            return pages.ContainsKey(url);
+            using (var command2
+                         = new SqlCommand("SELECT Visited FROM dbo.[Pages] WHERE URL = @url", conn))
+            {
+                command2.Parameters.AddWithValue("@url", url);
+
+                return command2.ExecuteScalar() != DBNull.Value;
+                
+            }
         }
 
-        public void Add(string url)
+        public void SetVisited(Uri url)
         {
-            pages[url] = true;
+            using (var command2
+                     = new SqlCommand("UPDATE dbo.[Pages] SET Visited = GETDATE() WHERE URL = @url", conn))
+            {
+                command2.Parameters.AddWithValue("@url", url.OriginalString);
+
+                command2.ExecuteNonQuery();
+            }
         }
     }
 }
