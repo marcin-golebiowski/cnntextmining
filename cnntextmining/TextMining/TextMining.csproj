@@ -63,12 +63,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Crawling\SaveAction.cs" />
-    <Compile Include="TextStuff\Stemming.cs" />
+    <Compile Include="TextTools\Stemming.cs" />
     <Compile Include="Crawling\TopicAction.cs" />
     <Compile Include="Crawling\Topics.cs" />
     <Compile Include="DataLoading\Downloader.cs" />
     <Compile Include="Crawling\VisitedPages.cs" />
-    <Compile Include="TextStuff\WordQuilifier.cs" />
+    <Compile Include="TextTools\WordQuilifier.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
@@ -101,6 +101,9 @@
     <Content Include="Model\stopWords.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sql\QueueInitialize.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Clastering\" />
