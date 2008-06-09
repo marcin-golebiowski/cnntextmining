@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using TextMining.DataProcessing;
+using TextMining.DataLoading;
+using TextMining.TextTools;
 
 namespace TextMining.Model
 {

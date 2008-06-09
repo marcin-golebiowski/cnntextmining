@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
 using System.Text.RegularExpressions;
-using TextMining.DataProcessing;
+using TextMining.DataLoading;
 
 namespace TextMining.Crawling
 {

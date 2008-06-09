@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data.SqlClient;
-using TextMining.Crawling;
+using System.Text;
 using TextMining.Model;
 
 namespace TextMining.Crawling

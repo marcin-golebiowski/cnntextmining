@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clastering\Kmeans.cs" />
     <Compile Include="DataLoading\DataFetcher.cs" />
     <Compile Include="Model\News.cs" />
     <Compile Include="Model\CNNPage.cs" />
@@ -63,11 +64,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Crawling\SaveAction.cs" />
+    <Compile Include="TextTools\DefaultNewsComparator.cs" />
+    <Compile Include="TextTools\INewsComparator.cs" />
     <Compile Include="TextTools\Stemming.cs" />
     <Compile Include="Crawling\TopicAction.cs" />
     <Compile Include="Crawling\Topics.cs" />
     <Compile Include="DataLoading\Downloader.cs" />
     <Compile Include="Crawling\VisitedPages.cs" />
+    <Compile Include="TextTools\WordsStats.cs" />
     <Compile Include="TextTools\WordQuilifier.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -101,9 +105,6 @@
     <Content Include="Model\stopWords.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Clastering\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

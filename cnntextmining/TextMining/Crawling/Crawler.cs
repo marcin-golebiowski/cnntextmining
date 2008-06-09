@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
-using TextMining.Crawling;
-using TextMining.DataProcessing;
+using TextMining.DataLoading;
 using TextMining.Model;
 
 namespace TextMining.Crawling

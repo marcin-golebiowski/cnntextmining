@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using TextMining.Model;
-using DataFetcher=TextMining.DataProcessing.DataFetcher;
+using TextMining.TextTools;
+using DataFetcher=TextMining.DataLoading.DataFetcher;
 
 namespace TextMining
 {
@@ -22,10 +23,13 @@ namespace TextMining
 
 
                 var dataFetcher = new DataFetcher(conn);
-
                 DateTime start = DateTime.Now;
-                List<News> pages = dataFetcher.GetAllNews();
-                Console.WriteLine("PAGES COUNT: " + pages.Count);
+                List<News> news = dataFetcher.GetAllNews();
+
+                WordsStats freq = new WordsStats(news);
+                freq.Compute();
+
+
                 DateTime end = DateTime.Now;
                 Console.WriteLine(end - start);
 

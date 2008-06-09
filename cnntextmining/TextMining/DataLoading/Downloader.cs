@@ -1,7 +1,7 @@
-using System.Net;
 using System.IO;
+using System.Net;
 
-namespace TextMining.DataProcessing
+namespace TextMining.DataLoading
 {
     class Downloader
     {

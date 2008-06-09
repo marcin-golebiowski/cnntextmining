@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using TextMining.Model;
 
-namespace TextMining.DataProcessing
+namespace TextMining.DataLoading
 {
     class DataFetcher
     {
