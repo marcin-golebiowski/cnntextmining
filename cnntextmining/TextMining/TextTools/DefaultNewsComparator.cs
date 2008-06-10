@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using TextMining.Model;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TextMining.TextTools
 {
@@ -19,37 +19,36 @@ namespace TextMining.TextTools
         // 1. szukamy wspólnych słów w dwóch newach
         // 2. 
 
-        public double Compare(News x, News y)
+        public double Compare(Vector x, Vector y)
         {
             double result = 0;
 
-            var xWords = new Dictionary<string, bool>();
-            var yWords = new Dictionary<string, bool>();
+            var words = new List<string>();
 
-
-            foreach (string word in x.words)
+            foreach (string word in x.Items.Keys)
             {
-                xWords[word] = false;
+                words.Add(word);
             }
 
-            foreach (string word in y.words)
+            foreach (string word in y.Items.Keys)
             {
-                yWords[word] = false;
-            }
-
-           
-            foreach (string word  in xWords.Keys)
-            {
-                if (yWords.ContainsKey(word))
-                {
-                    result += (stats.GetDocumentTermFrequency(word, x.url) +
-                               stats.GetDocumentTermFrequency(word, y.url)
-                               ) * stats.GetInvertedDocumentTermFreqency(word);
-
-                }
+                words.Add(word);
             }
 
 
+            foreach (string word in words)
+            {
+                double val =
+                    (stats.GetTF(word, x.URL)-stats.GetTF(word, y.URL))*stats.GetIDF(word);
+                val = val*val;
+
+                result += val;
+            }
+
+            // News1: [ word1 -> 1.3 , word2 -> 0.0004, word3 -> 0 , ......]
+            // News2: [ word1' -> 1.2, word2' -> 0, word3' -> .....]
+
+            result = Math.Sqrt(Math.Abs(result));
 
             return result;
         }

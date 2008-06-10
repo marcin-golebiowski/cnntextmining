@@ -26,6 +26,11 @@ namespace TextMining.TextTools
             this.news = news;
         }
 
+        public List<News> Newss
+        {
+            get { return news; }
+        }
+
         public void Compute()
         {
             Console.WriteLine("Start Computing word freq");
@@ -63,32 +68,32 @@ namespace TextMining.TextTools
                 }
             }
 
-            Console.WriteLine(wordCount.Count);
-
             Console.WriteLine("End Computing word freq");
-        }    
+        }
 
 
-        public double GetDocumentTermFrequency(string word, string url)
+        public double GetTF(string word, string url)
         {
             // liczba wystapien w dokumencie / liczbe wszystkich slow w dokumencie
 
-            double wordFreq = wordDocumentCount[word][url];
+            double wordFreq = 0;
+
+            if (wordDocumentCount[word].ContainsKey(url))
+            {
+                wordFreq = wordDocumentCount[word][url];
+            }
+
             double words = dict[url].words.Count;
 
             if (words != 0)
             {
-                return wordFreq / words;
-                
-            }
-            else
-            {
-                return 0;
+                return wordFreq/words;
             }
 
+            return 0;
         }
 
-        public double GetInvertedDocumentTermFreqency(string word)
+        public double GetIDF(string word)
         {
             double D = dict.Count;
             double M = wordDocumentCount[word].Count;
@@ -97,10 +102,8 @@ namespace TextMining.TextTools
             {
                 return D/M;
             }
-            else
-            {
-                return 0;
-            }
+
+            return 0;
         }
     }
 }

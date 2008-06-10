@@ -71,6 +71,7 @@
     <Compile Include="Crawling\Topics.cs" />
     <Compile Include="DataLoading\Downloader.cs" />
     <Compile Include="Crawling\VisitedPages.cs" />
+    <Compile Include="TextTools\Vector.cs" />
     <Compile Include="TextTools\WordsStats.cs" />
     <Compile Include="TextTools\WordQuilifier.cs" />
   </ItemGroup>

@@ -19,16 +19,16 @@ namespace TextMining.DataLoading
             return GetAllNews(false, int.MaxValue);
         }
 
-      
+
         public List<News> GetAllNews(bool trim, int newsToGet)
         {
             var result = new List<News>();
 
             int count = 0;
             using (var command
-                = new SqlCommand("SELECT URL, Words, Links FROM dbo.[News]", conn))
+                = new SqlCommand("SELECT TOP " + newsToGet  + " URL, Words, Links FROM dbo.[News]", conn))
             {
-                using (SqlDataReader reader =  command.ExecuteReader())
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
                     //reader.
                     if (reader != null && reader.HasRows)
@@ -50,25 +50,19 @@ namespace TextMining.DataLoading
 
                             count++;
 
-                            if (count % 1000 ==0)
+                            if (count%1000 == 0)
                             {
                                 Console.WriteLine(count);
                             }
-                            // if we have trim on
-                            if (trim && count >= newsToGet)
-                            {
-                                break;
-                            }
-
                         }
+
+                        reader.Close();
                     }
+
                 }
             }
-
             return result;
         }
-
-
-
     }
 }
+    
