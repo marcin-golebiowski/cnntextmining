@@ -50,9 +50,12 @@ namespace TextMining
                 {
                     Vector v1 = new Vector(freq,
                         news[rand.Next()% numberOfNews], maxVectorLen);
+                    v1.BuildVector();
+
 
                     Vector v2 = new Vector(freq,
                         news[rand.Next() % numberOfNews], maxVectorLen);
+                    v2.BuildVector();
 
                     DefaultNewsComparator comp = new DefaultNewsComparator(freq);
 

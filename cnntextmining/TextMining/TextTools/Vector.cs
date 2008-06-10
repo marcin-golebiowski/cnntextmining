@@ -15,9 +15,8 @@ namespace TextMining.TextTools
             this.stats = stats;
             this.news = news;
             this.maxlen = maxlen;
-
-            BuildVector();
         }
+
 
         public Dictionary<string, double> Items
         {
@@ -29,7 +28,8 @@ namespace TextMining.TextTools
         {
             get { return news.url; }
         }
-        private void BuildVector()
+
+        public void BuildVector()
         {
             List<Pair> list = new List<Pair>();
 
@@ -63,12 +63,12 @@ namespace TextMining.TextTools
         {
             if (x.val > y.val)
             {
-                return 1;
+                return -1;
             }
 
             if (x.val < y.val)
             {
-                return -1;
+                return 1;
             }
 
             return 0;
