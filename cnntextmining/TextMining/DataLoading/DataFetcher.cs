@@ -14,8 +14,13 @@ namespace TextMining.DataLoading
             this.conn = conn;
         }
 
-      
         public List<News> GetAllNews()
+        {
+            return GetAllNews(false, int.MaxValue);
+        }
+
+      
+        public List<News> GetAllNews(bool trim, int newsToGet)
         {
             var result = new List<News>();
 
@@ -49,6 +54,12 @@ namespace TextMining.DataLoading
                             {
                                 Console.WriteLine(count);
                             }
+                            // if we have trim on
+                            if (trim && count >= newsToGet)
+                            {
+                                break;
+                            }
+
                         }
                     }
                 }
