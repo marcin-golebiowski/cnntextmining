@@ -56,10 +56,12 @@
     <Compile Include="Clastering\Dbscan.cs" />
     <Compile Include="Clastering\Kmeans.cs" />
     <Compile Include="DataLoading\DataFetcher.cs" />
-    <Compile Include="Experiments\DefaultEvaluator.cs" />
-    <Compile Include="Experiments\IEvaluator.cs" />
-    <Compile Include="Experiments\ExperimentStats.cs" />
-    <Compile Include="Experiments\TopicOriginalAssigment.cs" />
+    <Compile Include="Evaluation\DefaultEvaluator.cs" />
+    <Compile Include="Evaluation\Experiments\Experiment1.cs" />
+    <Compile Include="Evaluation\IEvaluator.cs" />
+    <Compile Include="Evaluation\ExperimentStats.cs" />
+    <Compile Include="Evaluation\IExperiment.cs" />
+    <Compile Include="Evaluation\TopicOriginalAssigment.cs" />
     <Compile Include="Model\News.cs" />
     <Compile Include="Model\CNNPage.cs" />
     <Compile Include="Crawling\Crawler.cs" />
