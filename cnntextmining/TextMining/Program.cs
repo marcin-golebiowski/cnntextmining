@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using TextMining.Clastering;
 using TextMining.Crawling;
+using TextMining.Evaluation.Experiments;
 using TextMining.Experiments;
 using TextMining.Model;
 using TextMining.TextTools;
@@ -21,26 +22,26 @@ namespace TextMining
             {
                 conn.Open();
 
+                var exp1 = new Experiment1(conn);
+                exp1.Run();
+
+
+
+
+
+
+
+                //var crawler = new Crawler(new SaveAction(conn), conn);
+
+                //crawler.Run();
+
+
 
                 //TopicOriginalAssigment oryginalAssigment = new TopicOriginalAssigment(conn);
                 //oryginalAssigment.Load();
 
 
-                var dataFetcher = new DataFetcher(conn);
-                List<News> news = dataFetcher.GetAllNews(true, 4000);
-                WordsStats stats = new WordsStats(news);
-                stats.Compute();
-
-                DefaultNewsComparator comparator = new DefaultNewsComparator(stats);
-
-            
-                Kmeans algorithm = new Kmeans(comparator, stats, 50);
-
-                Console.WriteLine("Starting KMeans");
-                List<List<News>> sets =  algorithm.Compute(news, 10, 2);
-                Console.WriteLine("KMeans end");
-
-                ExperimentStats.PrintStats(sets);
+                
                 
 
 
