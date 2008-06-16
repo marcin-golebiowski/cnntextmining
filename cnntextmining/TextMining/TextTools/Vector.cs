@@ -73,6 +73,14 @@ namespace TextMining.TextTools
                 }
                 list.Sort(new Comp());
                 list.RemoveRange(maxlen - 1, list.Count - (maxlen - 1));
+
+                Items.Clear();
+
+
+                foreach (Pair p in list)
+                {
+                    Items[p.word] = p.val;
+                }
             }
         }
     }
