@@ -38,15 +38,13 @@ namespace TextMining.TextTools
 
             foreach (string word in words)
             {
-                double val =
-                    (stats.GetTF(word, x.URL)-stats.GetTF(word, y.URL))*stats.GetIDF(word);
-                val = val*val;
-
-                result += val;
+                if (x.Items.ContainsKey(word) && y.Items.ContainsKey(word))
+                {
+                    double val = x.Items[word] - y.Items[word];
+                    val = val*val;
+                    result += val;
+                }
             }
-
-            // News1: [ word1 -> 1.3 , word2 -> 0.0004, word3 -> 0 , ......]
-            // News2: [ word1' -> 1.2, word2' -> 0, word3' -> .....]
 
             result = Math.Sqrt(Math.Abs(result));
 

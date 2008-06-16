@@ -76,9 +76,9 @@ namespace TextMining.Crawling
             {
                 try
                 {
-                    Console.WriteLine("PAGES VISITED: " + history.Count);
-                    Console.WriteLine("NEWS:" + history.NewsCount);
-                    Console.WriteLine("QUEUE SIZE: " + queue.Count);
+                    //Console.WriteLine("PAGES VISITED: " + history.Count);
+                    //Console.WriteLine("NEWS:" + history.NewsCount);
+                    //Console.WriteLine("QUEUE SIZE: " + queue.Count);
 
 
                     if (queue.Count == 0)
@@ -151,7 +151,7 @@ namespace TextMining.Crawling
        
         private void AddLinksToPagesToVisit(Uri[] links)
         {
-            if (links.Length < 30)
+            if (links.Length < 10)
             {
                 Console.WriteLine("Dodaje wszystkie linki: (" + links.Length + ")");
                 foreach (var uri in links)
@@ -172,7 +172,7 @@ namespace TextMining.Crawling
                     ids.Add(i);
                 }
 
-                for (int j = 30; j >= 1; j--)
+                for (int j = 10; j >= 1; j--)
                 {
                     int i = random.Next()%j;
                     try

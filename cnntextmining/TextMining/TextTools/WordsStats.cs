@@ -76,6 +76,11 @@ namespace TextMining.TextTools
         {
             // liczba wystapien w dokumencie / liczbe wszystkich slow w dokumencie
 
+            if (!wordDocumentCount.ContainsKey(word))
+            {
+                return 0;
+            }
+
             double wordFreq = 0;
 
             if (wordDocumentCount[word].ContainsKey(url))
@@ -95,6 +100,13 @@ namespace TextMining.TextTools
 
         public double GetIDF(string word)
         {
+
+            if (!wordDocumentCount.ContainsKey(word))
+            {
+                return 0;
+            }
+
+
             double D = dict.Count;
             double M = wordDocumentCount[word].Count;
 

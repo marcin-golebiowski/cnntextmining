@@ -55,6 +55,26 @@ namespace TextMining.TextTools
                 Items[p.word] = p.val;
             }
         }
+
+
+        public void Trim()
+        {
+
+            if (items.Count > maxlen)
+            {
+                List<Pair> list = new List<Pair>();
+
+                foreach (KeyValuePair<string, double> item in items)
+                {
+                    Pair p = new Pair();
+                    p.word = item.Key;
+                    p.val = item.Value;
+                    list.Add(p);
+                }
+                list.Sort(new Comp());
+                list.RemoveRange(maxlen - 1, list.Count - (maxlen - 1));
+            }
+        }
     }
 
     class Comp : IComparer<Pair>
