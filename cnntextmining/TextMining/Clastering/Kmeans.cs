@@ -55,6 +55,7 @@ namespace TextMining.Clastering
                     for (int j = 1; j < centroids.Length; j++)
                     {
                         double val = comp.Compare(centroids[j], vectors[i]);
+                        //Console.WriteLine(val);
 
                         if (val < minVal)
                         {
@@ -62,7 +63,7 @@ namespace TextMining.Clastering
                             min = j;
                         }
                     }
-
+                    //Console.WriteLine("----");
                     assigment[i] = min;
                 }
 
