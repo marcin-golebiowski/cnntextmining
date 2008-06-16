@@ -12,6 +12,7 @@ namespace TextMining.Clastering
         private readonly INewsComparator comparator;
         private readonly WordsStats stats;
         private readonly int maxLen;
+        private Vector[] newsVectors;
 
         private enum State { visited, unvisited, noise };
 
@@ -21,7 +22,6 @@ namespace TextMining.Clastering
             this.stats = stats;
             this.maxLen = maxLen;
         }
-
 
         /// <summary>
         /// Dbscan clustering algorithm. (http://en.wikipedia.org/wiki/DBSCAN)
@@ -34,11 +34,15 @@ namespace TextMining.Clastering
         {
             var division = new List<List<News>>();
             var states = new State[news.Count];
+            newsVectors = new Vector[news.Count];
 
+            // Build the vectors and
             // Assign unvisited state to every news.
             for (int i = 0; i < states.Length; i++)
             {
                 states[i] = State.unvisited;
+                newsVectors[i] = new Vector(stats, news[i], maxLen);
+                newsVectors[i].BuildVector();
             }
 
             // Process every unvisited news.
@@ -73,10 +77,14 @@ namespace TextMining.Clastering
 
         private List<int> getGroup(int current, List<News> news, State[] states, double eps, int minPts)
         {
+            // Result group.
             List<int> group = new List<int>();
-
+            // Candidates for beeing in group.
             List<int> candidates = new List<int>();
+            List<int> visited = new List<int>();         
+
             candidates.Add(current);
+            visited.Add(current);
 
             while (candidates.Count > 0)
             {
@@ -86,12 +94,14 @@ namespace TextMining.Clastering
                     if (neighbours.Count >= minPts)
                     {
                         group.Add(candidates[0]);
-                        states[candidates[0]] = State.visited;
-                        candidates.AddRange(neighbours);
-                    }
-                    else
-                    {
-                        states[candidates[0]] = State.noise;
+                        foreach (int newCandid in neighbours)
+                        {
+                            if (!visited.Contains(newCandid) && states[newCandid] == State.unvisited)
+                            {
+                                candidates.Add(newCandid);
+                                visited.Add(newCandid);
+                            }
+                        }
                     }
                 }
                 candidates.RemoveAt(0);
@@ -104,25 +114,25 @@ namespace TextMining.Clastering
             // Result - indices of news that are neighbours of current news.
             List<int> neighbours = new List<int>();
 
-            // The current news vector.
-            Vector center = new Vector(stats, news[current], maxLen);
-
-            Vector toCompare;
-
             // Look through all possibly unvisited neighbours. Maybe can be done more effective.
             for (int i = 0; i < news.Count; i++ )
             {
                 // Look only for unvisited states.
-                if (states[i] != State.unvisited || i == current)
+                if (i == current || states[i] != State.unvisited)
                     continue;
 
-                toCompare = new Vector(stats, news[i], maxLen);
                 // If the news is near enough. Add to neighbours.
-                if (Math.Abs(comparator.Compare(center, toCompare)) <= eps)
+                if (Math.Abs(comparator.Compare(newsVectors[current], newsVectors[i])) >= eps)
                 {
                     neighbours.Add(i);
                 }
             }
+
+            // TODO check
+            if (neighbours.Count > 50)
+                return new List<int>();
+            
+
             return neighbours;
         }
 
