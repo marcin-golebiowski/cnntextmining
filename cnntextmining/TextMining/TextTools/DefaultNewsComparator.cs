@@ -23,27 +23,14 @@ namespace TextMining.TextTools
         {
             double result = 0;
 
-            var words = new List<string>();
-
             foreach (string word in x.Items.Keys)
             {
-                words.Add(word);
-            }
-
-            foreach (string word in y.Items.Keys)
-            {
-                words.Add(word);
-            }
-
-
-            foreach (string word in words)
-            {
-                if (x.Items.ContainsKey(word) && y.Items.ContainsKey(word))
-                {
-                    double val = x.Items[word] - y.Items[word];
-                    val = val*val;
-                    result += val;
-                }
+               if (y.Items.ContainsKey(word))
+               {
+                   double val = x.Items[word] - y.Items[word];
+                   val = val * val;
+                   result += val;
+               }
             }
 
             result = Math.Sqrt(Math.Abs(result));
