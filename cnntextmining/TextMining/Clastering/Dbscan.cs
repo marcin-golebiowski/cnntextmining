@@ -51,6 +51,7 @@ namespace TextMining.Clastering
                 if (states[i] == State.unvisited)
                 {
                     List<int> group = getGroup(i, news, states, eps, minPts);
+                    Console.WriteLine("g " + i + " count " + group.Count); 
                     // If not enough neighbours mark as noise.
                     if (group.Count == 0)
                     {
@@ -88,6 +89,7 @@ namespace TextMining.Clastering
 
             while (candidates.Count > 0)
             {
+                Console.WriteLine(candidates.Count);
                 if (states[candidates[0]] == State.unvisited)
                 {
                     List<int> neighbours = getNeighbours(candidates[0], news, states, eps);
@@ -129,9 +131,12 @@ namespace TextMining.Clastering
             }
 
             // TODO check
+            /*
             if (neighbours.Count > 50)
                 return new List<int>();
-            
+            */
+
+            //Console.WriteLine(neighbours.Count);
 
             return neighbours;
         }

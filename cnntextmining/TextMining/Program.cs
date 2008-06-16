@@ -14,7 +14,7 @@ namespace TextMining
     class Program
     {
         private const string connectionString =
-         @"Data Source=.\SQLEXPRESS;Initial Catalog=TextMining;Integrated Security=True";
+         @"Data Source=NEVERLAND\SQLEXPRESS;Initial Catalog=TextMining;user=marek;password=marek";
 
         static void Main()
         {
@@ -22,8 +22,11 @@ namespace TextMining
             {
                 conn.Open();
 
-                var exp1 = new Experiment1(conn);
-                exp1.Run();
+                //var exp1 = new Experiment1(conn);
+                //exp1.Run();
+
+                var exp2 = new Experiment_DBSCAN(conn);
+                exp2.Run();
             }
         }
     }

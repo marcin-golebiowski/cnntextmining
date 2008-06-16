@@ -20,7 +20,7 @@ namespace TextMining.Experiments
             {
                 for (int i = 0; i < set.Count; i++)
                 {
-                    for (int j = 0; j < set.Count; j++)
+                    for (int j = i + 1; j < set.Count; j++)
                     {
                         if (assigment.AreInTheSameTopic(set[i].url, set[j].url))
                         {
