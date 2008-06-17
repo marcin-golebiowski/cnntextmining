@@ -4,13 +4,6 @@ namespace TextMining.TextTools
 {
     class EuclidesMetricComparator : IComparator
     {
-        private readonly WordsStats stats;
-
-        public EuclidesMetricComparator(WordsStats stats)
-        {
-            this.stats = stats;
-        }
-
         public double Compare(Vector x, Vector y)
         {
             double result = 0;
