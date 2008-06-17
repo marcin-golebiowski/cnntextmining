@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using TextMining.Model;
 
-namespace TextMining.Experiments
+namespace TextMining.Evaluation
 {
     public class ExperimentStats
     {
@@ -12,6 +12,7 @@ namespace TextMining.Experiments
             {
                 Console.Write(set.Count + ";");
             }
+            Console.WriteLine();
         }
     }
 }

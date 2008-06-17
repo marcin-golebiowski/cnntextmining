@@ -24,7 +24,6 @@ namespace TextMining.DataLoading
         {
             var result = new List<News>();
 
-            int count = 0;
             using (var command
                 = new SqlCommand("SELECT TOP " + newsToGet + " URL, Words, Links FROM dbo.[News] WHERE URL Like 'http://edition.cnn.com/2008/%'", conn))
             {
@@ -47,13 +46,6 @@ namespace TextMining.DataLoading
                             element.links.AddRange(links.Split(';'));
                             //element.rawData = rawData;
                             result.Add(element);
-
-                            count++;
-
-                            if (count%1000 == 0)
-                            {
-                                Console.WriteLine(count);
-                            }
                         }
 
                         reader.Close();

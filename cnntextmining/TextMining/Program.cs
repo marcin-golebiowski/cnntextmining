@@ -22,11 +22,11 @@ namespace TextMining
             {
                 conn.Open();
 
-                //var exp1 = new Experiment1(conn);
-                //exp1.Run();
+                var exp1 = new Experiment1(conn);
+                exp1.Run();
 
-                var exp2 = new Experiment_DBSCAN(conn);
-                exp2.Run();
+                //var exp2 = new Experiment_DBSCAN(conn);
+                //exp2.Run();
             }
         }
     }

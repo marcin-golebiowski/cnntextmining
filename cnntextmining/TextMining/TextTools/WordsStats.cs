@@ -33,7 +33,7 @@ namespace TextMining.TextTools
 
         public void Compute()
         {
-            Console.WriteLine("Start Computing word freq");
+          
             foreach (var item in news)
             {
                 dict[item.url] = item;
@@ -68,7 +68,7 @@ namespace TextMining.TextTools
                 }
             }
 
-            Console.WriteLine("End Computing word freq");
+        
         }
 
 

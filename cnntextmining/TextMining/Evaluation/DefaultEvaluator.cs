@@ -3,7 +3,7 @@ using TextMining.Model;
 
 namespace TextMining.Experiments
 {
-    class DefaultEvaluator : IEvaluator
+    public class DefaultEvaluator : IEvaluator
     {
         private readonly TopicOriginalAssigment assigment;
 
@@ -25,6 +25,10 @@ namespace TextMining.Experiments
                         if (assigment.AreInTheSameTopic(set[i].url, set[j].url))
                         {
                             score++;
+                        }
+                        else
+                        {
+                            score--;
                         }
                     }
                 }
