@@ -9,14 +9,14 @@ namespace TextMining.Clastering
 {
     class Dbscan
     {
-        private readonly INewsComparator comparator;
+        private readonly IComparator comparator;
         private readonly WordsStats stats;
         private readonly int maxLen;
         private Vector[] newsVectors;
 
         private enum State { visited, unvisited, noise };
 
-        public Dbscan(INewsComparator comparator, WordsStats stats, int maxLen)
+        public Dbscan(IComparator comparator, WordsStats stats, int maxLen)
         {
             this.comparator = comparator;
             this.stats = stats;

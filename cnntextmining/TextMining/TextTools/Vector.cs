@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TextMining.Model;
 
 namespace TextMining.TextTools
@@ -21,6 +22,20 @@ namespace TextMining.TextTools
         public Dictionary<string, double> Items
         {
             get { return items; }
+        }
+
+        public double GetLength()
+        {
+            double result = 0;
+            foreach (string word in items.Keys)
+            {
+                double val = items[word];
+                result += val*val;
+            }
+
+            result = Math.Sqrt(result);
+
+            return result;
         }
 
 

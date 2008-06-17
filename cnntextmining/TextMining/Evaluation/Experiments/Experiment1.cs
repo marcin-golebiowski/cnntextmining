@@ -29,10 +29,10 @@ namespace TextMining.Evaluation.Experiments
         public void Run()
         {
 
-            const int newsCount = 1000;
+            const int newsCount = 500;
             const int K = 100;
-            const int VectorLen = 400;
-            const int iterations = 5;
+            const int VectorLen = 3000;
+            const int iterations = 2;
 
 
             DateTime clock;
@@ -62,7 +62,7 @@ namespace TextMining.Evaluation.Experiments
             
             DefaultEvaluator eval = new DefaultEvaluator(ass); 
 
-            var comparator = new DefaultNewsComparator(stats);
+            var comparator = new CosinusMetricComparator();
             var algorithm = new Kmeans(comparator, eval, stats,VectorLen);
 
             Console.WriteLine("Starting KMeans");

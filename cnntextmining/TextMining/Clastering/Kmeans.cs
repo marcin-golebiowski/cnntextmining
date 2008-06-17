@@ -9,12 +9,12 @@ namespace TextMining.Clastering
 {
     public class Kmeans
     {
-        private readonly INewsComparator comparator;
+        private readonly IComparator comparator;
         private readonly DefaultEvaluator eval;
         private readonly WordsStats stats;
         private readonly int maxLen;
 
-        public Kmeans(INewsComparator comparator,  DefaultEvaluator eval, WordsStats stats,  int maxLen)
+        public Kmeans(IComparator comparator,  DefaultEvaluator eval, WordsStats stats,  int maxLen)
         {
             this.comparator = comparator;
             this.eval = eval;
@@ -25,7 +25,7 @@ namespace TextMining.Clastering
 
         public List<List<News>> Compute(List<News> news, int K, int maxIterations)
         {
-            DefaultNewsComparator comp = new DefaultNewsComparator(stats);
+            EuclidesMetricComparator comp = new EuclidesMetricComparator(stats);
 
             Random rand = new Random();
             Vector[] centroids = new Vector[K];

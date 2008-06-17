@@ -2,21 +2,14 @@
 
 namespace TextMining.TextTools
 {
-    class DefaultNewsComparator : INewsComparator
+    class EuclidesMetricComparator : IComparator
     {
         private readonly WordsStats stats;
 
-        public DefaultNewsComparator(WordsStats stats)
+        public EuclidesMetricComparator(WordsStats stats)
         {
             this.stats = stats;
         }
-
-        
-        // Wektor to będzie słownik (word -> itdf)
-        // i wtedy jesli będą mieli wspólne słowa do sumujemy to ...
-
-        // 1. szukamy wspólnych słów w dwóch newach
-        // 2. 
 
         public double Compare(Vector x, Vector y)
         {
