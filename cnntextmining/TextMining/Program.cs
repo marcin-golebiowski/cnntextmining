@@ -14,13 +14,16 @@ namespace TextMining
     class Program
     {
         private const string connectionString =
-         @"Data Source=NEVERLAND\SQLEXPRESS;Initial Catalog=TextMining;user=marek;password=marek";
+         @"Data Source=NEVERLAND\SQLEXPRESS;Initial Catalog=TextMiningNew;user=marek;password=marek";
 
         static void Main()
         {
             using (var conn = new SqlConnection(connectionString))
             {
                 conn.Open();
+
+                Crawler crawler = new Crawler(new SaveAction(conn), conn);
+                crawler.RunTopicRec();
 
 
                 //var exp1 = new Experiment1(conn);
@@ -29,14 +32,14 @@ namespace TextMining
                 //var exp2 = new Experiment_DBSCAN(conn);
                 //exp2.Run();
 
-                CNNPage page = new CNNPage("http://edition.cnn.com/2003/TECH/space/07/30/sprj.colu.columbia.probe/index.html");
+                /*CNNPage page = new CNNPage("http://edition.cnn.com/2003/TECH/space/07/30/sprj.colu.columbia.probe/index.html");
 
                 Console.WriteLine(page.pureText);
                 Console.WriteLine();
                 foreach(Uri link in page.allLinks)
                     Console.WriteLine(link);
 
-
+                */
 
             }
         }

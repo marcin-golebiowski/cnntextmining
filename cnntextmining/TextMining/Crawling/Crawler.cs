@@ -103,8 +103,6 @@ namespace TextMining.Crawling
                             }
 
                          
-
-
                             //----
                             if (CNNPage.IsNewsPage(curr.OriginalString))
                             {
@@ -112,8 +110,8 @@ namespace TextMining.Crawling
                                 newsAction.Do(page);
 
                                 //----
-                                Uri[] links = page.allLinks.ToArray();
-                                AddLinksToPagesToVisit(links);
+                                //Uri[] links = page.allLinks.ToArray();
+                                //AddLinksToPagesToVisit(links);
                             }
 
                             //----
@@ -148,40 +146,83 @@ namespace TextMining.Crawling
 
 
 
-       
-        private void AddLinksToPagesToVisit(Uri[] links)
+        public void RunTopicRec()
         {
-            if (links.Length < 10)
+            while (true)
             {
-                Console.WriteLine("Dodaje wszystkie linki: (" + links.Length + ")");
-                foreach (var uri in links)
+                if (queue.Count == 0)
                 {
+                    Console.WriteLine("KURWA KONIEC");
+                    break;
+                }
+
+                Uri curr = queue.Dequeue();
+                Console.WriteLine("PROCESSING: " + curr);
+
+                if (!history.WasVisited(curr.OriginalString))
+                {
+                    //SqlTransaction trans = conn.BeginTransaction();
                     try
                     {
-                        queue.Enqueue(uri);
+                        if (CNNPage.isTopicPage(curr.OriginalString))
+                        {
+                            var action = new TopicAction(conn);
+                            action.Do(curr.OriginalString);
+
+                            Console.WriteLine("Przetwarzam newsy z topicu");
+
+                            Uri[] links = GetLinks(curr.OriginalString);
+                            for (int i = 0; i < links.Length; i++)
+                            {
+                                try
+                                {
+
+                                    if (CNNPage.IsNewsPage(links[i].OriginalString))
+                                    {
+                                        Console.WriteLine("News: " + i + "/" + links.Length);
+                                        newsAction.Do(new CNNPage(links[i].OriginalString));
+                                        Console.WriteLine("OK");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Not news :(");
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("FAIL");
+                                }
+                            }
+                            //trans.Commit();
+
+                            Console.WriteLine("- Przetworzono topic -");
+                        }
+
+                        history.SetVisited(curr);
+                        //trans.Commit();
                     }
-                    catch {}
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Wyst¹pi³ b³¹d: " + ex);
+//                        trans.Rollback();
+                    }
+
                 }
             }
-            else
+        }
+
+
+        private void AddLinksToPagesToVisit(Uri[] links)
+        {
+            Console.WriteLine("Dodaje wszystkie linki: (" + links.Length + ")");
+            foreach (var uri in links)
             {
-                Console.WriteLine("Dodaje losowe 20 linków");
-                var ids = new List<int>();
-                for (int i = 0; i < links.Length; i++)
+                try
                 {
-                    ids.Add(i);
+                    queue.Enqueue(uri);
                 }
-
-                for (int j = 10; j >= 1; j--)
+                catch
                 {
-                    int i = random.Next()%j;
-                    try
-                    {
-                        queue.Enqueue(links[ids[i]]);
-                    }
-                    catch {}
-                    ids.RemoveAt(i);
-
                 }
             }
         }
