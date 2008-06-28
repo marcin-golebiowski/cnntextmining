@@ -25,7 +25,7 @@ namespace TextMining.Clastering
 
         public List<List<News>> Compute(List<News> news, int K, int maxIterations)
         {
-            EuclidesMetricComparator comp = new EuclidesMetricComparator(stats);
+            EuclidesMetricComparator comp = new EuclidesMetricComparator();
 
             Random rand = new Random();
             Vector[] centroids = new Vector[K];

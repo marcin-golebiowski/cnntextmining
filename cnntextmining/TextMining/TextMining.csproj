@@ -58,6 +58,7 @@
     <Compile Include="DataLoading\DataFetcher.cs" />
     <Compile Include="Evaluation\DefaultEvaluator.cs" />
     <Compile Include="Evaluation\Experiments\Experiment1.cs" />
+    <Compile Include="Evaluation\Experiments\Experiment_DBSCAN.cs" />
     <Compile Include="Evaluation\IEvaluator.cs" />
     <Compile Include="Evaluation\ExperimentStats.cs" />
     <Compile Include="Evaluation\IExperiment.cs" />

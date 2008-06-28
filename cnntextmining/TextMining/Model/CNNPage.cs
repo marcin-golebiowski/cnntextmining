@@ -51,7 +51,7 @@ namespace TextMining.Model
             if (IsNewsPage(uri_))
             {
                 ProcessIncludedText(includedText(page));
-                GetWords();
+                //GetWords();
                 DontMissLinks(page);
             }
             else
@@ -102,6 +102,26 @@ namespace TextMining.Model
                         i += 27;
                         continue;
                     }
+
+                    // dont include <!--date>
+                    // <!-- date --><!-- /date -->
+
+                    toCheck = page.Substring(i + 5, 4);
+                    if (toCheck == "date")
+                    {
+                        include = false;
+                        i += 13;
+                        continue;
+                    }
+
+                    toCheck = page.Substring(i + 5, 5);
+                    if (toCheck == "/date")
+                    {
+                        include = true;
+                        i += 14;
+                        continue;
+                    }
+
                 }
                 if (include)
                 {

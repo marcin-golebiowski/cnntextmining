@@ -22,11 +22,22 @@ namespace TextMining
             {
                 conn.Open();
 
-                var exp1 = new Experiment1(conn);
-                exp1.Run();
+
+                //var exp1 = new Experiment1(conn);
+                //exp1.Run();
 
                 //var exp2 = new Experiment_DBSCAN(conn);
                 //exp2.Run();
+
+                CNNPage page = new CNNPage("http://edition.cnn.com/2003/SPORT/11/24/rwc.australia.reax/index.html");
+
+                Console.WriteLine(page.pureText);
+                Console.WriteLine();
+                foreach(Uri link in page.allLinks)
+                    Console.WriteLine(link);
+
+
+
             }
         }
     }
