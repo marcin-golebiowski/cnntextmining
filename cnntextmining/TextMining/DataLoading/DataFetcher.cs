@@ -25,7 +25,7 @@ namespace TextMining.DataLoading
             var result = new List<News>();
 
             using (var command
-                = new SqlCommand("SELECT TOP " + newsToGet + " URL, Words, Links FROM dbo.[News] WHERE URL Like 'http://edition.cnn.com/2008/%'", conn))
+                = new SqlCommand("SELECT TOP " + newsToGet + " [URL], [Words], [RawData], [Links] FROM dbo.[News] WHERE URL Like 'http://edition.cnn.com/2008/%'", conn))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -37,7 +37,7 @@ namespace TextMining.DataLoading
                             string url = reader["URL"].ToString();
                             string words = reader["Words"].ToString();
                             string links = reader["Links"].ToString();
-                            //string rawData = reader["RawData"].ToString();
+                            string rawData = reader["RawData"].ToString();
 
 
                             var element = new News();
