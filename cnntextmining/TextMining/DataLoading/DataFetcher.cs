@@ -44,7 +44,7 @@ namespace TextMining.DataLoading
                             element.url = url;
                             element.words.AddRange(words.Split(';'));
                             element.links.AddRange(links.Split(';'));
-                            //element.rawData = rawData;
+                            element.rawData = rawData;
                             result.Add(element);
                         }
 

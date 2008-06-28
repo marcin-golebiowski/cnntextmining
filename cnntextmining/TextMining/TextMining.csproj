@@ -54,10 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clastering\Dbscan.cs" />
+    <Compile Include="Clastering\Hierarchical.cs" />
     <Compile Include="Clastering\Kmeans.cs" />
     <Compile Include="DataLoading\DataFetcher.cs" />
     <Compile Include="Evaluation\DefaultEvaluator.cs" />
     <Compile Include="Evaluation\Experiments\Experiment1.cs" />
+    <Compile Include="Evaluation\Experiments\Experiment_DBSCAN.cs" />
     <Compile Include="Evaluation\IEvaluator.cs" />
     <Compile Include="Evaluation\ExperimentStats.cs" />
     <Compile Include="Evaluation\IExperiment.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="DataLoading\Downloader.cs" />
     <Compile Include="Crawling\VisitedPages.cs" />
     <Compile Include="TextTools\Vector.cs" />
+    <Compile Include="TextTools\WordList.cs" />
     <Compile Include="TextTools\WordsStats.cs" />
     <Compile Include="TextTools\WordQuilifier.cs" />
   </ItemGroup>

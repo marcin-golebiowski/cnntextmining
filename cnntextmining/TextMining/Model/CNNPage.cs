@@ -51,7 +51,8 @@ namespace TextMining.Model
             if (IsNewsPage(uri_))
             {
                 ProcessIncludedText(includedText(page));
-                //GetWords();
+                WordList wl = new WordList();
+                words = wl.getWordList(pureText);
                 DontMissLinks(page);
             }
             else
@@ -222,6 +223,7 @@ namespace TextMining.Model
             pureText = text.ToString().Trim();
         }
 
+        /*
         private void GetWords()
         {
             string[] wordstemp = pureText.Split(' ');
@@ -239,7 +241,8 @@ namespace TextMining.Model
                 }
             }
         }
-
+        */
+ 
         private void DontMissLinks(string page)
         {
             Regex dontMissReg =

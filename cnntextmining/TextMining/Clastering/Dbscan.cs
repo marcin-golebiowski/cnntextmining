@@ -90,7 +90,7 @@ namespace TextMining.Clastering
             while (candidates.Count > 0)
             {
                 Console.WriteLine(candidates.Count);
-                if (states[candidates[0]] == State.unvisited)
+                if (states[candidates[0]] != State.noise)
                 {
                     List<int> neighbours = getNeighbours(candidates[0], news, states, eps);
                     if (neighbours.Count >= minPts)
@@ -98,7 +98,7 @@ namespace TextMining.Clastering
                         group.Add(candidates[0]);
                         foreach (int newCandid in neighbours)
                         {
-                            if (!visited.Contains(newCandid) && states[newCandid] == State.unvisited)
+                            if (!visited.Contains(newCandid))
                             {
                                 candidates.Add(newCandid);
                                 visited.Add(newCandid);
@@ -120,7 +120,7 @@ namespace TextMining.Clastering
             for (int i = 0; i < news.Count; i++ )
             {
                 // Look only for unvisited states.
-                if (i == current || states[i] != State.unvisited)
+                if (i == current || states[i] == State.noise)
                     continue;
 
                 // If the news is near enough. Add to neighbours.
@@ -129,14 +129,6 @@ namespace TextMining.Clastering
                     neighbours.Add(i);
                 }
             }
-
-            // TODO check
-            /*
-            if (neighbours.Count > 50)
-                return new List<int>();
-            */
-
-            //Console.WriteLine(neighbours.Count);
 
             return neighbours;
         }
