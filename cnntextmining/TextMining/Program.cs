@@ -29,7 +29,7 @@ namespace TextMining
                 //var exp2 = new Experiment_DBSCAN(conn);
                 //exp2.Run();
 
-                CNNPage page = new CNNPage("http://edition.cnn.com/2003/SPORT/11/24/rwc.australia.reax/index.html");
+                CNNPage page = new CNNPage("http://edition.cnn.com/2003/TECH/space/07/30/sprj.colu.columbia.probe/index.html");
 
                 Console.WriteLine(page.pureText);
                 Console.WriteLine();
