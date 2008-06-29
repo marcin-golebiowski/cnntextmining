@@ -114,7 +114,7 @@ namespace TextMining.Clastering
 
         private double distanceBetweenGroups(List<int> g1, List<int> g2, double[,] dist)
         {
-            double min = double.MaxValue;
+            double max = double.MinValue;
 
             foreach (int i in g1)
             {
@@ -126,13 +126,12 @@ namespace TextMining.Clastering
                     else
                         curr = dist[j, i];
 
-                    if (curr < min)
-                        min = curr;
+                    if (curr > max)
+                        max = curr;
                 }
             }
 
-
-            return min;
+            return max;
         }
 
 

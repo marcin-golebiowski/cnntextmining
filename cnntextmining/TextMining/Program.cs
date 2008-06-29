@@ -27,9 +27,10 @@ namespace TextMining
                 Console.WriteLine("Words Stats - computed");
                 GroupFactory factory = new GroupFactory(conn);
 
+
                 var topics = new List<string>();
-                topics.Add(@"http://topics.edition.cnn.com/topics/european_football");
-                topics.Add(@"http://topics.edition.cnn.com/topics/religion");
+                topics.Add(@"http://topics.edition.cnn.com/topics/astronomy");
+                topics.Add(@"http://topics.edition.cnn.com/topics/armed_forces");
                 //topics.Add(@"http://topics.edition.cnn.com/topics/genetics");
                 //topics.Add(@"http://topics.edition.cnn.com/topics/religion");
 
@@ -41,15 +42,11 @@ namespace TextMining
 
                 CosinusMetricComparator comp = new CosinusMetricComparator();
                 
-                Kmeans algorithm = new Kmeans(comp, stats, 500);
-
-                List<Group> groups = algorithm.Compute(start, 2, 10);
-
-                //Hierarchical h = new Hierarchical(comp, stats, 4000);
+                Hierarchical algorithm = new Hierarchical(comp, stats, 4000);
 
                 //Dbscan scan = new Dbscan(comp, stats, 1000);
 
-                //List<Group> groups = scan.Compute(start, 0.0230, 3);
+                List<Group> groups = algorithm.Compute(start, 10);
 
                 ExperimentStats.PrintDetailsString(groups);
 
