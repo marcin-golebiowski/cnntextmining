@@ -29,7 +29,7 @@ namespace TextMining.Evaluation.Experiments
         {
             var dataFetcher = new DataFetcher(conn);
             Console.WriteLine("Downloading news for database...");
-            List<News> news = dataFetcher.GetAllNews(true, 700);
+            List<News> news = dataFetcher.GetAllNews(true, 300);
             Console.WriteLine("News downloaded " + news.Count);
 
             news = Words.ComputeWords(news);

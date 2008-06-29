@@ -13,6 +13,7 @@ namespace TextMining.TextTools
 
             double standardDeviation;
             double average;
+            double aritm;
             double min = double.MaxValue;
             double max = double.MinValue;
 
@@ -53,18 +54,21 @@ namespace TextMining.TextTools
             average = sum / c;
 
             double devSum = 0.0;
+            double artSum = 0.0;
             c = 0;
 
             for (int i = 0; i < news.Count; i++)
             {
                 for (int j = 0; j < i; j++)
                 {
-                    devSum += Math.Pow(dist[i, j] - average, 2.0);
+                    devSum += dist[i, j] * dist[i, j];
+                    artSum += Math.Abs(dist[i, j] - average);
                     c++;
                 }
             }
 
-            standardDeviation = Math.Sqrt(devSum / c);
+            standardDeviation = Math.Sqrt(   (devSum / c) - (average*average)   );
+            aritm = artSum / c;
 
             sb.Append("Data information:\n");
             sb.Append("Minimum distance = " + min.ToString() + "\n");
@@ -72,6 +76,7 @@ namespace TextMining.TextTools
             sb.Append("Average distance = " + average.ToString() + "\n");
             sb.Append("Zero count = " + zeroCount + "\n");
             sb.Append("Standard deviation = " + standardDeviation.ToString() + "\n");
+            sb.Append("Arithmetic median = " + aritm.ToString() + "\n");
             sb.Append("End data information\n");
 
             return sb.ToString();
