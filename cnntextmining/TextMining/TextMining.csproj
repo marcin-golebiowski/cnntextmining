@@ -79,6 +79,7 @@
     <Compile Include="TextTools\CosinusMetricComparator.cs" />
     <Compile Include="TextTools\EuclidesMetricComparator.cs" />
     <Compile Include="TextTools\IComparator.cs" />
+    <Compile Include="TextTools\JaccardMetricCompartator.cs" />
     <Compile Include="TextTools\Stemming.cs" />
     <Compile Include="Crawling\TopicAction.cs" />
     <Compile Include="Crawling\Topics.cs" />

@@ -31,7 +31,10 @@ namespace TextMining.Evaluation.Experiments
             int maxLen = 8000;
 
             var dataFetcher = new DataFetcher(conn);
+            Console.WriteLine("newsy przed pobraniem");
             List<News> tmp = dataFetcher.GetAllNews();
+
+            Console.WriteLine("newsy pobrane");
 
             Random r = new Random();
             List<News> news = new List<News>();
@@ -52,7 +55,7 @@ namespace TextMining.Evaluation.Experiments
             var stats = new WordsStats(news);
             stats.Compute();
 
-            var comparator = new CosinusMetricComparator();
+            var comparator = new JaccardMetricCompartator();
 
 
             var algorithm = new Dbscan(comparator, stats, maxLen);
@@ -72,13 +75,15 @@ namespace TextMining.Evaluation.Experiments
                 Console.WriteLine(sum / newsCount);
             }
             */
-            
+
+
+            Group gr = new Group("chujowa grupka", news);
 
             Console.WriteLine("Starting Dbscan");
-            //List<List<News>> sets = algorithm.Compute(news, 0.0230, 3);
+            List<Group> sets = algorithm.Compute(gr, 0.23, 2);
             Console.WriteLine("Dbscan end");
 
-            //ExperimentStats.GetGroupCountString(sets);
+            ExperimentStats.GetGroupCountString(sets);
 
             Console.WriteLine("Loading assingments..");
             TopicOriginalAssigment ass = new TopicOriginalAssigment(conn);
@@ -88,17 +93,25 @@ namespace TextMining.Evaluation.Experiments
             DefaultEvaluator eval = new DefaultEvaluator(ass);
 
             Console.WriteLine("Starting eval");
-            //Console.WriteLine(eval.GetScore(sets));
+            Console.WriteLine(eval.GetScore(sets));
             Console.WriteLine("End eval");
 
-            
-            /*foreach (List<News> gr in sets)
+            int sum = 0;
+
+            foreach (Group g in sets)
             {
-                Console.WriteLine("SET ");
-                foreach (News n in gr)
-                    Console.WriteLine(n.url);
+                Console.Write(g.Count + ";");
+                sum += g.Count;
+            }
+            Console.WriteLine("sum = " + sum);
+            
+            foreach (Group ggg in sets)
+            {
+                Console.WriteLine("SET " + gr.Count);
+                for (int i = 0; i < ggg.Count; i++ )
+                    Console.WriteLine(ggg[i].url);
                 Console.WriteLine("------------------");
-            }*/
+            }
             
         }
     }

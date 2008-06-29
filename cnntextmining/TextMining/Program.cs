@@ -5,6 +5,7 @@ using TextMining.Clastering;
 using TextMining.Evaluation;
 using TextMining.TextTools;
 using DataFetcher=TextMining.DataLoading.DataFetcher;
+using TextMining.Evaluation.Experiments;
 
 namespace TextMining
 {
@@ -19,15 +20,21 @@ namespace TextMining
             {
                 conn.Open();
 
+                Console.WriteLine("polaczenie ok");
+
                 // preprocessing
-                var fetcher = new DataFetcher(conn);
-                WordsStats stats = new WordsStats(Words.ComputeWords(fetcher.GetAllNews()));
-                stats.Compute();
+               // var fetcher = new DataFetcher(conn);
+               // WordsStats stats = new WordsStats(Words.ComputeWords(fetcher.GetAllNews()));
+               // stats.Compute();
 
-                Console.WriteLine("Words Stats - computed");
-                GroupFactory factory = new GroupFactory(conn);
+               // Console.WriteLine("Words Stats - computed");
+               // GroupFactory factory = new GroupFactory(conn);
 
 
+                var exp2 = new Experiment_DBSCAN(conn);
+                exp2.Run();
+
+                /*
                 var topics = new List<string>();
                 topics.Add(@"http://topics.edition.cnn.com/topics/astronomy");
                 topics.Add(@"http://topics.edition.cnn.com/topics/armed_forces");

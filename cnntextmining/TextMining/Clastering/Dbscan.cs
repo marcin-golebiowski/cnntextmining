@@ -90,7 +90,7 @@ namespace TextMining.Clastering
             while (candidates.Count > 0)
             {
                 Console.WriteLine(candidates.Count);
-                if (states[candidates[0]] != State.noise)
+                if (states[candidates[0]] == State.unvisited)
                 {
                     List<int> neighbours = getNeighbours(candidates[0], news, states, eps);
                     if (neighbours.Count >= minPts)
