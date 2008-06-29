@@ -31,8 +31,8 @@ namespace TextMining
                // GroupFactory factory = new GroupFactory(conn);
 
 
-                var exp2 = new Experiment_DBSCAN(conn);
-                exp2.Run();
+                var exp = new MetricsStatistics(conn);
+                exp.Run();
 
                 /*
                 var topics = new List<string>();

@@ -26,6 +26,9 @@ namespace TextMining.TextTools
 
             xSy += xIy;
 
+            if (xSy == 0)
+                return xIy;
+
             result = (double)xIy / (double)xSy;
 
             return result;

@@ -76,7 +76,6 @@ namespace TextMining.Evaluation.Experiments
             }
             */
 
-
             Group gr = new Group("chujowa grupka", news);
 
             Console.WriteLine("Starting Dbscan");
