@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-
+using TextMining.Evaluation;
 using TextMining.TextTools;
-using TextMining.Model;
 
 namespace TextMining.Clastering
 {
@@ -25,9 +23,11 @@ namespace TextMining.Clastering
             this.maxLen = maxLen;
         }
 
-        public List<List<News>> Compute(List<News> news, int k)
+        public List<Group> Compute(Group news, int k)
         {
+            Console.WriteLine("Obliczanie odlegosci");
             double[,] distances = computeDistances(news);
+            Console.WriteLine("Koniec");
 
             //Make initial N groups
 
@@ -39,9 +39,9 @@ namespace TextMining.Clastering
                 groups.Add(tmp);
             }
 
-
             while (groups.Count > k)
             {
+                Console.WriteLine("Iteratation: " + (news.Count - groups.Count));
                 // search 2 nearest groups, and put them together
                 Pair nearest = getTwoClosestClusters(groups, distances);
 
@@ -49,11 +49,11 @@ namespace TextMining.Clastering
                 groups.RemoveAt(nearest.second);
             }
 
-            List<List<News>> result = new List<List<News>>();
+            List<Group> result = new List<Group>();
 
             foreach (List<int> gr in groups)
             {
-                List<News> toAdd = new List<News>();
+                Group toAdd = new Group("");
                 foreach (int n in gr)
                 {
                     toAdd.Add(news[n]);
@@ -65,7 +65,7 @@ namespace TextMining.Clastering
         }
 
 
-        private double[,] computeDistances(List<News> news)
+        private double[,] computeDistances(Group news)
         {
             double[,] distances = new double[news.Count, news.Count];
 
@@ -80,9 +80,9 @@ namespace TextMining.Clastering
                     col.BuildVector();
 
                     distances[i, j] = comparator.Compare(row, col);
-                    Console.Write(distances[i, j] + "  ");
+                    //Console.Write(distances[i, j] + "  ");
                 }
-                Console.WriteLine();
+                //Console.WriteLine();
             }
             return distances;
         }
