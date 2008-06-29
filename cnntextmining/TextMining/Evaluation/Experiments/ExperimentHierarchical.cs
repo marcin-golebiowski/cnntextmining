@@ -78,7 +78,7 @@ namespace TextMining.Evaluation.Experiments
             
 
             Console.WriteLine("Starting Dbscan");
-            List<List<News>> sets = algorithm.Compute(news, 0.0230, 3);
+            //List<List<News>> sets = algorithm.Compute(news, 0.0230, 3);
             Console.WriteLine("Dbscan end");
 
             //ExperimentStats.GetGroupCountString(sets);
@@ -95,13 +95,13 @@ namespace TextMining.Evaluation.Experiments
             Console.WriteLine("End eval");
 
             
-            foreach (List<News> gr in sets)
+            /*foreach (List<News> gr in sets)
             {
                 Console.WriteLine("SET ");
                 foreach (News n in gr)
                     Console.WriteLine(n.url);
                 Console.WriteLine("------------------");
-            }
+            }*/
             
         }
     }

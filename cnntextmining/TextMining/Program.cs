@@ -30,8 +30,8 @@ namespace TextMining
                 var topics = new List<string>();
                 topics.Add(@"http://topics.edition.cnn.com/topics/weather");
                 topics.Add(@"http://topics.edition.cnn.com/topics/terrorism");
-                //topics.Add(@"http://topics.edition.cnn.com/topics/genetics");
-                //topics.Add(@"http://topics.edition.cnn.com/topics/religion");
+                topics.Add(@"http://topics.edition.cnn.com/topics/genetics");
+                topics.Add(@"http://topics.edition.cnn.com/topics/religion");
 
                 Group start = factory.CreateGroupWithNewsFromTopics(topics);
 
@@ -43,9 +43,11 @@ namespace TextMining
                 //Kmeans algorithm = new Kmeans(comp, stats, 4000);
                 //List<Group> groups = algorithm.Compute(start, 4, 10);
 
-                Hierarchical h = new Hierarchical(comp, stats, 4000);
+                //Hierarchical h = new Hierarchical(comp, stats, 4000);
 
-                List<Group> groups = h.Compute(start, 2);
+                Dbscan scan = new Dbscan(comp, stats, 1000);
+
+                List<Group> groups = scan.Compute(start, 0.0230, 3);
 
                 ExperimentStats.PrintDetailsString(groups);
 

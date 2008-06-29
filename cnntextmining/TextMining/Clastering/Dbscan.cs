@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using TextMining.Evaluation;
 using TextMining.Model;
 using TextMining.TextTools;
 
@@ -30,9 +30,9 @@ namespace TextMining.Clastering
         /// <param name="eps">minimal distance between news in same neighbourhood</param>
         /// <param name="minPts">minimal number of neighbour news, for news in that cluster</param>
         /// <returns></returns>
-        public List<List<News>> Compute(List<News> news, double eps, int minPts)
+        public List<Group> Compute(Group news, double eps, int minPts)
         {
-            var division = new List<List<News>>();
+            var division = new List<Group>();
             var states = new State[news.Count];
             newsVectors = new Vector[news.Count];
 
@@ -59,7 +59,7 @@ namespace TextMining.Clastering
                     }
                     else
                     {
-                        List<News> linked = new List<News>();
+                        Group linked = new Group("");
                         foreach (int linkedIndex in group)
                         {
                             linked.Add(news[linkedIndex]);
@@ -76,7 +76,7 @@ namespace TextMining.Clastering
         }
 
 
-        private List<int> getGroup(int current, List<News> news, State[] states, double eps, int minPts)
+        private List<int> getGroup(int current, Group news, State[] states, double eps, int minPts)
         {
             // Result group.
             List<int> group = new List<int>();
@@ -111,7 +111,7 @@ namespace TextMining.Clastering
             return group;
         }
 
-        private List<int> getNeighbours(int current, List<News> news, State[] states, double eps)
+        private List<int> getNeighbours(int current, Group news, State[] states, double eps)
         {
             // Result - indices of news that are neighbours of current news.
             List<int> neighbours = new List<int>();
