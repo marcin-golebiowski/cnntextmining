@@ -30,7 +30,6 @@ namespace TextMining.Clastering
 
             for (int i = 0; i < K; i++)
             {
-                
                 News n = news[rand.Next()%news.Count];
                 centroids[i] = new Vector(stats, n, maxLen);
                 centroids[i].BuildVector();
@@ -46,7 +45,10 @@ namespace TextMining.Clastering
             {
                 DateTime start = DateTime.Now;
 
+                Console.WriteLine("=========================================");
+                Console.WriteLine("=========================================");
                 Console.WriteLine("Iteration " + iteration + ": started");
+
                 // liczenie przydzialu
                 for (int i = 0; i < news.Count; i++)
                 {
@@ -76,7 +78,9 @@ namespace TextMining.Clastering
                 
                 Console.WriteLine("Time: " + (DateTime.Now - start));
 
-                string conf = ExperimentStats.GetGroupCountString(GetCurrentSet(news, assigment, K));
+                List<Group> current = GetCurrentSet(news, assigment, K);
+
+                string conf = ExperimentStats.GetGroupCountString(current);
 
                 if (configurations.ContainsKey(conf))
                 {
@@ -85,8 +89,6 @@ namespace TextMining.Clastering
                 }
 
                 configurations[conf] = true;
-
-                Console.WriteLine(conf);
             }
 
             return GetCurrentSet(news, assigment, K);

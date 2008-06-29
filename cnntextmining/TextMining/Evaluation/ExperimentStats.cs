@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace TextMining.Evaluation
@@ -16,6 +17,37 @@ namespace TextMining.Evaluation
             b.AppendLine();
 
             return b.ToString();
+        }
+
+
+        public static void PrintDetailsString(List<Group> groups)
+        {
+            Console.WriteLine("==");
+            foreach (Group set in groups)
+            {
+                var count = new Dictionary<string, int>();
+                Console.WriteLine("S=" + set.Count);
+
+                for (int i = 0; i < set.Count; i++)
+                {
+                    if (count.ContainsKey(set[i].topicUrl))
+                    {
+                        count[set[i].topicUrl] += 1;
+                    }
+                    else
+                    {
+                        count[set[i].topicUrl] = 1;
+                    }
+                }
+
+                foreach (KeyValuePair<string, int> pair in count)
+                {
+                    Console.WriteLine(pair.Key + "-" + pair.Value);
+                }
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("=====");
         }
     }
 }

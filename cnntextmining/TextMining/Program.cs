@@ -24,26 +24,14 @@ namespace TextMining
                 WordsStats stats = new WordsStats(Words.ComputeWords(fetcher.GetAllNews()));
                 stats.Compute();
 
-
-                List<string> words = stats.GetMostPopularWords(100);
-
-                string res = "";
-
-                for (int i = 0; i < words.Count; i++)
-                {
-                    res += words[i] + "\n";
-                }
-
-                Console.WriteLine(res);
-                
-
-                /*Console.WriteLine("Words Stats - computed");
+                Console.WriteLine("Words Stats - computed");
                 GroupFactory factory = new GroupFactory(conn);
 
                 var topics = new List<string>();
                 topics.Add(@"http://topics.edition.cnn.com/topics/weather");
                 topics.Add(@"http://topics.edition.cnn.com/topics/terrorism");
                 topics.Add(@"http://topics.edition.cnn.com/topics/genetics");
+                topics.Add(@"http://topics.edition.cnn.com/topics/religion");
 
                 Group start = factory.CreateGroupWithNewsFromTopics(topics);
 
@@ -51,12 +39,13 @@ namespace TextMining
                 start.RemoveDuplicates();
                 Console.WriteLine("Po usuniêciu duplikatów: " + start.Count);
 
-                EuclidesMetricComparator comp = new EuclidesMetricComparator();
+                CosinusMetricComparator comp = new CosinusMetricComparator();
                 Kmeans kmeans = new Kmeans(comp, stats, 4000);
 
-                List<Group> groups =  kmeans.Compute(start, 3, 100);
+                List<Group> groups = kmeans.Compute(start, 4, 10);
 
-               */
+                ExperimentStats.PrintDetailsString(groups);
+
 
                 //var assigment = new TopicOriginalAssigment(conn);
                 //assigment.Load();

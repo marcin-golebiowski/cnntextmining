@@ -4,6 +4,7 @@ namespace TextMining.Model
 {
     public class News
     {
+        public string topicUrl;
         public string url;
         public List<string> links = new List<string>();
         public List<string> words = new List<string>();

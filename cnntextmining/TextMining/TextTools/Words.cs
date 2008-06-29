@@ -12,7 +12,6 @@ namespace TextMining.TextTools
                 var words = new List<string>();
                 Filter(info);
 
-
                 string[] wordstemp = info.rawData.Split(' ');
                 for (int i = 0; i < wordstemp.Length; i++)
                 {
@@ -23,7 +22,7 @@ namespace TextMining.TextTools
                         // steaming
                         word = Stemmer.DoPorterStemming(word);
 
-                        if (word.Length > 3)
+                        if (word.Length >= 3)
                         {
                             words.Add(word);
                         }

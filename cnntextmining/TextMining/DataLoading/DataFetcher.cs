@@ -23,7 +23,7 @@ namespace TextMining.DataLoading
             var result = new List<News>();
 
             using (var command
-                = new SqlCommand("SELECT N.[URL], [Words], [RawData], [Links] FROM dbo.[News] N JOIN dbo.[Topics] T ON  T.LinkURL = N.URL  WHERE TopicURL = @topic", conn))
+                = new SqlCommand("SELECT N.[URL], [Words], [RawData], [Links], [TopicURL] FROM dbo.[News] N JOIN dbo.[Topics] T ON  T.LinkURL = N.URL  WHERE TopicURL = @topic", conn))
             {
                 command.Parameters.AddWithValue("@topic", topicURL);
 
@@ -45,6 +45,7 @@ namespace TextMining.DataLoading
                             element.words.AddRange(words.Split(';'));
                             element.links.AddRange(links.Split(';'));
                             element.rawData = rawData;
+                            element.topicUrl = reader["TopicURL"].ToString();
                             result.Add(element);
                         }
 
