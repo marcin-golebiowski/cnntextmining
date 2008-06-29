@@ -28,10 +28,10 @@ namespace TextMining
                 GroupFactory factory = new GroupFactory(conn);
 
                 var topics = new List<string>();
-                topics.Add(@"http://topics.edition.cnn.com/topics/weather");
-                topics.Add(@"http://topics.edition.cnn.com/topics/terrorism");
-                topics.Add(@"http://topics.edition.cnn.com/topics/genetics");
+                topics.Add(@"http://topics.edition.cnn.com/topics/european_football");
                 topics.Add(@"http://topics.edition.cnn.com/topics/religion");
+                //topics.Add(@"http://topics.edition.cnn.com/topics/genetics");
+                //topics.Add(@"http://topics.edition.cnn.com/topics/religion");
 
                 Group start = factory.CreateGroupWithNewsFromTopics(topics);
 
@@ -40,14 +40,16 @@ namespace TextMining
                 Console.WriteLine("Po usuniêciu duplikatów: " + start.Count);
 
                 CosinusMetricComparator comp = new CosinusMetricComparator();
-                //Kmeans algorithm = new Kmeans(comp, stats, 4000);
-                //List<Group> groups = algorithm.Compute(start, 4, 10);
+                
+                Kmeans algorithm = new Kmeans(comp, stats, 500);
+
+                List<Group> groups = algorithm.Compute(start, 2, 10);
 
                 //Hierarchical h = new Hierarchical(comp, stats, 4000);
 
-                Dbscan scan = new Dbscan(comp, stats, 1000);
+                //Dbscan scan = new Dbscan(comp, stats, 1000);
 
-                List<Group> groups = scan.Compute(start, 0.0230, 3);
+                //List<Group> groups = scan.Compute(start, 0.0230, 3);
 
                 ExperimentStats.PrintDetailsString(groups);
 

@@ -82,11 +82,11 @@ namespace TextMining.Clastering
 
                 string conf = ExperimentStats.GetGroupCountString(current);
 
-                if (configurations.ContainsKey(conf))
+                /*if (configurations.ContainsKey(conf))
                 {
                     Console.WriteLine("Konfiguracja wystąpiła już");
                     break;
-                }
+                }*/
 
                 configurations[conf] = true;
             }
@@ -170,7 +170,7 @@ namespace TextMining.Clastering
 
 
                 //trim
-                newCentroids[i].Trim();
+                //newCentroids[i].Trim();
             }
 
             return newCentroids;

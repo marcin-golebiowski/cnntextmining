@@ -21,7 +21,10 @@ namespace TextMining.TextTools
                     {
                         // steaming
                         word = Stemmer.DoPorterStemming(word);
-                        words.Add(word);
+                        if (word.Length > 6)
+                        {
+                            words.Add(word);
+                        }
                     }
                 }
 
