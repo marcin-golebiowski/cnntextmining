@@ -90,7 +90,7 @@ namespace TextMining.Clastering
         private Pair getTwoClosestClusters(List<List<int>> groups, double[,] dist)
         {
             double min = double.MaxValue;
-            int f, s;
+            int f = 0, s = 0;
 
             for (int i = 0; i < groups.Count; i++)
             {
@@ -122,13 +122,15 @@ namespace TextMining.Clastering
             {
                 foreach (int j in g2)
                 {
-                    int curr;
-                    (i < j) ? curr  
+                    double curr;
+                    if (i > j)
+                        curr = dist[i, j];
+                    else
+                        curr = dist[j, i];
 
-
+                    if (curr < min)
+                        min = curr;
                 }
-
-
             }
 
 
