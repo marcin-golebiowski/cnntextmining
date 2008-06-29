@@ -39,26 +39,30 @@ namespace TextMining
                 */
                 /*
                 var topics = new List<string>();
-                topics.Add(@"http://topics.edition.cnn.com/topics/astronomy");
-                topics.Add(@"http://topics.edition.cnn.com/topics/armed_forces");
+                //topics.Add(@"http://topics.edition.cnn.com/topics/astronomy");
+                //topics.Add(@"http://topics.edition.cnn.com/topics/armed_forces");
                 //topics.Add(@"http://topics.edition.cnn.com/topics/genetics");
-                //topics.Add(@"http://topics.edition.cnn.com/topics/religion");
+                topics.Add(@"http://topics.edition.cnn.com/topics/religion");
 
-                Group start = factory.CreateGroupWithNewsFromTopics(topics);
-
-                Console.WriteLine("Przed usuniêciem duplikatów: " + start.Count);
-                start.RemoveDuplicates();
-                Console.WriteLine("Po usuniêciu duplikatów: " + start.Count);
-
+                Group initialGroup = factory.CreateGroupWithNewsFromTopics(topics);
                 CosinusMetricComparator comp = new CosinusMetricComparator();
-                
-                Hierarchical algorithm = new Hierarchical(comp, stats, 4000);
 
-                //Dbscan scan = new Dbscan(comp, stats, 1000);
 
-                List<Group> groups = algorithm.Compute(start, 10);
+                var metis = new Metis(stats, comp, conn);
 
+                List<Group> groups = metis.Compute(initialGroup, 4);
                 ExperimentStats.PrintDetailsString(groups);
+                
+
+                
+                
+                //Hierarchical algorithm = new Hierarchical(comp, stats, 4000);
+
+                //Dbscan scan = new Dbscan(comp, stats, 1000)p;
+
+                //List<Group> groups = algorithm.Compute(start, 10);
+
+                //ExperimentStats.PrintDetailsString(groups);
 
 
                 //var assigment = new TopicOriginalAssigment(conn);

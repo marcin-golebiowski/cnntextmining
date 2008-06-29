@@ -62,7 +62,7 @@ namespace TextMining.DataLoading
             var result = new List<News>();
 
             using (var command
-                = new SqlCommand("SELECT TOP " + newsToGet + " [URL], [Words], [RawData], [Links] FROM dbo.[News] WHERE URL Like 'http://edition.cnn.com/%'", conn))
+                = new SqlCommand("SELECT TOP " + newsToGet + " [URL], [Words], [RawData], [Links], [TopicURL] FROM dbo.[News] JOIN dbo.[Topics] ON LinkURL = URL WHERE URL Like 'http://edition.cnn.com/%'", conn))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -80,6 +80,7 @@ namespace TextMining.DataLoading
                             element.url = url;
                             element.words.AddRange(words.Split(';'));
                             element.links.AddRange(links.Split(';'));
+                            element.topicUrl = reader["TopicURL"].ToString();
                             element.rawData = rawData;
                             result.Add(element);
                         }
@@ -116,6 +117,42 @@ namespace TextMining.DataLoading
                 }
             }
             return result;
+        }
+
+        public News GetNews(string newsURL)
+        {
+            News element = null;
+            using (var command
+                = new SqlCommand("SELECT [URL], [Words], [RawData], [Links], [TopicURL] FROM dbo.[News] JOIN dbo.[Topics] ON LinkURL = URL WHERE URL = @url", conn))
+            {
+                command.Parameters.AddWithValue("@url", newsURL);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader != null && reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            string url = reader["URL"].ToString();
+                            string words = reader["Words"].ToString();
+                            string links = reader["Links"].ToString();
+                            string rawData = reader["RawData"].ToString();
+
+                            element = new News();
+                            element.url = url;
+                            element.topicUrl =  reader["TopicURL"].ToString();
+                            element.words.AddRange(words.Split(';'));
+                            element.links.AddRange(links.Split(';'));
+                            element.rawData = rawData;
+                           
+                        }
+
+                        reader.Close();
+                    }
+
+                }
+            }
+
+            return element;
         }
     }
 }
