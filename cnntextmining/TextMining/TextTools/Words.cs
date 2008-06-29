@@ -3,25 +3,30 @@ using TextMining.Model;
 
 namespace TextMining.TextTools
 {
-    public class WordsSetter
+    public class Words
     {
         public static List<News> ComputeWords(List<News> news)
         {
             foreach (News info in news)
             {
-                List<string> words = new List<string>();
+                var words = new List<string>();
+                Filter(info);
+
+
                 string[] wordstemp = info.rawData.Split(' ');
                 for (int i = 0; i < wordstemp.Length; i++)
                 {
                     // normalization 
                     string word = wordstemp[i].ToLower().Trim();
-
-                    // steaming
-                    word = Stemmer.DoPorterStemming(word);
-
                     if (WordQuilifier.WordIsOK(word))
                     {
-                        words.Add(word);
+                        // steaming
+                        word = Stemmer.DoPorterStemming(word);
+
+                        if (word.Length > 3)
+                        {
+                            words.Add(word);
+                        }
                     }
                 }
 
@@ -31,6 +36,16 @@ namespace TextMining.TextTools
             }
 
             return news;
+        }
+
+        private static void Filter(News info)
+        {
+            string[] toRemove = new string[] { "\n", "\t", ".", ",", "\"", "&quot;",  ";", "?", "�", "'" };
+
+            foreach (string s in toRemove)
+            {
+                info.rawData = info.rawData.Replace(s, " ");
+            }
         }
     }
 }

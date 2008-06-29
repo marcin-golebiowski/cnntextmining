@@ -23,7 +23,7 @@ namespace TextMining.DataLoading
             var result = new List<News>();
 
             using (var command
-                = new SqlCommand("SELECT [URL], [Words], [RawData], [Links] FROM dbo.[News] WHERE TopicURL = @topic", conn))
+                = new SqlCommand("SELECT N.[URL], [Words], [RawData], [Links] FROM dbo.[News] N JOIN dbo.[Topics] T ON  T.LinkURL = N.URL  WHERE TopicURL = @topic", conn))
             {
                 command.Parameters.AddWithValue("@topic", topicURL);
 

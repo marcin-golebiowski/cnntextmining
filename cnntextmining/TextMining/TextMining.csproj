@@ -60,6 +60,8 @@
     <Compile Include="Evaluation\DefaultEvaluator.cs" />
     <Compile Include="Evaluation\ExperimentStats.cs" />
     <Compile Include="Evaluation\Experiments\Experiment1.cs" />
+    <Compile Include="Evaluation\Experiments\ExperimentHierarchical.cs" />
+    <Compile Include="Evaluation\Experiments\Experiment_DBSCAN.cs" />
     <Compile Include="Evaluation\Group.cs" />
     <Compile Include="Evaluation\GroupFactory.cs" />
     <Compile Include="Evaluation\IEvaluator.cs" />
@@ -84,7 +86,7 @@
     <Compile Include="Crawling\VisitedPages.cs" />
     <Compile Include="TextTools\Vector.cs" />
     <Compile Include="TextTools\WordList.cs" />
-    <Compile Include="TextTools\WordsSetter.cs" />
+    <Compile Include="TextTools\Words.cs" />
     <Compile Include="TextTools\WordsStats.cs" />
     <Compile Include="TextTools\WordQuilifier.cs" />
   </ItemGroup>

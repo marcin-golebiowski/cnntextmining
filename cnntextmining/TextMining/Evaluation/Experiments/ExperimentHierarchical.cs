@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data.SqlClient;
 using TextMining.DataLoading;
 using TextMining.Model;
 using TextMining.TextTools;
 using TextMining.Clastering;
-using TextMining.Experiments;
+
 
 
 namespace TextMining.Evaluation.Experiments
@@ -82,7 +81,7 @@ namespace TextMining.Evaluation.Experiments
             List<List<News>> sets = algorithm.Compute(news, 0.0230, 3);
             Console.WriteLine("Dbscan end");
 
-            ExperimentStats.PrintStats(sets);
+            //ExperimentStats.GetGroupCountString(sets);
 
             Console.WriteLine("Loading assingments..");
             TopicOriginalAssigment ass = new TopicOriginalAssigment(conn);
@@ -92,7 +91,7 @@ namespace TextMining.Evaluation.Experiments
             DefaultEvaluator eval = new DefaultEvaluator(ass);
 
             Console.WriteLine("Starting eval");
-            Console.WriteLine(eval.GetScore(sets));
+            //Console.WriteLine(eval.GetScore(sets));
             Console.WriteLine("End eval");
 
             

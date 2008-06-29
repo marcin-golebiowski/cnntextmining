@@ -62,5 +62,21 @@ namespace TextMining.Evaluation
         {
             news.Add(news1);
         }
+
+        public void RemoveDuplicates()
+        {
+            Dictionary<News, bool> r = new Dictionary<News, bool>();
+            foreach (News news1 in news)
+            {
+                r[news1] = true;
+            }
+
+            news.Clear();
+
+            foreach (KeyValuePair<News, bool> keyValuePair in r)
+            {
+                news.Add(keyValuePair.Key);
+            }
+        }
     }
 }

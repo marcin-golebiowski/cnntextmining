@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System.Collections.Generic;
+using System.Data.SqlClient;
 using TextMining.DataLoading;
 using TextMining.TextTools;
 
@@ -17,13 +18,21 @@ namespace TextMining.Evaluation
         {
             var result = new Group("INITIAL");
             var f = new DataFetcher(conn);
-            result.AddRange(WordsSetter.ComputeWords(f.GetAllNews()));
+            result.AddRange(Words.ComputeWords(f.GetAllNews()));
             return result;
         }
 
-        public Group CreateGroupWithNewsFromTopics(string[] topics)
+        public Group CreateGroupWithNewsFromTopics(List<string> topics)
         {
-            return null;
+            var result = new Group("INITIAL");
+            var f = new DataFetcher(conn);
+
+            foreach (string topic in topics)
+            {
+                result.AddRange(Words.ComputeWords(f.GetAllNews(topic)));    
+            }
+
+            return result;
         }
     }
 }

@@ -68,7 +68,7 @@ namespace TextMining.Evaluation.Experiments
             //List<List<News>> sets = algorithm.Compute(news, K, iterations);
             Console.WriteLine("KMeans end");
 
-            //ExperimentStats.PrintStats(sets);
+            //ExperimentStats.GetGroupCountString(sets);
 
             
            

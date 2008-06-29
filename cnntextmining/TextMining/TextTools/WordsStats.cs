@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TextMining.Model;
 
 namespace TextMining.TextTools
@@ -26,9 +25,58 @@ namespace TextMining.TextTools
             this.news = news;
         }
 
-        public List<News> Newss
+
+        public List<string> GetMostPopularWords(int count)
         {
-            get { return news; }
+            var res = new List<string>();
+
+            List<Pair> tmp = new List<Pair>();
+
+            foreach (KeyValuePair<string, int> pair in wordCount)
+            {
+                var p = new Pair();
+                p.val = pair.Value;
+                p.word = pair.Key;
+
+                tmp.Add(p);
+            }
+
+            tmp.Sort(new Comp());
+            
+
+            for (int i = 0; i < count; i++)
+            {
+                res.Add(tmp[i].word);
+            }
+
+            return res;
+        }
+
+
+        public List<string> GetMostWordsD(int count)
+        {
+            var res = new List<string>();
+
+            List<Pair> tmp = new List<Pair>();
+
+            foreach (KeyValuePair<string, Dictionary<string, int>> pair in wordDocumentCount)
+            {
+                var p = new Pair();
+                p.val = pair.Value.Count;
+                p.word = pair.Key;
+
+                tmp.Add(p);
+            }
+
+            tmp.Sort(new Comp());
+
+
+            for (int i = 0; i < count; i++)
+            {
+                res.Add(tmp[i].word);
+            }
+
+            return res;
         }
 
         public void Compute()

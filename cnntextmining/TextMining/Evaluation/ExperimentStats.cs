@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using TextMining.Model;
+﻿using System.Collections.Generic;
+using System.Text;
 
 namespace TextMining.Evaluation
 {
     public class ExperimentStats
     {
-        public static void PrintStats(List<Group> groups)
+        public static string GetGroupCountString(List<Group> groups)
         {
+            var b = new StringBuilder();
+
             foreach (Group set in groups)
             {
-                Console.Write(set.Count + ";");
+                b.Append(set.Count + ";");
             }
-            Console.WriteLine();
+            b.AppendLine();
+
+            return b.ToString();
         }
     }
 }

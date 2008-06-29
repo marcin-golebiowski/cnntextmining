@@ -2,10 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using TextMining.Clastering;
-using TextMining.Crawling;
 using TextMining.Evaluation;
-using TextMining.Evaluation.Experiments;
-using TextMining.Model;
 using TextMining.TextTools;
 using DataFetcher=TextMining.DataLoading.DataFetcher;
 
@@ -24,22 +21,42 @@ namespace TextMining
 
                 // preprocessing
                 var fetcher = new DataFetcher(conn);
-                WordsStats stats = new WordsStats(WordsSetter.ComputeWords(fetcher.GetAllNews()));
+                WordsStats stats = new WordsStats(Words.ComputeWords(fetcher.GetAllNews()));
                 stats.Compute();
 
+
+                List<string> words = stats.GetMostPopularWords(100);
+
+                string res = "";
+
+                for (int i = 0; i < words.Count; i++)
+                {
+                    res += words[i] + "\n";
+                }
+
+                Console.WriteLine(res);
+                
+
+                /*Console.WriteLine("Words Stats - computed");
                 GroupFactory factory = new GroupFactory(conn);
-                Group start = factory.CreateGroupWithAllNews();
+
+                var topics = new List<string>();
+                topics.Add(@"http://topics.edition.cnn.com/topics/weather");
+                topics.Add(@"http://topics.edition.cnn.com/topics/terrorism");
+                topics.Add(@"http://topics.edition.cnn.com/topics/genetics");
+
+                Group start = factory.CreateGroupWithNewsFromTopics(topics);
+
+                Console.WriteLine("Przed usuniêciem duplikatów: " + start.Count);
+                start.RemoveDuplicates();
+                Console.WriteLine("Po usuniêciu duplikatów: " + start.Count);
 
                 EuclidesMetricComparator comp = new EuclidesMetricComparator();
-                Kmeans kmeans = new Kmeans(comp, stats, 10);
+                Kmeans kmeans = new Kmeans(comp, stats, 4000);
 
+                List<Group> groups =  kmeans.Compute(start, 3, 100);
 
-
-                List<Group> groups =  kmeans.Compute(start, 10, 10);
-
-
-                ExperimentStats.PrintStats(groups);
-
+               */
 
                 //var assigment = new TopicOriginalAssigment(conn);
                 //assigment.Load();

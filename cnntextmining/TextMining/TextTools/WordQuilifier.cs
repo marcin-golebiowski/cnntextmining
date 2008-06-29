@@ -33,11 +33,6 @@ namespace TextMining.TextTools
                 return false;
             }
 
-            if (word == "the")
-            {
-                
-            }
-
             if (stopWords.ContainsKey(word))
             {
                 return false;

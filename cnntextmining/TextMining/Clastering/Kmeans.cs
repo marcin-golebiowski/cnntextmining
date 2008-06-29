@@ -11,6 +11,7 @@ namespace TextMining.Clastering
         private readonly IComparator comparator;
         private readonly WordsStats stats;
         private readonly int maxLen;
+        private readonly Dictionary<string, bool> configurations = new Dictionary<string, bool>();
 
         public Kmeans(IComparator comparator, WordsStats stats,  int maxLen)
         {
@@ -29,6 +30,7 @@ namespace TextMining.Clastering
 
             for (int i = 0; i < K; i++)
             {
+                
                 News n = news[rand.Next()%news.Count];
                 centroids[i] = new Vector(stats, n, maxLen);
                 centroids[i].BuildVector();
@@ -73,7 +75,18 @@ namespace TextMining.Clastering
                 centroids = ComputeNewCentroids(K, assigment, vectors, centroids);
                 
                 Console.WriteLine("Time: " + (DateTime.Now - start));
-               
+
+                string conf = ExperimentStats.GetGroupCountString(GetCurrentSet(news, assigment, K));
+
+                if (configurations.ContainsKey(conf))
+                {
+                    Console.WriteLine("Konfiguracja wystąpiła już");
+                    break;
+                }
+
+                configurations[conf] = true;
+
+                Console.WriteLine(conf);
             }
 
             return GetCurrentSet(news, assigment, K);
@@ -81,7 +94,6 @@ namespace TextMining.Clastering
 
         private static List<Group> GetCurrentSet(Group news, int[] assigment, int K)
         {
-
             //3. Zwróc wynik
             var result = new List<Group>();
             for (int i = 0; i < K; i++)
