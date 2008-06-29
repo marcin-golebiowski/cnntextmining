@@ -31,9 +31,12 @@ namespace TextMining
                // GroupFactory factory = new GroupFactory(conn);
 
 
+                var expr = new ExperimentHierarchical(conn);
+                expr.Run();
+                /*
                 var exp = new MetricsStatistics(conn);
                 exp.Run();
-
+                */
                 /*
                 var topics = new List<string>();
                 topics.Add(@"http://topics.edition.cnn.com/topics/astronomy");

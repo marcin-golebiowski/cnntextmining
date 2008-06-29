@@ -34,31 +34,14 @@ namespace TextMining.Evaluation.Experiments
             int maxLen = 8000;
 
             var dataFetcher = new DataFetcher(conn);
-            List<News> tmp = dataFetcher.GetAllNews();
+            List<News> news = dataFetcher.GetAllNews(true, newsCount);
 
-            Random r = new Random();
-            List<News> news = new List<News>();
-
-            WordList wl = new WordList();
-
-            for (int i = 0; i < newsCount; i++)
-            {
-                int x = r.Next(tmp.Count);
-                news.Add(tmp[x]);
-
-                tmp[x].words = wl.getWordList(tmp[x].rawData);
-                tmp.RemoveAt(x);
-            }
-
-
-
-            var stats = new WordsStats(news);
-            stats.Compute();
+            
 
             var comparator = new CosinusMetricComparator();
 
 
-            var algorithm = new Dbscan(comparator, stats, maxLen);
+            
 
             /*
             for (int i = 0; i < newsCount; i++)
@@ -77,11 +60,19 @@ namespace TextMining.Evaluation.Experiments
             */
             
 
-            Console.WriteLine("Starting Dbscan");
-            //List<List<News>> sets = algorithm.Compute(news, 0.0230, 3);
+            Console.WriteLine("Starting hierarchical");
+            List<News> toCompute = Words.ComputeWords(news);
+
+            var stats = new WordsStats(toCompute);
+            stats.Compute();
+
+            var algorithm = new Hierarchical(comparator, stats, maxLen);
+
+            Console.WriteLine("start");
+            List<Group> sets = algorithm.Compute(new Group("aa",toCompute), 20);
             Console.WriteLine("Dbscan end");
 
-            //ExperimentStats.GetGroupCountString(sets);
+            ExperimentStats.GetGroupCountString(sets);
 
             Console.WriteLine("Loading assingments..");
             TopicOriginalAssigment ass = new TopicOriginalAssigment(conn);
@@ -91,17 +82,17 @@ namespace TextMining.Evaluation.Experiments
             DefaultEvaluator eval = new DefaultEvaluator(ass);
 
             Console.WriteLine("Starting eval");
-            //Console.WriteLine(eval.GetScore(sets));
+            Console.WriteLine(eval.GetScore(sets));
             Console.WriteLine("End eval");
 
             
-            /*foreach (List<News> gr in sets)
+            foreach (Group gr in sets)
             {
                 Console.WriteLine("SET ");
-                foreach (News n in gr)
-                    Console.WriteLine(n.url);
+                for (int i = 0; i < gr.Count; i++ )
+                    Console.WriteLine(gr[i].url);
                 Console.WriteLine("------------------");
-            }*/
+            }
             
         }
     }

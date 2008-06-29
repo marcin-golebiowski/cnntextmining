@@ -41,7 +41,7 @@ namespace TextMining.Clastering
 
             while (groups.Count > k)
             {
-                Console.WriteLine("Iteratation: " + (news.Count - groups.Count));
+                //Console.WriteLine("Iteratation: " + (news.Count - groups.Count));
                 // search 2 nearest groups, and put them together
                 Pair nearest = getTwoClosestClusters(groups, distances);
 
@@ -80,9 +80,10 @@ namespace TextMining.Clastering
                     col.BuildVector();
 
                     distances[i, j] = comparator.Compare(row, col);
+                    distances[j, i] = distances[i, j];
                     //Console.Write(distances[i, j] + "  ");
                 }
-                //Console.WriteLine();
+                Console.WriteLine(i);
             }
             return distances;
         }
@@ -114,24 +115,17 @@ namespace TextMining.Clastering
 
         private double distanceBetweenGroups(List<int> g1, List<int> g2, double[,] dist)
         {
-            double max = double.MinValue;
+            double sum = 0.0;
 
             foreach (int i in g1)
             {
                 foreach (int j in g2)
                 {
-                    double curr;
-                    if (i > j)
-                        curr = dist[i, j];
-                    else
-                        curr = dist[j, i];
-
-                    if (curr > max)
-                        max = curr;
+                    sum += dist[i, j];
                 }
             }
 
-            return max;
+            return sum / (g1.Count*g2.Count);
         }
 
 
