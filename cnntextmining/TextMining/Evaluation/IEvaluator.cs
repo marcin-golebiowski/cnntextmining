@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using TextMining.Model;
 
-namespace TextMining.Experiments
+namespace TextMining.Evaluation
 {
     public interface IEvaluator
     {
@@ -10,6 +9,6 @@ namespace TextMining.Experiments
         /// </summary>
         /// <param name="?"></param>
         /// <returns></returns>
-        long GetScore(List<List<News>> sets);
+        long GetScore(List<Group> sets);
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using TextMining.Clastering;
 using TextMining.DataLoading;
-using TextMining.Experiments;
 using TextMining.Model;
 using TextMining.TextTools;
 
@@ -63,13 +62,13 @@ namespace TextMining.Evaluation.Experiments
             DefaultEvaluator eval = new DefaultEvaluator(ass); 
 
             var comparator = new CosinusMetricComparator();
-            var algorithm = new Kmeans(comparator, eval, stats,VectorLen);
+            var algorithm = new Kmeans(comparator, stats,VectorLen);
 
             Console.WriteLine("Starting KMeans");
-            List<List<News>> sets = algorithm.Compute(news, K, iterations);
+            //List<List<News>> sets = algorithm.Compute(news, K, iterations);
             Console.WriteLine("KMeans end");
 
-            ExperimentStats.PrintStats(sets);
+            //ExperimentStats.PrintStats(sets);
 
             
            

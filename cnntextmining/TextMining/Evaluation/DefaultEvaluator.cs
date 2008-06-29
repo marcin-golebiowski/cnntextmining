@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using TextMining.Evaluation;
 using TextMining.Model;
 
-namespace TextMining.Experiments
+namespace TextMining.Evaluation
 {
     public class DefaultEvaluator : IEvaluator
     {
@@ -12,17 +13,17 @@ namespace TextMining.Experiments
             this.assigment = assigment;
         }
 
-        public long GetScore(List<List<News>> sets)
+        public long GetScore(List<Group> groups)
         {
             long score = 0;
 
-            foreach (var set in sets)
+            foreach (var group in groups)
             {
-                for (int i = 0; i < set.Count; i++)
+                for (int i = 0; i < group.Count; i++)
                 {
-                    for (int j = i + 1; j < set.Count; j++)
+                    for (int j = i + 1; j < group.Count; j++)
                     {
-                        if (assigment.AreInTheSameTopic(set[i].url, set[j].url))
+                        if (assigment.AreInTheSameTopic(group[i].url, group[j].url))
                         {
                             score++;
                         }

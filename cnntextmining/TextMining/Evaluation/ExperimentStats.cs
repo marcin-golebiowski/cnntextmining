@@ -6,9 +6,9 @@ namespace TextMining.Evaluation
 {
     public class ExperimentStats
     {
-        public static void PrintStats(List<List<News>> sets)
+        public static void PrintStats(List<Group> groups)
         {
-            foreach (List<News> set in sets)
+            foreach (Group set in groups)
             {
                 Console.Write(set.Count + ";");
             }

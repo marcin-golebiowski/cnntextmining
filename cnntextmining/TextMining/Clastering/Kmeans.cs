@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using TextMining.Evaluation;
-using TextMining.Experiments;
 using TextMining.Model;
 using TextMining.TextTools;
 
@@ -10,25 +9,21 @@ namespace TextMining.Clastering
     public class Kmeans
     {
         private readonly IComparator comparator;
-        private readonly DefaultEvaluator eval;
         private readonly WordsStats stats;
         private readonly int maxLen;
 
-        public Kmeans(IComparator comparator,  DefaultEvaluator eval, WordsStats stats,  int maxLen)
+        public Kmeans(IComparator comparator, WordsStats stats,  int maxLen)
         {
             this.comparator = comparator;
-            this.eval = eval;
             this.stats = stats;
             this.maxLen = maxLen;
         }
 
 
-        public List<List<News>> Compute(List<News> news, int K, int maxIterations)
+        public List<Group> Compute(Group news, int K, int maxIterations)
         {
-            EuclidesMetricComparator comp = new EuclidesMetricComparator();
-
-            Random rand = new Random();
-            Vector[] centroids = new Vector[K];
+            var rand = new Random();
+            var centroids = new Vector[K];
 
             //1. Losuj K newsow
 
@@ -39,8 +34,9 @@ namespace TextMining.Clastering
                 centroids[i].BuildVector();
             }
 
-            int[] assigment = new int[news.Count];
-            Vector[] vectors = new Vector[news.Count];
+
+            var assigment = new int[news.Count];
+            var vectors = new Vector[news.Count];
 
 
             // /// Petla
@@ -56,11 +52,11 @@ namespace TextMining.Clastering
                     vectors[i].BuildVector();
 
                     int min = 0;
-                    double minVal = comp.Compare(centroids[0], vectors[i]);
+                    double minVal = comparator.Compare(centroids[0], vectors[i]);
 
                     for (int j = 1; j < centroids.Length; j++)
                     {
-                        double val = comp.Compare(centroids[j], vectors[i]);
+                        double val = comparator.Compare(centroids[j], vectors[i]);
                         //Console.WriteLine(val);
 
                         if (val < minVal)
@@ -74,29 +70,23 @@ namespace TextMining.Clastering
                 }
 
                 // liczymy centroidy
-                centroids = ComputeNewCentroids(K, assigment, news, stats, vectors, centroids);
-                
-                
+                centroids = ComputeNewCentroids(K, assigment, vectors, centroids);
                 
                 Console.WriteLine("Time: " + (DateTime.Now - start));
-                List<List<News>> currentSet = GetCurrentSet(news, assigment, K);
-                Console.WriteLine("Eval: " + eval.GetScore(currentSet));
-                ExperimentStats.PrintStats(currentSet);
-                Console.WriteLine("---");
                
             }
 
             return GetCurrentSet(news, assigment, K);
         }
 
-        private List<List<News>> GetCurrentSet(List<News> news, int[] assigment, int K)
+        private static List<Group> GetCurrentSet(Group news, int[] assigment, int K)
         {
 
             //3. Zwróc wynik
-            List<List<News>> result = new List<List<News>>();
+            var result = new List<Group>();
             for (int i = 0; i < K; i++)
             {
-                result.Add(new List<News>());
+                result.Add(new Group(""));
             }
 
             for (int j = 0; j < news.Count; j++)
@@ -106,18 +96,15 @@ namespace TextMining.Clastering
             return result;
         }
 
-        private Vector[] ComputeNewCentroids(int K, int[] assigment, List<News> news,
-            WordsStats stats, Vector[] vectors, Vector[] oldCentroids)
+        private Vector[] ComputeNewCentroids(int K, int[] assigment, Vector[] vectors, Vector[] oldCentroids)
         {
-            Vector[] newCentroids = new Vector[K];
+            var newCentroids = new Vector[K];
 
-            List<List<int>> sets = new List<List<int>>();
+            var sets = new List<List<int>>();
             for (int i = 0; i < K; i++)
             {
                 sets.Add(new List<int>());
             }
-
-
 
 
             // adding neighbours

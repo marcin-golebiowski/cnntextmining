@@ -51,8 +51,8 @@ namespace TextMining.Model
             if (IsNewsPage(uri_))
             {
                 ProcessIncludedText(includedText(page));
-                WordList wl = new WordList();
-                words = wl.getWordList(pureText);
+                //WordList wl = new WordList();
+                //words = wl.getWordList(pureText);
                 DontMissLinks(page);
             }
             else

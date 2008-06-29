@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-namespace TextMining.Experiments
+namespace TextMining.Evaluation
 {
     public class TopicOriginalAssigment
     {
@@ -11,6 +11,8 @@ namespace TextMining.Experiments
         // topic url -> id of topic
         private readonly Dictionary<string, int> topics;
 
+        private readonly Dictionary<int, string> topicsRev;
+
         // news -> a list of id's of topics
         private readonly Dictionary<string, List<int>> assigment;
 
@@ -18,7 +20,26 @@ namespace TextMining.Experiments
         {
             assigment = new Dictionary<string, List<int>>();
             topics = new Dictionary<string, int>();
+            topicsRev = new Dictionary<int, string>();
             this.connection = connection;
+        }
+
+        public List<int> GetTopicsForNews(string newsURL)
+        {
+            if (assigment.ContainsKey(newsURL))
+            {
+                return assigment[newsURL];
+            }
+            return new List<int>();
+        }
+
+        public string GetTopicURL(int topicURL)
+        {
+            if (topicsRev.ContainsKey(topicURL))
+            {
+                return topicsRev[topicURL];
+            }
+            return "";
         }
 
         public void Load()
@@ -30,7 +51,7 @@ namespace TextMining.Experiments
             int topicNumbers = 0;
 
             using (var command
-               = new SqlCommand("SELECT * FROM dbo.[Topics] WHERE LinkURL Like '%.html'", connection))
+                = new SqlCommand("SELECT * FROM dbo.[Topics] WHERE LinkURL Like '%.html'", connection))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -47,6 +68,7 @@ namespace TextMining.Experiments
                             if (!topics.ContainsKey(topicURL))
                             {
                                 topics[topicURL] = topicNumbers;
+                                topicsRev[topicNumbers] = topicURL;
                                 topicID = topicNumbers;
                                 topicNumbers++;
                             }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using TextMining.Model;
 
@@ -19,14 +18,15 @@ namespace TextMining.DataLoading
             return GetAllNews(false, int.MaxValue);
         }
 
-
-        public List<News> GetAllNews(bool trim, int newsToGet)
+        public List<News> GetAllNews(string topicURL)
         {
             var result = new List<News>();
 
             using (var command
-                = new SqlCommand("SELECT TOP " + newsToGet + " [URL], [Words], [RawData], [Links] FROM dbo.[News] WHERE URL Like 'http://edition.cnn.com/2008/%'", conn))
+                = new SqlCommand("SELECT [URL], [Words], [RawData], [Links] FROM dbo.[News] WHERE TopicURL = @topic", conn))
             {
+                command.Parameters.AddWithValue("@topic", topicURL);
+
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     //reader.
@@ -46,6 +46,67 @@ namespace TextMining.DataLoading
                             element.links.AddRange(links.Split(';'));
                             element.rawData = rawData;
                             result.Add(element);
+                        }
+
+                        reader.Close();
+                    }
+
+                }
+            }
+            return result;
+        }
+
+        public List<News> GetAllNews(bool trim, int newsToGet)
+        {
+            var result = new List<News>();
+
+            using (var command
+                = new SqlCommand("SELECT TOP " + newsToGet + " [URL], [Words], [RawData], [Links] FROM dbo.[News] WHERE URL Like 'http://edition.cnn.com/%'", conn))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader != null && reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            string url = reader["URL"].ToString();
+                            string words = reader["Words"].ToString();
+                            string links = reader["Links"].ToString();
+                            string rawData = reader["RawData"].ToString();
+
+
+                            var element = new News();
+                            element.url = url;
+                            element.words.AddRange(words.Split(';'));
+                            element.links.AddRange(links.Split(';'));
+                            element.rawData = rawData;
+                            result.Add(element);
+                        }
+
+                        reader.Close();
+                    }
+
+                }
+            }
+            return result;
+        }
+
+        public List<string> GetTopics()
+        {
+            var result = new List<string>();
+
+            using (var command
+                = new SqlCommand("SELECT Distinct TopicURL FROM dbo.[Topics]", conn))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader != null && reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            string url = reader["TopicURL"].ToString();
+                          
+                            result.Add(url);
                         }
 
                         reader.Close();
