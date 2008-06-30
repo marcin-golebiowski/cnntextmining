@@ -18,7 +18,7 @@ namespace TextMining.TextTools
                }
             }
 
-            result = Math.Sqrt(Math.Abs(result));
+            result = - Math.Sqrt(Math.Abs(result));
 
             return result;
         }

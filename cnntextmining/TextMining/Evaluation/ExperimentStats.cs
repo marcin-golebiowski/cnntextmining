@@ -22,16 +22,12 @@ namespace TextMining.Evaluation
 
         public static void PrintDetailsString(List<Group> groups)
         {
-            Console.WriteLine("==");
             foreach (Group set in groups)
             {
                 var count = new Dictionary<string, int>();
-
-
                 for (int i = 0; i < set.Count; i++)
                 {
-                    Console.WriteLine(set[i].url);
-                    
+                    //Console.WriteLine(set[i].url);
                     if (count.ContainsKey(set[i].topicUrl))
                     {
                         count[set[i].topicUrl] += 1;
@@ -42,10 +38,9 @@ namespace TextMining.Evaluation
                     }
                 }
 
-                Console.WriteLine("--");
                 foreach (KeyValuePair<string, int> pair in count)
                 {
-                    Console.WriteLine(pair.Key + "-" + pair.Value);
+                    Console.WriteLine(pair.Key + " [" + pair.Value + "]");
                 }
                 Console.WriteLine("+++++++++++++");
             }

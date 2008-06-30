@@ -65,6 +65,7 @@
     <Compile Include="Evaluation\ExperimentStats.cs" />
     <Compile Include="Evaluation\Experiments\Experiment1.cs" />
     <Compile Include="Evaluation\Experiments\ExperimentHierarchical.cs" />
+    <Compile Include="Evaluation\Experiments\ExperimentKMeans.cs" />
     <Compile Include="Evaluation\Experiments\Experiment_DBSCAN.cs" />
     <Compile Include="Evaluation\Experiments\MetricsStatistics.cs" />
     <Compile Include="Evaluation\Group.cs" />

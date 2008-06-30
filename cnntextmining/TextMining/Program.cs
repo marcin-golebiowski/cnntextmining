@@ -31,8 +31,13 @@ namespace TextMining
                // GroupFactory factory = new GroupFactory(conn);
 
 
-                var expr = new ExperimentHierarchical(conn);
+                var expr = new ExperimentKMeans(conn);
                 expr.Run();
+
+
+
+
+
                 /*
                 var exp = new MetricsStatistics(conn);
                 exp.Run();

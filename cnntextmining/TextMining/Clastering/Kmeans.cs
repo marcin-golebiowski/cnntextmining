@@ -56,20 +56,18 @@ namespace TextMining.Clastering
                     vectors[i].BuildVector();
 
                     int min = 0;
-                    double minVal = comparator.Compare(centroids[0], vectors[i]);
+                    double maxVal = comparator.Compare(centroids[0], vectors[i]);
 
                     for (int j = 1; j < centroids.Length; j++)
                     {
                         double val = comparator.Compare(centroids[j], vectors[i]);
-                        //Console.WriteLine(val);
 
-                        if (val < minVal)
+                        if (val > maxVal)
                         {
-                            minVal = val;
+                            maxVal = val;
                             min = j;
                         }
                     }
-                    //Console.WriteLine("----");
                     assigment[i] = min;
                 }
 
@@ -80,15 +78,8 @@ namespace TextMining.Clastering
 
                 List<Group> current = GetCurrentSet(news, assigment, K);
 
-                string conf = ExperimentStats.GetGroupCountString(current);
-
-                /*if (configurations.ContainsKey(conf))
-                {
-                    Console.WriteLine("Konfiguracja wystąpiła już");
-                    break;
-                }*/
-
-                configurations[conf] = true;
+                ExperimentStats.PrintDetailsString(current);
+              
             }
 
             return GetCurrentSet(news, assigment, K);
@@ -109,6 +100,8 @@ namespace TextMining.Clastering
             }
             return result;
         }
+
+
 
         private Vector[] ComputeNewCentroids(int K, int[] assigment, Vector[] vectors, Vector[] oldCentroids)
         {
@@ -167,10 +160,6 @@ namespace TextMining.Clastering
                             oldCentroids[i].Items[word] / (sets[i].Count + 1);
                     }
                 }
-
-
-                //trim
-                //newCentroids[i].Trim();
             }
 
             return newCentroids;
