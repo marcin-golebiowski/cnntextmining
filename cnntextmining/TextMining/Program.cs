@@ -1,10 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using TextMining.Clastering;
-using TextMining.Evaluation;
-using TextMining.TextTools;
-using DataFetcher=TextMining.DataLoading.DataFetcher;
 using TextMining.Evaluation.Experiments;
 
 namespace TextMining
@@ -31,7 +26,7 @@ namespace TextMining
                // GroupFactory factory = new GroupFactory(conn);
 
 
-                var expr = new ExperimentKMeans(conn);
+                var expr = new ExperimentKMeans2(conn);
                 expr.Run();
 
 

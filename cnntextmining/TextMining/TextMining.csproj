@@ -63,6 +63,7 @@
     <Compile Include="DataLoading\DataFetcher.cs" />
     <Compile Include="Evaluation\DefaultEvaluator.cs" />
     <Compile Include="Evaluation\ExperimentStats.cs" />
+    <Compile Include="Evaluation\Experiments\ExperimentKMeans2.cs" />
     <Compile Include="Evaluation\Experiments\Experiment1.cs" />
     <Compile Include="Evaluation\Experiments\ExperimentHierarchical.cs" />
     <Compile Include="Evaluation\Experiments\ExperimentKMeans.cs" />
