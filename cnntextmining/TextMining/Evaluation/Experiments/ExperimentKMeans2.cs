@@ -23,27 +23,16 @@ namespace TextMining.Evaluation.Experiments
             WordsStats stats = new WordsStats(Words.ComputeWords(fetcher.GetAllNews()));
             stats.Compute();
 
-             Console.WriteLine("Words Stats - computed");
-             GroupFactory factory = new GroupFactory(conn);
+            Console.WriteLine("Words Stats - computed");
+            GroupFactory factory = new GroupFactory(conn);
+
+            Group initialGroup = factory.CreateGroupWithAllNews();
+            CosinusMetricComparator comp = new CosinusMetricComparator(10);
 
 
-            var topics = new List<string>();
-            
-            topics.Add(@"http://topics.edition.cnn.com/topics/adolf_hitler");
-            topics.Add(@"http://topics.edition.cnn.com/topics/movies");
-            topics.Add(@"http://topics.edition.cnn.com/topics/business");
-            topics.Add(@"http://topics.edition.cnn.com/topics/education");
-            topics.Add(@"http://topics.edition.cnn.com/topics/terrorism");
-
-            Group initialGroup = factory.CreateGroupWithNewsFromTopics(topics);
-            CosinusMetricComparator comp = new CosinusMetricComparator();
-
-
-            Kmeans algorithm = new Kmeans(comp, stats, 1000);
-            List<Group> groups = algorithm.Compute(initialGroup, 5, 10);
+            Kmeans algorithm = new Kmeans(comp, stats, 2000);
+            List<Group> groups = algorithm.Compute(initialGroup, 100, 20);
             ExperimentStats.PrintDetailsString(groups);
-                
-           
         }
     }
 }

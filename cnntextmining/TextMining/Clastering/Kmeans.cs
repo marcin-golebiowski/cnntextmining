@@ -160,6 +160,8 @@ namespace TextMining.Clastering
                             oldCentroids[i].Items[word] / (sets[i].Count + 1);
                     }
                 }
+
+                newCentroids[i].Trim();
             }
 
             return newCentroids;

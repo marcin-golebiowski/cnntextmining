@@ -41,18 +41,23 @@ namespace TextMining.TextTools
 
         public string URL
         {
-            get { return news.url; }
+            get { return VectorNews.url; }
+        }
+
+        public News VectorNews
+        {
+            get { return news; }
         }
 
         public void BuildVector()
         {
             List<Pair> list = new List<Pair>();
 
-            foreach (string word in news.words)
+            foreach (string word in VectorNews.words)
             {
                 Pair p = new Pair();
                 p.word = word;
-                p.val = stats.GetTF(word, news.url) * stats.GetIDF(word);
+                p.val = stats.GetTF(word, VectorNews.url) * stats.GetIDF(word);
                 list.Add(p);
             }
 
