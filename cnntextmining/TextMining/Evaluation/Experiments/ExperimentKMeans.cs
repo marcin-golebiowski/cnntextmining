@@ -29,17 +29,16 @@ namespace TextMining.Evaluation.Experiments
 
 
             var topics = new List<string>();
-            topics.Add(@"http://topics.edition.cnn.com/topics/astronomy");
-            topics.Add(@"http://topics.edition.cnn.com/topics/armed_forces");
-            topics.Add(@"http://topics.edition.cnn.com/topics/genetics");
-            topics.Add(@"http://topics.edition.cnn.com/topics/religion");
+            topics.Add(@"http://topics.edition.cnn.com/topics/computer_technology");
+            topics.Add(@"http://topics.edition.cnn.com/topics/formula_one_racing");
+            topics.Add(@"http://topics.edition.cnn.com/topics/medicine");
 
             Group initialGroup = factory.CreateGroupWithNewsFromTopics(topics);
-            CosinusMetricComparator comp = new CosinusMetricComparator();
+            JaccardMetricCompartator comp = new JaccardMetricCompartator();
 
 
             Kmeans algorithm = new Kmeans(comp, stats, 1000);
-            List<Group> groups = algorithm.Compute(initialGroup, 4, 10);
+            List<Group> groups = algorithm.Compute(initialGroup, 3, 10);
             ExperimentStats.PrintDetailsString(groups);
                 
            
