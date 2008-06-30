@@ -69,7 +69,7 @@ namespace TextMining.Evaluation.Experiments
             var algorithm = new Hierarchical(comparator, stats, maxLen);
 
             Console.WriteLine("start");
-            List<Group> sets = algorithm.Compute(new Group("aa",toCompute), 20);
+            List<Group> sets = algorithm.Compute(new Group("aa",toCompute), 20, Hierarchical.Distance.AVG);
             Console.WriteLine("Dbscan end");
 
             ExperimentStats.GetGroupCountString(sets);

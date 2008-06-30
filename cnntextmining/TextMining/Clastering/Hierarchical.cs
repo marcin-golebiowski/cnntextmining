@@ -12,6 +12,8 @@ namespace TextMining.Clastering
             public int first, second;
         }
 
+        public enum Distance { MIN, MAX, AVG };
+
         private readonly IComparator comparator;
         private readonly WordsStats stats;
         private readonly int maxLen;
@@ -23,7 +25,7 @@ namespace TextMining.Clastering
             this.maxLen = maxLen;
         }
 
-        public List<Group> Compute(Group news, int k)
+        public List<Group> Compute(Group news, int k, Distance d)
         {
             Console.WriteLine("Obliczanie odlegosci");
             double[,] distances = computeDistances(news);
@@ -43,7 +45,7 @@ namespace TextMining.Clastering
             {
                 //Console.WriteLine("Iteratation: " + (news.Count - groups.Count));
                 // search 2 nearest groups, and put them together
-                Pair nearest = getTwoClosestClusters(groups, distances);
+                Pair nearest = getTwoClosestClusters(groups, distances, d);
 
                 groups[nearest.first].AddRange(groups[nearest.second]);
                 groups.RemoveAt(nearest.second);
@@ -88,7 +90,7 @@ namespace TextMining.Clastering
             return distances;
         }
 
-        private Pair getTwoClosestClusters(List<List<int>> groups, double[,] dist)
+        private Pair getTwoClosestClusters(List<List<int>> groups, double[,] dist, Distance d)
         {
             double max = double.MinValue;
             int f = 0, s = 0;
@@ -97,7 +99,21 @@ namespace TextMining.Clastering
             {
                 for (int j = 0; j < i; j++)
                 {
-                    double curr = distanceBetweenGroups(groups[i], groups[j], dist);
+                    double curr = 0.0;
+                    switch (d)
+                    {
+                        case Distance.AVG:
+                            curr = avgDist(groups[i], groups[j], dist);
+                            break;
+                        case Distance.MAX:
+                            curr = maxDist(groups[i], groups[j], dist);
+                            break;
+                        case Distance.MIN:
+                            curr = minDist(groups[i], groups[j], dist);
+                            break;
+                    }
+  
+
                     if (curr > max)
                     {
                         max = curr;
@@ -113,7 +129,7 @@ namespace TextMining.Clastering
             return result;
         }
 
-        private double distanceBetweenGroups(List<int> g1, List<int> g2, double[,] dist)
+        private double avgDist(List<int> g1, List<int> g2, double[,] dist)
         {
             double sum = 0.0;
 
@@ -126,6 +142,43 @@ namespace TextMining.Clastering
             }
 
             return sum / (g1.Count*g2.Count);
+        }
+
+        private double maxDist(List<int> g1, List<int> g2, double[,] dist)
+        {
+            double min = double.MaxValue;
+
+            foreach (int i in g1)
+            {
+                foreach (int j in g2)
+                {
+                    if (dist[i, j] < min)
+                    {
+                        min = dist[i, j];
+                    }
+                }
+            }
+
+            return min;
+        }
+
+        private double minDist(List<int> g1, List<int> g2, double[,] dist)
+        {
+            double max = double.MinValue;
+
+            foreach (int i in g1)
+            {
+                foreach (int j in g2)
+                {
+                    if (dist[i, j] > max)
+                    {
+                        max = dist[i, j];
+
+                    }
+                }
+            }
+
+            return max;
         }
 
 
