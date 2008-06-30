@@ -22,6 +22,14 @@ namespace TextMining.Evaluation
             return result;
         }
 
+        public Group CreateGroupWithAllNews(int count)
+        {
+            var result = new Group("INITIAL");
+            var f = new DataFetcher(conn);
+            result.AddRange(Words.ComputeWords(f.GetAllNews(false, count)));
+            return result;
+        }
+
         public Group CreateGroupWithNewsFromTopics(List<string> topics)
         {
             var result = new Group("INITIAL");

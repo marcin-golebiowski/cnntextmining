@@ -14,11 +14,15 @@
             this.val = val;
         }
 
-
-
-        private int GetCommonLinks(Vector x, Vector y)
+        private static int GetCommonLinks(Vector x, Vector y)
         {
             int result = 0;
+
+            if (x.VectorNews != null || y.VectorNews != null)
+            {
+                return 0;
+            }
+
             for (int i = 0; i < x.VectorNews.links.Count; i++)
             {
                 for (int j = 0; j < y.VectorNews.links.Count; j++)

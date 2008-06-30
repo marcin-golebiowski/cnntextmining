@@ -26,7 +26,7 @@ namespace TextMining.Evaluation.Experiments
             Console.WriteLine("Words Stats - computed");
             GroupFactory factory = new GroupFactory(conn);
 
-            Group initialGroup = factory.CreateGroupWithAllNews();
+            Group initialGroup = factory.CreateGroupWithAllNews(500);
             CosinusMetricComparator comp = new CosinusMetricComparator(10);
 
 
