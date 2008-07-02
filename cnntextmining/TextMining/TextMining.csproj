@@ -61,6 +61,7 @@
     <Compile Include="Clustering\Kmeans.cs" />
     <Compile Include="Clustering\Metis.cs" />
     <Compile Include="DataLoading\DataStore.cs" />
+    <Compile Include="Evaluation\ClusteringMeasures\HighRelatedTopics.cs" />
     <Compile Include="Evaluation\ClusteringMeasures\MedianTopicSplit.cs" />
     <Compile Include="Evaluation\ClusteringMeasures\TopicSpitCount.cs" />
     <Compile Include="Evaluation\ClusteringMeasures\Util.cs" />

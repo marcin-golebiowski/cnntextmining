@@ -14,7 +14,7 @@ namespace TextMining.Evaluation.Experiments
         public void Run()
         {
             //int newsToExperiment = 1000;
-            int randomTopicsCounter = 3;
+            int randomTopicsCounter = 8;
             int maxLen = 2000;
             int kMeansIt = 3;
 
@@ -50,6 +50,14 @@ namespace TextMining.Evaluation.Experiments
 
             Console.WriteLine("kmeans srednia dominacja = " + groupEvaluator.Eval(kMeansResult));
             Console.WriteLine("hierarchical srednia dominacja = " + groupEvaluator.Eval(hierarchicalResult));
+
+            HighRelatedTopics htopics = new HighRelatedTopics(hierarchicalResult);
+            List<string[]> related = htopics.getHighRelatedTopics(8);
+
+            foreach(string[] pair in related)
+            {
+                Console.WriteLine(pair[0] + "\n" + pair[1] + "\n");
+            }
 
 
             //ExperimentStats.PrintDetailsString(dbscanResult);
