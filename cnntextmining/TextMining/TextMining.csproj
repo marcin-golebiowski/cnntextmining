@@ -56,10 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clastering\Dbscan.cs" />
-    <Compile Include="Clastering\Hierarchical.cs" />
-    <Compile Include="Clastering\Kmeans.cs" />
-    <Compile Include="Clastering\Metis.cs" />
+    <Compile Include="Clustering\Dbscan.cs" />
+    <Compile Include="Clustering\Hierarchical.cs" />
+    <Compile Include="Clustering\Kmeans.cs" />
+    <Compile Include="Clustering\Metis.cs" />
     <Compile Include="DataLoading\DataStore.cs" />
     <Compile Include="Evaluation\ClusteringMeasures\ClusteringMeasure.cs" />
     <Compile Include="Evaluation\ClusteringMeasures\Util.cs" />
@@ -76,7 +76,6 @@
     <Compile Include="Evaluation\IEvaluator.cs" />
     <Compile Include="Evaluation\IExperiment.cs" />
     <Compile Include="Evaluation\ClusteringMeasures\MedianCoverageForDominanceTopic.cs" />
-    <Compile Include="Evaluation\TopicOriginalAssigment.cs" />
     <Compile Include="Model\News.cs" />
     <Compile Include="Model\CNNPage.cs" />
     <Compile Include="Crawling\Crawler.cs" />

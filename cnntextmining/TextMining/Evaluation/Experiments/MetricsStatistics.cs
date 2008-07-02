@@ -10,21 +10,7 @@ namespace TextMining.Evaluation.Experiments
 {
     class MetricsStatistics : IExperiment
     {
-        private readonly SqlConnection conn;
-
-        public SqlConnection Conn
-        {
-            get { return conn; }
-        }
-
-        public SqlConnection _ { get; set; }
-
-        public MetricsStatistics(SqlConnection conn)
-        {
-            this.conn = conn;
-        }
-
-
+      
         public void Run()
         {  
             Console.WriteLine("Downloading news for database...");

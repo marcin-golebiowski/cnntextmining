@@ -30,7 +30,6 @@ namespace TextMining.Evaluation.ClusteringMeasures
                 newsCountInTopic.Add(topic, topicNews);
             }
 
-            int c2 = 0;
             int newsCount = 0;
 
             foreach (Group group in clustering)
@@ -40,9 +39,8 @@ namespace TextMining.Evaluation.ClusteringMeasures
                 List<string> topicsInGroup = Util.getTopicsInGroup(group);
                 foreach (string topic in topicsInGroup)
                 {
-                    result += (double)Util.topicCountInGroup(topic, group) / (double)newsCountInTopic[topic].Count;
-                    result += (double)Util.topicCountInGroup(topic, group) / (double)group.Count;
-                    c2 += 2;
+                    result *= (double)Util.topicCountInGroup(topic, group) / (double)newsCountInTopic[topic].Count;
+                    result *= (double)Util.topicCountInGroup(topic, group) / (double)group.Count;
                 }
                 //result *= topicDominance(group, topicsInGroup, kDominance);
                  
@@ -50,7 +48,7 @@ namespace TextMining.Evaluation.ClusteringMeasures
 
             result *= Util.avgDeviation(clustering, newsCount);
 
-            return result / (double)c2;
+            return result;
         }
 
     }

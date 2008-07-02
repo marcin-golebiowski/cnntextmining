@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using TextMining.DataLoading;
 using TextMining.Model;
 using TextMining.TextTools;
-using TextMining.Clastering;
+using TextMining.Clustering;
 
 
 
@@ -12,22 +12,6 @@ namespace TextMining.Evaluation.Experiments
 {
     class ExperimentHierarchical : IExperiment
     {
-
-        private readonly SqlConnection conn;
-
-        public SqlConnection Conn
-        {
-            get { return conn; }
-        }
-
-        public SqlConnection _ { get; set; }
-
-        public ExperimentHierarchical(SqlConnection conn)
-        {
-            this.conn = conn;
-        }
-
-
         public void Run()
         {
             int newsCount = 500;
@@ -72,10 +56,6 @@ namespace TextMining.Evaluation.Experiments
             Console.WriteLine("Dbscan end");
 
             ExperimentStats.GetGroupCountString(sets);
-
-            Console.WriteLine("Loading assingments..");
-            TopicOriginalAssigment ass = new TopicOriginalAssigment(conn);
-            ass.Load();
 
 
             foreach (Group gr in sets)

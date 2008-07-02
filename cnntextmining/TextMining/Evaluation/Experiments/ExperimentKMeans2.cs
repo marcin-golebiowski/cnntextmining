@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using TextMining.Clastering;
+using TextMining.Clustering;
 using TextMining.DataLoading;
 using TextMining.TextTools;
 
@@ -9,23 +9,14 @@ namespace TextMining.Evaluation.Experiments
 {
     public class ExperimentKMeans2 : IExperiment
     {
-        private readonly SqlConnection conn;
-
-        public ExperimentKMeans2(SqlConnection conn)
-        {
-            this.conn = conn;
-        }
-
-
         public void Run()
         {
             WordsStats stats = new WordsStats(Words.ComputeWords(DataStore.Instance.GetAllNews()));
             stats.Compute();
 
             Console.WriteLine("Words Stats - computed");
-            GroupFactory factory = new GroupFactory(conn);
-
-            Group initialGroup = factory.CreateGroupWithAllNews(1000);
+          
+            Group initialGroup = GroupFactory.CreateGroupWithAllNews(1000);
             CosinusMetricComparator comp = new CosinusMetricComparator(10);
 
 

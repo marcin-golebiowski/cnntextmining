@@ -7,21 +7,14 @@ namespace TextMining.Evaluation
 {
     public class GroupFactory
     {
-        private readonly SqlConnection conn;
-
-        public GroupFactory(SqlConnection conn)
-        {
-            this.conn = conn;
-        }
-
-        public Group CreateGroupWithAllNews()
+        public static Group CreateGroupWithAllNews()
         {
             var result = new Group("INITIAL");
             result.AddRange(Words.ComputeWords(DataStore.Instance.GetAllNews()));
             return result;
         }
 
-        public Group CreateGroupWithAllNews(int count)
+        public static Group CreateGroupWithAllNews(int count)
         {
             var result = new Group("INITIAL");
            
@@ -29,7 +22,7 @@ namespace TextMining.Evaluation
             return result;
         }
 
-        public Group CreateGroupWithNewsFromTopics(List<string> topics)
+        public static Group CreateGroupWithNewsFromTopics(List<string> topics)
         {
             var result = new Group("INITIAL");
             foreach (string topic in topics)

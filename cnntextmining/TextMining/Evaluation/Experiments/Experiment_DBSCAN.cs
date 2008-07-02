@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using TextMining.Clastering;
+using TextMining.Clustering;
 using TextMining.DataLoading;
 using TextMining.Model;
 using TextMining.TextTools;
@@ -10,21 +10,7 @@ namespace TextMining.Evaluation.Experiments
 {
     class Experiment_DBSCAN : IExperiment
     {
-        private readonly SqlConnection conn;
-
-        public SqlConnection Conn
-        {
-            get { return conn; }
-        }
-
-        public SqlConnection _ { get; set; }
-
-        public Experiment_DBSCAN(SqlConnection conn)
-        {
-            this.conn = conn;
-        }
-
-
+       
         public void Run()
         {
             int newsCount = 500;
@@ -83,12 +69,7 @@ namespace TextMining.Evaluation.Experiments
 
             ExperimentStats.GetGroupCountString(sets);
 
-            Console.WriteLine("Loading assingments..");
-            TopicOriginalAssigment ass = new TopicOriginalAssigment(conn);
-            ass.Load();
-
-
-            int sum = 0;
+                       int sum = 0;
 
             foreach (Group g in sets)
             {

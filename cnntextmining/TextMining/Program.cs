@@ -12,7 +12,6 @@ namespace TextMining
 
             List<News> news = DataStore.Instance.GetAllNews();
 
-
             //fetcher.SaveNewsFromFile(news, "newsy.bin");
 
 

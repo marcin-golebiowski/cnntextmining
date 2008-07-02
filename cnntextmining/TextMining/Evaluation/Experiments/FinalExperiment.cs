@@ -4,43 +4,28 @@ using System.Data.SqlClient;
 using TextMining.DataLoading;
 using TextMining.TextTools;
 using TextMining.Model;
-using TextMining.Clastering;
+using TextMining.Clustering;
 using TextMining.Evaluation.ClusteringMeasures;
 
 namespace TextMining.Evaluation.Experiments
 {
     class FinalExperiment : IExperiment
     {
-        private readonly SqlConnection conn;
-
-        public SqlConnection Conn
-        {
-            get { return conn; }
-        }
-
-        public SqlConnection _ { get; set; }
-
-        public FinalExperiment(SqlConnection conn)
-        {
-            this.conn = conn;
-        }
-
-
         public void Run()
         {
             //int newsToExperiment = 1000;
             int randomTopicsCounter = 5;
             int maxLen = 2000;
-            int kMeansIt = 10;
+            int kMeansIt = 5;
 
             WordsStats stats = new WordsStats(Words.ComputeWords(DataStore.Instance.GetAllNews()));
             stats.Compute();
 
             Console.WriteLine("Words Stats - computed");
-            GroupFactory factory = new GroupFactory(conn);
+            GroupFactory factory = new GroupFactory();
 
 
-            List<string> randomTopics = getRandomTopics(conn, randomTopicsCounter);
+            List<string> randomTopics = getRandomTopics(randomTopicsCounter);
 
 
             foreach (string s in randomTopics)
@@ -48,7 +33,7 @@ namespace TextMining.Evaluation.Experiments
 
 
 
-            Group initialGroup = factory.CreateGroupWithNewsFromTopics(randomTopics);
+            Group initialGroup = GroupFactory.CreateGroupWithNewsFromTopics(randomTopics);
 
 
             CosinusMetricComparator cos = new CosinusMetricComparator();
@@ -80,7 +65,7 @@ namespace TextMining.Evaluation.Experiments
 
         }
 
-        private List<string> getRandomTopics(SqlConnection conn, int size)
+        private List<string> getRandomTopics(int size)
         {
             List<News> news = DataStore.Instance.GetAllNews();
 

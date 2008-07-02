@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using TextMining.Clastering;
+using TextMining.Clustering;
 using TextMining.DataLoading;
 using TextMining.Model;
 using TextMining.TextTools;
@@ -10,20 +10,7 @@ namespace TextMining.Evaluation.Experiments
 {
     class Experiment1 : IExperiment
     {
-        private readonly SqlConnection conn;
-
-        public SqlConnection Conn
-        {
-            get { return conn; }
-        }
-
-        public SqlConnection _ { get; set; }
-
-        public Experiment1(SqlConnection conn)
-        {
-            this.conn = conn;
-        }
-
+      
 
         public void Run()
         {
@@ -38,8 +25,6 @@ namespace TextMining.Evaluation.Experiments
 
             Console.WriteLine("Assingments: start loading");
             clock = DateTime.Now;
-            TopicOriginalAssigment ass = new TopicOriginalAssigment(conn);
-            ass.Load();
 
             Console.WriteLine("Assigments: end loading - " + (DateTime.Now - clock).ToString());
             
