@@ -4,11 +4,11 @@ namespace TextMining.Evaluation.ClusteringMeasures
 {
     class MedianCoverageForDominanceTopic : IGroupEvaluator
     {
-        public double Eval(List<Group> clustering)
+        public double Eval(List<Group> groups)
         {
             double coverage = 0.0;
 
-            foreach (Group g in clustering)
+            foreach (Group g in groups)
             {
                 int dominanceCount = int.MinValue;
                 List<string> topics = Util.getTopicsInGroup(g);
@@ -23,7 +23,7 @@ namespace TextMining.Evaluation.ClusteringMeasures
                 }
                 coverage += dominanceCount / (double)g.Count;
             }
-            return coverage / clustering.Count;
+            return coverage / groups.Count;
         }
     }
 }

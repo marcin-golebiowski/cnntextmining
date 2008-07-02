@@ -9,6 +9,6 @@ namespace TextMining.Evaluation
         /// </summary>
         /// <param name="?"></param>
         /// <returns></returns>
-        double Eval(List<Group> sets);
+        double Eval(List<Group> groups);
     }
 }
