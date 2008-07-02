@@ -27,11 +27,18 @@ namespace TextMining.Evaluation.ClusteringMeasures
 
             for (int i = 0; i < count; i++)
             {
-                result.Add(new string[] { relatedTopics[i].topic1, relatedTopics[i].topic2 }); 
+                result.Add(new string[] { relatedTopics[i].topic1, relatedTopics[i].topic2 });
+                Console.WriteLine(relatedTopics[i].topic1 + "\n" + relatedTopics[i].topic2 + "\ndist = " + relatedTopics[i].distance + "\n");
             }
 
             return result;
         }
+
+        public List<string[]> getHighRelatedTopics()
+        {
+            return getHighRelatedTopics(relatedTopics.Count);
+        }
+
 
 
         private void computeDistances()
@@ -50,7 +57,7 @@ namespace TextMining.Evaluation.ClusteringMeasures
                     {
                         int s1 = Util.topicCountInGroup(topicI, g);
                         int s2 = Util.topicCountInGroup(topicJ, g);
-                        distances[i, j] += Math.Max(s1, s2);
+                        distances[i, j] += Math.Min(s1, s2);
                     }
                 }
             }
@@ -68,7 +75,8 @@ namespace TextMining.Evaluation.ClusteringMeasures
                     p.topic1 = topicsInDB[i];
                     p.topic2 = topicsInDB[j];
                     p.distance = distances[i,j];
-                    relatedTopics.Add(p);
+                    if(p.distance != 0)
+                        relatedTopics.Add(p);
                 }
             }
             relatedTopics.Sort();
@@ -86,7 +94,7 @@ namespace TextMining.Evaluation.ClusteringMeasures
 
             public int CompareTo(object obj)
             {
-                return (int)(distance - ((Pair)obj).distance);
+                return (int)( ((Pair)obj).distance - distance);
             }
 
             #endregion
