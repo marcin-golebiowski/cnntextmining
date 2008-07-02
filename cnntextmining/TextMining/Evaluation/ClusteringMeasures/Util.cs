@@ -30,32 +30,6 @@ namespace TextMining.Evaluation.ClusteringMeasures
             return c;
         }
 
-        // Chcemy aby w hrupi byl topic dominujacy
-        // Srednia + max odbiega mocno
-        public static double topicDominance(Group g, List<string> topics, int k)
-        {
-            double result = 0.0;
-
-            double median = (double)g.Count / (double)topics.Count;
-
-            int max = int.MinValue;
-
-            for (int i = 0; i < topics.Count; i++)
-            {
-                int tmp = topicCountInGroup(topics[i], g);
-                if (tmp > max)
-                {
-                    max = tmp;
-                }
-            }
-            result = max / (median * k);
-            if (result >= 1.0)
-            {
-                result = 1.0;
-            }
-            return result;
-        }
-
         public static double avgDeviation(List<Group> clustering, int newsCount)
         {
             double median = newsCount / clustering.Count;

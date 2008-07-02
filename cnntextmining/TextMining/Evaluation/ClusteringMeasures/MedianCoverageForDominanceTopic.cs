@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TextMining.DataLoading;
 
 namespace TextMining.Evaluation.ClusteringMeasures
 {
@@ -19,6 +20,8 @@ namespace TextMining.Evaluation.ClusteringMeasures
                 foreach (string topic in topics)
                 {
                     int tmp = Util.topicCountInGroup(topic, g);
+
+
                     if (tmp > dominanceCount)
                     {
                         dominanceCount = tmp;
