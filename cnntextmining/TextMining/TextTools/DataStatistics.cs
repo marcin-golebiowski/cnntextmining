@@ -21,6 +21,8 @@ namespace TextMining.TextTools
             int c = 0;
             int zeroCount = 0;
 
+            int cLinks = 0;
+
             double[,] dist = new double[news.Count, news.Count];
 
             for (int i = 0; i < news.Count; i++)
@@ -44,10 +46,12 @@ namespace TextMining.TextTools
                     sum += res;
                     c++;
 
+                    //cLinks += commonLinks(news[i], news[j]);
+
                     if (c % 10000 == 0)
                         Console.WriteLine(c);
 
-                   // Console.WriteLine(sum + " " + c + " " + res); 
+                    //Console.WriteLine(cLinks); 
                 }
             }
 
@@ -77,10 +81,29 @@ namespace TextMining.TextTools
             sb.Append("Zero count = " + zeroCount + "\n");
             sb.Append("Standard deviation = " + standardDeviation.ToString() + "\n");
             sb.Append("Arithmetic median = " + aritm.ToString() + "\n");
+            //sb.Append("Common links average = " + (cLinks / c) + "\n");
             sb.Append("End data information\n");
 
             return sb.ToString();
         }
+
+        private int commonLinks(News x, News y)
+        {
+            int c = 0;
+            foreach (string u1 in x.links)
+            {
+                foreach (string u2 in y.links)
+                {
+                    if (u1 == u2)
+                        c++;
+                }
+            }
+            Console.WriteLine(x.links.Count + " " + y.links.Count);
+            return c;
+        }
+
+
+
 
     }
 }

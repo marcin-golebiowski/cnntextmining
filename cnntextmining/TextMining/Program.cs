@@ -26,7 +26,7 @@ namespace TextMining
                // GroupFactory factory = new GroupFactory(conn);
 
 
-                var expr = new ExperimentKMeans2(conn);
+                var expr = new FinalExperiment(conn);
                 expr.Run();
 
 

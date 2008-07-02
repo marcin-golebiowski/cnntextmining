@@ -45,9 +45,9 @@ namespace TextMining.Clastering
             {
                 DateTime start = DateTime.Now;
 
-                Console.WriteLine("=========================================");
-                Console.WriteLine("=========================================");
-                Console.WriteLine("Iteration " + iteration + ": started");
+                //Console.WriteLine("=========================================");
+                //Console.WriteLine("=========================================");
+                //Console.WriteLine("Iteration " + iteration + ": started");
 
                 // liczenie przydzialu
                 for (int i = 0; i < news.Count; i++)
@@ -74,11 +74,11 @@ namespace TextMining.Clastering
                 // liczymy centroidy
                 centroids = ComputeNewCentroids(K, assigment, vectors, centroids);
                 
-                Console.WriteLine("Time: " + (DateTime.Now - start));
+                //Console.WriteLine("Time: " + (DateTime.Now - start));
 
                 List<Group> current = GetCurrentSet(news, assigment, K);
 
-                ExperimentStats.PrintDetailsString(current);
+                //ExperimentStats.PrintDetailsString(current);
               
             }
 

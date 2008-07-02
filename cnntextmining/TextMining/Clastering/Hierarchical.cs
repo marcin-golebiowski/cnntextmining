@@ -27,9 +27,9 @@ namespace TextMining.Clastering
 
         public List<Group> Compute(Group news, int k, Distance d)
         {
-            Console.WriteLine("Obliczanie odlegosci");
+            //Console.WriteLine("Obliczanie odlegosci");
             double[,] distances = computeDistances(news);
-            Console.WriteLine("Koniec");
+            //Console.WriteLine("Koniec");
 
             //Make initial N groups
 
@@ -85,7 +85,7 @@ namespace TextMining.Clastering
                     distances[j, i] = distances[i, j];
                     //Console.Write(distances[i, j] + "  ");
                 }
-                Console.WriteLine(i);
+                //Console.WriteLine(i);
             }
             return distances;
         }
