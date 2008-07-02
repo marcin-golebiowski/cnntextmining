@@ -17,19 +17,19 @@ namespace TextMining
 
             int a, b, c;
 
-            if (Int32.TryParse(args[0], out a))
+            if (!Int32.TryParse(args[0], out a))
             {
                 Console.WriteLine("First argument is not a number");
                 return;
             }
 
-            if (Int32.TryParse(args[1], out b))
+            if (!Int32.TryParse(args[1], out b))
             {
                 Console.WriteLine("Second argument is not a number");
                 return;
             }
 
-             if (Int32.TryParse(args[2], out c))
+            if (!Int32.TryParse(args[2], out c))
             {
                 Console.WriteLine("Third argument is not a number");
                 return;
