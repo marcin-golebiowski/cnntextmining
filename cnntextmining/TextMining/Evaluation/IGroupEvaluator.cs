@@ -2,13 +2,13 @@
 
 namespace TextMining.Evaluation
 {
-    public interface IEvaluator
+    public interface IGroupEvaluator
     {
         /// <summary>
         /// Return computed score 
         /// </summary>
         /// <param name="?"></param>
         /// <returns></returns>
-        long GetScore(List<Group> sets);
+        double Eval(List<Group> sets);
     }
 }

@@ -68,7 +68,7 @@
     <Compile Include="Evaluation\Experiments\MetricsStatistics.cs" />
     <Compile Include="Evaluation\Group.cs" />
     <Compile Include="Evaluation\GroupFactory.cs" />
-    <Compile Include="Evaluation\IEvaluator.cs" />
+    <Compile Include="Evaluation\IGroupEvaluator.cs" />
     <Compile Include="Evaluation\IExperiment.cs" />
     <Compile Include="Evaluation\ClusteringMeasures\MedianCoverageForDominanceTopic.cs" />
     <Compile Include="Model\News.cs" />
