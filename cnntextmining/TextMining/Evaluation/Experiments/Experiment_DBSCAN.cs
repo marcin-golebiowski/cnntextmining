@@ -30,9 +30,8 @@ namespace TextMining.Evaluation.Experiments
             int newsCount = 500;
             int maxLen = 8000;
 
-            var dataFetcher = new DataFetcher(conn);
             Console.WriteLine("newsy przed pobraniem");
-            List<News> tmp = dataFetcher.GetAllNews();
+            List<News> tmp = DataStore.Instance.GetAllNews();
 
             Console.WriteLine("newsy pobrane");
 

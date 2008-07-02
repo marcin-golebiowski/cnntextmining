@@ -17,27 +17,24 @@ namespace TextMining.Evaluation
         public Group CreateGroupWithAllNews()
         {
             var result = new Group("INITIAL");
-            var f = new DataFetcher(conn);
-            result.AddRange(Words.ComputeWords(f.GetAllNews()));
+            result.AddRange(Words.ComputeWords(DataStore.Instance.GetAllNews()));
             return result;
         }
 
         public Group CreateGroupWithAllNews(int count)
         {
             var result = new Group("INITIAL");
-            var f = new DataFetcher(conn);
-            result.AddRange(Words.ComputeWords(f.GetAllNews(false, count)));
+           
+            result.AddRange(Words.ComputeWords(DataStore.Instance.GetAllNews(count)));
             return result;
         }
 
         public Group CreateGroupWithNewsFromTopics(List<string> topics)
         {
             var result = new Group("INITIAL");
-            var f = new DataFetcher(conn);
-
             foreach (string topic in topics)
             {
-                result.AddRange(Words.ComputeWords(f.GetAllNews(topic)));    
+                result.AddRange(Words.ComputeWords(DataStore.Instance.GetAllNews(topic)));    
             }
 
             return result;

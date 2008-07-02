@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data.SqlClient;
 using TextMining.DataLoading;
 using TextMining.TextTools;
@@ -34,9 +33,7 @@ namespace TextMining.Evaluation.Experiments
             int maxLen = 2000;
             int kMeansIt = 10;
 
-
-            var fetcher = new DataFetcher(conn);
-            WordsStats stats = new WordsStats(Words.ComputeWords(fetcher.GetAllNews()));
+            WordsStats stats = new WordsStats(Words.ComputeWords(DataStore.Instance.GetAllNews()));
             stats.Compute();
 
             Console.WriteLine("Words Stats - computed");
@@ -69,8 +66,8 @@ namespace TextMining.Evaluation.Experiments
 
             int kDominance = 3;
 
-            Console.WriteLine("Jakosc grupowania kmeans = " + ClusteringMeasure.compute(conn, randomTopics, kMeansResult, kDominance));
-            Console.WriteLine("Jakosc grupowania hierarchical = " + ClusteringMeasure.compute(conn, randomTopics, hierarchicalResult, kDominance));
+            Console.WriteLine("Jakosc grupowania kmeans = " + ClusteringMeasure.compute(randomTopics, kMeansResult, kDominance));
+            Console.WriteLine("Jakosc grupowania hierarchical = " + ClusteringMeasure.compute(randomTopics, hierarchicalResult, kDominance));
 
             Console.WriteLine("kmeans srednia dominacja = " + MedianCoverageForDominanceTopic.compute(kMeansResult));
             Console.WriteLine("hierarchical srednia dominacja = " + MedianCoverageForDominanceTopic.compute(hierarchicalResult));
@@ -85,8 +82,7 @@ namespace TextMining.Evaluation.Experiments
 
         private List<string> getRandomTopics(SqlConnection conn, int size)
         {
-            var fetcher = new DataFetcher(conn);
-            List<News> news = fetcher.GetAllNews();
+            List<News> news = DataStore.Instance.GetAllNews();
 
             var result = new List<string>();
             var rand = new Random();

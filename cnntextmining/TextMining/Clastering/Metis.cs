@@ -119,11 +119,9 @@ namespace TextMining.Clastering
             var reader = new StreamReader(path + ".news");
             string line;
 
-            DataFetcher f = new DataFetcher(conn);
-
             while ((line = reader.ReadLine()) != null)
             {
-                News m = f.GetNews(line);
+                News m = DataStore.Instance.GetNews(line);
 
                 newses.Add(m);
             }

@@ -26,10 +26,9 @@ namespace TextMining.Evaluation.Experiments
 
 
         public void Run()
-        {
-            var dataFetcher = new DataFetcher(conn);
+        {  
             Console.WriteLine("Downloading news for database...");
-            List<News> news = dataFetcher.GetAllNews(true, 300);
+            List<News> news = DataStore.Instance.GetAllNews(300);
             Console.WriteLine("News downloaded " + news.Count);
 
             news = Words.ComputeWords(news);

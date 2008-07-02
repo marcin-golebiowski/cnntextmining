@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using TextMining.DataLoading;
 using TextMining.Model;
-using System.Data.SqlClient;
 
 namespace TextMining.Evaluation.ClusteringMeasures
 {
@@ -11,13 +8,11 @@ namespace TextMining.Evaluation.ClusteringMeasures
     {
 
         // This method is uneffective.
-        public static double compute(SqlConnection conn, List<string> inputTopicsUris, List<Group> clustering, int kDominance)
+        public static double compute(List<string> inputTopicsUris, List<Group> clustering, int kDominance)
         {
             double result = 0.0;
 
-            DataFetcher fetcher = new DataFetcher(conn);
-
-            List<News> allNews = fetcher.GetAllNews();
+            List<News> allNews = DataStore.Instance.GetAllNews();
             Dictionary<string, Group> newsCountInTopic = new Dictionary<string,Group>();
 
 

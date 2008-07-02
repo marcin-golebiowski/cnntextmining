@@ -60,7 +60,7 @@
     <Compile Include="Clastering\Hierarchical.cs" />
     <Compile Include="Clastering\Kmeans.cs" />
     <Compile Include="Clastering\Metis.cs" />
-    <Compile Include="DataLoading\DataFetcher.cs" />
+    <Compile Include="DataLoading\DataStore.cs" />
     <Compile Include="Evaluation\ClusteringMeasures\ClusteringMeasure.cs" />
     <Compile Include="Evaluation\ClusteringMeasures\Util.cs" />
     <Compile Include="Evaluation\ExperimentStats.cs" />
@@ -134,6 +134,9 @@
     <Content Include="Model\stopWords.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

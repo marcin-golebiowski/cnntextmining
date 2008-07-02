@@ -44,11 +44,10 @@ namespace TextMining.Evaluation.Experiments
             Console.WriteLine("Assigments: end loading - " + (DateTime.Now - clock).ToString());
             
 
-            var dataFetcher = new DataFetcher(conn);
 
             Console.WriteLine("News: start loading");
             clock = DateTime.Now;
-            List<News> news = dataFetcher.GetAllNews(true, newsCount);
+            List<News> news = DataStore.Instance.GetAllNews(newsCount);
             Console.WriteLine("News: end loading -  " + (DateTime.Now - clock).ToString());
 
 

@@ -19,8 +19,7 @@ namespace TextMining.Evaluation.Experiments
 
         public void Run()
         {
-            var fetcher = new DataFetcher(conn);
-            WordsStats stats = new WordsStats(Words.ComputeWords(fetcher.GetAllNews()));
+            WordsStats stats = new WordsStats(Words.ComputeWords(DataStore.Instance.GetAllNews()));
             stats.Compute();
 
             Console.WriteLine("Words Stats - computed");
