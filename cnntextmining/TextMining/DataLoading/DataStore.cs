@@ -11,6 +11,8 @@ namespace TextMining.DataLoading
     {
         private readonly string path;
         private readonly Dictionary<string, News> dict = new Dictionary<string, News>();
+        private readonly Dictionary<string, List<News>> topics = new Dictionary<string, List<News>>();
+
         private List<News> newsss;
         private static DataStore dataStore;
 
@@ -36,16 +38,22 @@ namespace TextMining.DataLoading
 
         private void Load()
         {
-            newsss = GetAllNews();
+            newsss = GetAllNewsFromFile();
             foreach (News n in newsss)
             {
                 dict[n.url] = n;
+                if (!topics.ContainsKey(n.topicUrl))
+                {
+                    topics[n.topicUrl] = new List<News>();                
+                }
+                topics[n.topicUrl].Add(n);
             }
         }
 
+
         public List<News> GetAllNews()
         {
-            return GetAllNewsFromFile();
+            return newsss;
         }
 
 
@@ -245,6 +253,16 @@ namespace TextMining.DataLoading
             }
 
             return result;
+        }
+
+
+        public double GetTopicSize(string topic)
+        {
+            if (topics.ContainsKey(topic))
+            {
+                return topics[topic].Count;
+            }
+            return 0;
         }
     }
 }

@@ -64,11 +64,6 @@
     <Compile Include="Evaluation\ClusteringMeasures\ClusteringMeasure.cs" />
     <Compile Include="Evaluation\ClusteringMeasures\Util.cs" />
     <Compile Include="Evaluation\ExperimentStats.cs" />
-    <Compile Include="Evaluation\Experiments\ExperimentKMeans2.cs" />
-    <Compile Include="Evaluation\Experiments\Experiment1.cs" />
-    <Compile Include="Evaluation\Experiments\ExperimentHierarchical.cs" />
-    <Compile Include="Evaluation\Experiments\ExperimentKMeans.cs" />
-    <Compile Include="Evaluation\Experiments\Experiment_DBSCAN.cs" />
     <Compile Include="Evaluation\Experiments\FinalExperiment.cs" />
     <Compile Include="Evaluation\Experiments\MetricsStatistics.cs" />
     <Compile Include="Evaluation\Group.cs" />

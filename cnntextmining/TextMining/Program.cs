@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TextMining.DataLoading;
 using TextMining.Model;
+using TextMining.Evaluation.Experiments;
 
 namespace TextMining
 {
@@ -26,8 +27,8 @@ namespace TextMining
             // GroupFactory factory = new GroupFactory(conn);
 
 
-            //var expr = new FinalExperiment(conn);
-            //expr.Run();
+            var expr = new FinalExperiment();
+            expr.Run();
 
 
 

@@ -65,7 +65,7 @@ namespace TextMining.Evaluation.ClusteringMeasures
             {
                 sum += g.Count - median;
             }
-            return 1.0 / (sum / clustering.Count);
+            return 1.0 / (sum / (double)clustering.Count);
         }
     }
 }

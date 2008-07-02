@@ -10,7 +10,6 @@ namespace TextMining.Evaluation.ClusteringMeasures
         {
             double coverage = 0.0;
 
-
             foreach (Group g in clustering)
             {
                 int dominanceCount = int.MinValue;

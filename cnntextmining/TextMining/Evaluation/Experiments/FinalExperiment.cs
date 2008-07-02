@@ -14,9 +14,9 @@ namespace TextMining.Evaluation.Experiments
         public void Run()
         {
             //int newsToExperiment = 1000;
-            int randomTopicsCounter = 5;
+            int randomTopicsCounter = 3;
             int maxLen = 2000;
-            int kMeansIt = 5;
+            int kMeansIt = 3;
 
             WordsStats stats = new WordsStats(Words.ComputeWords(DataStore.Instance.GetAllNews()));
             stats.Compute();
@@ -35,7 +35,7 @@ namespace TextMining.Evaluation.Experiments
 
             Group initialGroup = GroupFactory.CreateGroupWithNewsFromTopics(randomTopics);
 
-
+            Console.WriteLine("Rozmiar grupy: " + initialGroup.Count);
             CosinusMetricComparator cos = new CosinusMetricComparator();
             EuclidesMetricComparator eu = new EuclidesMetricComparator();
             JaccardMetricCompartator ja = new JaccardMetricCompartator();
