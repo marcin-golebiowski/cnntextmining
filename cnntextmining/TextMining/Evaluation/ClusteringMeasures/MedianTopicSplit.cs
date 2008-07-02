@@ -10,19 +10,30 @@ namespace TextMining.Evaluation.ClusteringMeasures
         {
             double sum = 0.0;
 
-            List<string>[] topicsInGroups = new List<string>[clustering.Count];
+            Dictionary<string, int> topicInGroupCount = new Dictionary<string,int>();
 
-
-
-            for(int i = 0; i < clustering.Count; i++)
+            foreach(Group g in clustering)
             {
-                topicsInGroups[i] = new List<string>();
-                
-
+                List<string> topics = Util.getTopicsInGroup(g);
+                foreach(string topic in topics)
+                {
+                    if (topicInGroupCount.ContainsKey(topic))
+                    {
+                        topicInGroupCount[topic]++;
+                    }
+                    else
+                    {
+                        topicInGroupCount.Add(topic, 1);
+                    }
+                }
             }
 
+            foreach (string topic in topicInGroupCount.Keys)
+            {
+                sum += topicInGroupCount[topic];
+            }
 
-            return 0.0;
+            return sum / (double)topicInGroupCount.Values.Count;
         }
     }
 }
