@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using TextMining.DataLoading;
-using TextMining.Model;
+using System;
 using TextMining.Evaluation.Experiments;
 
 namespace TextMining
@@ -8,98 +6,37 @@ namespace TextMining
     class Program
     {
 
-        static void Main()
+        static void Main(string[] args)
         {
+         
+            if (args.Length != 3)
+            {
+                Console.WriteLine("Usage: TextMining.exe  <numer of topics> <number of kmeans iteration> <numer of releated topic to print> ");
+                return;
+            }
 
-            List<News> news = DataStore.Instance.GetAllNews();
+            int a, b, c;
 
-            //fetcher.SaveNewsFromFile(news, "newsy.bin");
+            if (Int32.TryParse(args[0], out a))
+            {
+                Console.WriteLine("First argument is not a number");
+                return;
+            }
 
+            if (Int32.TryParse(args[1], out b))
+            {
+                Console.WriteLine("Second argument is not a number");
+                return;
+            }
 
-            //Console.WriteLine("polaczenie ok");
+             if (Int32.TryParse(args[2], out c))
+            {
+                Console.WriteLine("Third argument is not a number");
+                return;
+            }
 
-            // preprocessing
-            // var fetcher = new DataStore(conn);
-            // WordsStats stats = new WordsStats(Words.ComputeWords(fetcher.GetAllNews()));
-            // stats.Compute();
-
-            // Console.WriteLine("Words Stats - computed");
-            // GroupFactory factory = new GroupFactory(conn);
-
-
-            var expr = new FinalExperiment();
+            var expr = new FinalExperiment(a, b, c);
             expr.Run();
-
-
-
-
-
-            /*
-            var exp = new MetricsStatistics(conn);
-            exp.Run();
-            */
-            /*
-            var topics = new List<string>();
-            //topics.Add(@"http://topics.edition.cnn.com/topics/astronomy");
-            //topics.Add(@"http://topics.edition.cnn.com/topics/armed_forces");
-            //topics.Add(@"http://topics.edition.cnn.com/topics/genetics");
-            topics.Add(@"http://topics.edition.cnn.com/topics/religion");
-
-            Group initialGroup = factory.CreateGroupWithNewsFromTopics(topics);
-            CosinusMetricComparator comp = new CosinusMetricComparator();
-
-
-            var metis = new Metis(stats, comp, conn);
-
-            List<Group> groups = metis.Compute(initialGroup, 4);
-            ExperimentStats.PrintDetailsString(groups);
-                
-
-                
-                
-            //Hierarchical algorithm = new Hierarchical(comp, stats, 4000);
-
-            //Dbscan scan = new Dbscan(comp, stats, 1000)p;
-
-            //List<Group> groups = algorithm.Compute(start, 10);
-
-            //ExperimentStats.PrintDetailsString(groups);
-
-
-            //var assigment = new TopicOriginalAssigment(conn);
-            //assigment.Load();
-
-            //DataStore fetcher = new DataStore(conn);
-            //List<News> news =  fetcher.GetAllNews();
-
-            //foreach (var info in news)
-            //{
-                //Console.WriteLine(info.url);
-                //Console.WriteLine(assigment.GetTopicsForNews(info.url).Count);
-            //}
-            //Console.WriteLine("Dostêpne: " + news.Count + " newsów");
-
-            //List<string> topics = fetcher.GetTopicsFromDatabase();
-
-            //Console.WriteLine("Liczba topików: " + topics.Count);
-                
-
-
-            //var exp1 = new Experiment1(conn);
-            //exp1.Run();
-
-            //var exp2 = new Experiment_DBSCAN(conn);
-            //exp2.Run();
-
-            /*CNNPage page = new CNNPage("http://edition.cnn.com/2003/TECH/space/07/30/sprj.colu.columbia.probe/index.html");
-
-            Console.WriteLine(page.pureText);
-            Console.WriteLine();
-            foreach(Uri link in page.allLinks)
-                Console.WriteLine(link);
-
-            */
-
         }
     }
 }

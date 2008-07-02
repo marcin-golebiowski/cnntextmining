@@ -10,13 +10,15 @@ namespace TextMining.Evaluation.Experiments
 {
     class FinalExperiment : IExperiment
     {
+        public int RelatedToWrite { get; set; }
         private readonly int topicCount;
         private readonly int kMeansIterations;
         const int maxLen = 2000;
 
 
-        public FinalExperiment(int topicCount, int kMeansIterations)
+        public FinalExperiment(int topicCount, int kMeansIterations, int relatedToWrite)
         {
+            RelatedToWrite = relatedToWrite;
             this.topicCount = topicCount;
             this.kMeansIterations = kMeansIterations;
         }
@@ -68,19 +70,16 @@ namespace TextMining.Evaluation.Experiments
 
             Console.WriteLine("===================== Powiązane topiki ==============================");
             HighRelatedTopics htopics = new HighRelatedTopics(hierarchicalResult);
-            List<string[]> related = htopics.getHighRelatedTopics(8);
+            List<string[]> related = htopics.getHighRelatedTopics(RelatedToWrite);
 
             foreach(string[] pair in related)
             {
                 Console.WriteLine(pair[0] + "\n" + pair[1] + "\n");
             }
 
-
             //ExperimentStats.PrintDetailsString(dbscanResult);
             //ExperimentStats.PrintDetailsString(hierarchicalResult);
             //ExperimentStats.PrintDetailsString(kMeansResult);
-
-
         }
 
         private static void PrintStats(string name, TimeSpan t1, List<Group> result)
@@ -119,7 +118,5 @@ namespace TextMining.Evaluation.Experiments
             }
             return result;
         }
-
-
     }
 }
