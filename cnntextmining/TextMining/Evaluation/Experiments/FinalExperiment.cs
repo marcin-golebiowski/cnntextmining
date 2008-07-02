@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using TextMining.DataLoading;
 using TextMining.TextTools;
 using TextMining.Model;
@@ -11,17 +10,25 @@ namespace TextMining.Evaluation.Experiments
 {
     class FinalExperiment : IExperiment
     {
+        private readonly int topicCount;
+        private readonly int kMeansIterations;
+        const int maxLen = 2000;
+
+
+        public FinalExperiment(int topicCount, int kMeansIterations)
+        {
+            this.topicCount = topicCount;
+            this.kMeansIterations = kMeansIterations;
+        }
+
+
         public void Run()
         {
-            const int randomTopicsCounter = 2;
-            const int maxLen = 2000;
-            const int kMeansIt = 3;
-
 
             WordsStats stats = new WordsStats(Words.ComputeWords(DataStore.Instance.GetAllNews()));
             stats.Compute();
 
-            List<string> randomTopics = getRandomTopics(randomTopicsCounter);
+            List<string> randomTopics = getRandomTopics(topicCount);
             Group initialGroup = GroupFactory.CreateGroupWithNewsFromTopics(randomTopics);
 
 
@@ -48,11 +55,11 @@ namespace TextMining.Evaluation.Experiments
             Console.WriteLine("===============================================================");
 
             start = DateTime.Now;
-            List<Group> hierarchicalResult = hr.Compute(initialGroup,randomTopicsCounter, Hierarchical.Distance.AVG);
+            List<Group> hierarchicalResult = hr.Compute(initialGroup, topicCount, Hierarchical.Distance.AVG);
             t1 = (DateTime.Now - start);
             
             start = DateTime.Now;
-            List<Group> kMeansResult = km.Compute(initialGroup, randomTopicsCounter, kMeansIt);
+            List<Group> kMeansResult = km.Compute(initialGroup, topicCount, kMeansIterations);
             t2 = (DateTime.Now - start);
 
             PrintStats("KMeans", t1, kMeansResult);
