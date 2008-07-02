@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
+using System.Runtime.Serialization;
 using TextMining.Model;
 
 namespace TextMining.DataLoading
@@ -17,6 +19,26 @@ namespace TextMining.DataLoading
         {
             return GetAllNews(false, int.MaxValue);
         }
+
+
+        public List<News> GetAllNewsFromFile(string path)
+        {
+            FileStream fs = new FileStream(path, FileMode.Open);
+            byte[] content = new byte[fs.Length];
+            fs.Read(content, 0, content.Length);
+            fs.Close();
+            return (List<News>) Serialization.Deserialize(content, StreamingContextStates.File);
+        }
+
+
+        public void SaveNewsFromFile(List<News> news, string path)
+        {
+            FileStream fs = new FileStream(path, FileMode.Create);
+            byte[] serialized = Serialization.Serialize(news, StreamingContextStates.File);
+            fs.Write(serialized, 0, serialized.Length);
+            fs.Close();
+        }
+
 
         public List<News> GetAllNews(string topicURL)
         {

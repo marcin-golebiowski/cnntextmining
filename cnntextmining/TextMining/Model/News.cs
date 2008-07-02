@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TextMining.Model
 {
+    [Serializable]
     public class News
     {
         public string topicUrl;

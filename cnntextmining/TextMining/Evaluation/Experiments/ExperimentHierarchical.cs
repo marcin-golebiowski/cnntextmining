@@ -79,13 +79,6 @@ namespace TextMining.Evaluation.Experiments
             ass.Load();
 
 
-            DefaultEvaluator eval = new DefaultEvaluator(ass);
-
-            Console.WriteLine("Starting eval");
-            Console.WriteLine(eval.GetScore(sets));
-            Console.WriteLine("End eval");
-
-            
             foreach (Group gr in sets)
             {
                 Console.WriteLine("SET ");

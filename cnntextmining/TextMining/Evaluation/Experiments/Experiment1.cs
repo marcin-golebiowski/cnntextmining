@@ -59,8 +59,6 @@ namespace TextMining.Evaluation.Experiments
             stats.Compute();
             Console.WriteLine("WordsStats: end - " + (DateTime.Now - clock).ToString());
             
-            DefaultEvaluator eval = new DefaultEvaluator(ass); 
-
             var comparator = new CosinusMetricComparator();
             var algorithm = new Kmeans(comparator, stats,VectorLen);
 

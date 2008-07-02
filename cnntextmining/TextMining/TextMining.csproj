@@ -63,7 +63,6 @@
     <Compile Include="DataLoading\DataFetcher.cs" />
     <Compile Include="Evaluation\ClusteringMeasures\ClusteringMeasure.cs" />
     <Compile Include="Evaluation\ClusteringMeasures\Util.cs" />
-    <Compile Include="Evaluation\DefaultEvaluator.cs" />
     <Compile Include="Evaluation\ExperimentStats.cs" />
     <Compile Include="Evaluation\Experiments\ExperimentKMeans2.cs" />
     <Compile Include="Evaluation\Experiments\Experiment1.cs" />
@@ -84,6 +83,7 @@
     <Compile Include="Crawling\IAction.cs" />
     <Compile Include="Crawling\NewsPageMetaData.cs" />
     <Compile Include="Crawling\PersistentQueue.cs" />
+    <Compile Include="Model\Serialization.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Crawling\SaveAction.cs" />
