@@ -37,15 +37,13 @@ namespace TextMining.Evaluation
                         count[set[i].topicUrl] = 1;
                     }
                 }
-
                 foreach (KeyValuePair<string, int> pair in count)
                 {
                     Console.WriteLine(pair.Key + " [" + pair.Value + "]");
                 }
-                Console.WriteLine("+++++++++++++");
+                Console.WriteLine("--");
             }
 
-            Console.WriteLine("=====");
         }
     }
 }

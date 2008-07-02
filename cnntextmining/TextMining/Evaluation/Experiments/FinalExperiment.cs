@@ -10,15 +10,23 @@ namespace TextMining.Evaluation.Experiments
 {
     class FinalExperiment : IExperiment
     {
-        public int RelatedToWrite { get; set; }
+        private readonly int relatedToWrite;
         private readonly int topicCount;
+        private readonly string[] topics;
         private readonly int kMeansIterations;
         const int maxLen = 2000;
 
 
+        public FinalExperiment(string[] topics, int kMeansIterations, int relatedToWrite)
+        {
+            this.topics = topics;
+            this.kMeansIterations = kMeansIterations;
+            this.relatedToWrite = relatedToWrite;
+        }
+
         public FinalExperiment(int topicCount, int kMeansIterations, int relatedToWrite)
         {
-            RelatedToWrite = relatedToWrite;
+            this.relatedToWrite = relatedToWrite;
             this.topicCount = topicCount;
             this.kMeansIterations = kMeansIterations;
         }
@@ -30,13 +38,25 @@ namespace TextMining.Evaluation.Experiments
             WordsStats stats = new WordsStats(Words.ComputeWords(DataStore.Instance.GetAllNews()));
             stats.Compute();
 
-            List<string> randomTopics = getRandomTopics(topicCount);
-            Group initialGroup = GroupFactory.CreateGroupWithNewsFromTopics(randomTopics);
+            List<string> experimentTopics;
+
+            if (topics != null)
+            {
+                experimentTopics = new List<string>();
+                experimentTopics.AddRange(topics);
+            }
+            else
+            {
+                experimentTopics = GetRandomTopics(topicCount);
+            }
 
 
-            Console.WriteLine("==========================");
-            Console.WriteLine("Topiki w grupie:");
-            foreach (string topic in randomTopics)
+            Group initialGroup = GroupFactory.CreateGroupWithNewsFromTopics(experimentTopics);
+
+
+            Console.WriteLine("========================================================================");
+            Console.WriteLine("Topiki w grupie początkowej:");
+            foreach (string topic in experimentTopics)
             {
                 Console.WriteLine(topic + " [" + Util.topicCountInGroup(topic, initialGroup) + "]");
             }
@@ -54,7 +74,7 @@ namespace TextMining.Evaluation.Experiments
             Hierarchical hr = new Hierarchical(cos, stats, maxLen);
             Kmeans km = new Kmeans(cos, stats, maxLen);
 
-            Console.WriteLine("===============================================================");
+            Console.WriteLine("========================================================================");
 
             start = DateTime.Now;
             List<Group> hierarchicalResult = hr.Compute(initialGroup, topicCount, Hierarchical.Distance.AVG);
@@ -68,38 +88,39 @@ namespace TextMining.Evaluation.Experiments
             PrintStats("Hierachical", t2, hierarchicalResult);
 
 
-            Console.WriteLine("===================== Powiązane topiki ==============================");
-            HighRelatedTopics htopics = new HighRelatedTopics(hierarchicalResult);
-            List<string[]> related = htopics.getHighRelatedTopics(RelatedToWrite);
-
-            foreach(string[] pair in related)
-            {
-                Console.WriteLine(pair[0] + "\n" + pair[1] + "\n");
-            }
-
             //ExperimentStats.PrintDetailsString(dbscanResult);
             //ExperimentStats.PrintDetailsString(hierarchicalResult);
             //ExperimentStats.PrintDetailsString(kMeansResult);
         }
 
-        private static void PrintStats(string name, TimeSpan t1, List<Group> result)
+        private  void PrintStats(string name, TimeSpan t1, List<Group> result)
         {
             IGroupEvaluator groupEvaluator1 = new MedianCoverageForDominanceTopic();
             IGroupEvaluator groupEvaluator2 = new TopicSpitCount();
             IGroupEvaluator groupEvaluator3 = new MedianTopicSplit();
 
             Console.WriteLine("========================================================================");
-            Console.WriteLine(" ---== "  + name +  " ==---");
-            Console.WriteLine("  -- czas działania = " + t1);
-            Console.WriteLine("  -- średnia dominacja = " + groupEvaluator1.Eval(result));
-            Console.WriteLine("  -- suma rozbicia topików = " + groupEvaluator2.Eval(result));
-            Console.WriteLine("  -- średnia rozbicia topików = " + groupEvaluator3.Eval(result));
-            Console.WriteLine("---------------------");
-            Console.WriteLine("Zawartość grup");
+            Console.WriteLine(" --------==== " + name + " ====--------");
+            Console.WriteLine("  -- czas działania => " + t1);
+            Console.WriteLine("  -- średnia dominacja => " + groupEvaluator1.Eval(result));
+            Console.WriteLine("  -- suma rozbicia topików => " + groupEvaluator2.Eval(result));
+            Console.WriteLine("  -- średnia rozbicia topików => " + groupEvaluator3.Eval(result));
+            Console.WriteLine("------------------------------------------------------------------------");
+            Console.WriteLine(" --- Zawartość grup ---");
             ExperimentStats.PrintDetailsString(result);
+
+
+            Console.WriteLine(" --- Powiązane topiki ---");
+            HighRelatedTopics htopics = new HighRelatedTopics(result);
+            List<string[]> related = htopics.getHighRelatedTopics(relatedToWrite);
+
+            foreach (string[] pair in related)
+            {
+                Console.WriteLine(pair[0] + "\n" + pair[1] + "\n");
+            }
         }
 
-        private List<string> getRandomTopics(int size)
+        private static List<string> GetRandomTopics(int size)
         {
             List<News> news = DataStore.Instance.GetAllNews();
 
