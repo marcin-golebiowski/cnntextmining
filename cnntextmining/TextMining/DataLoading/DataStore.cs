@@ -12,6 +12,7 @@ namespace TextMining.DataLoading
         private readonly string path;
         private readonly Dictionary<string, News> dict = new Dictionary<string, News>();
         private readonly Dictionary<string, List<News>> topics = new Dictionary<string, List<News>>();
+        private readonly List<string> topicsList = new List<string>();
 
         private List<News> newsss;
         private static DataStore dataStore;
@@ -44,7 +45,8 @@ namespace TextMining.DataLoading
                 dict[n.url] = n;
                 if (!topics.ContainsKey(n.topicUrl))
                 {
-                    topics[n.topicUrl] = new List<News>();                
+                    topics[n.topicUrl] = new List<News>();
+                    topicsList.Add(n.topicUrl);
                 }
                 topics[n.topicUrl].Add(n);
             }
@@ -200,6 +202,11 @@ namespace TextMining.DataLoading
             return null;
         }
 
+
+        public List<string> GetTopics()
+        {
+            return topicsList;
+        }
 
 
         public News GetNewsFromDatabase(string newsURL, SqlConnection conn)
