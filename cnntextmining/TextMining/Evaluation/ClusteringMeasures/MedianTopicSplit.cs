@@ -4,9 +4,9 @@ using System.Text;
 
 namespace TextMining.Evaluation.ClusteringMeasures
 {
-    class MedianTopicSplit
+    class MedianTopicSplit : IGroupEvaluator
     {
-        public static double compute(List<Group> clustering)
+        public  double Eval(List<Group> clustering)
         {
             double sum = 0.0;
 

@@ -13,44 +13,53 @@ namespace TextMining.Evaluation.Experiments
     {
         public void Run()
         {
-            //int newsToExperiment = 1000;
-            int randomTopicsCounter = 8;
+            int randomTopicsCounter = 2;
             int maxLen = 2000;
             int kMeansIt = 3;
+
 
             WordsStats stats = new WordsStats(Words.ComputeWords(DataStore.Instance.GetAllNews()));
             stats.Compute();
 
-            Console.WriteLine("Words Stats - computed");
             List<string> randomTopics = getRandomTopics(randomTopicsCounter);
-
-
-            foreach (string s in randomTopics)
-                Console.WriteLine(s);
-
-
-
             Group initialGroup = GroupFactory.CreateGroupWithNewsFromTopics(randomTopics);
+
+
+            Console.WriteLine("==========================");
+            Console.WriteLine("Topiki w grupie:");
+            foreach (string topic in randomTopics)
+            {
+                Console.WriteLine(topic + " [" + Util.topicCountInGroup(topic, initialGroup) + "]");
+            }
 
             Console.WriteLine("Rozmiar grupy: " + initialGroup.Count);
             CosinusMetricComparator cos = new CosinusMetricComparator();
             EuclidesMetricComparator eu = new EuclidesMetricComparator();
             JaccardMetricCompartator ja = new JaccardMetricCompartator();
 
+            DateTime start;
+            TimeSpan t1, t2;
+            
+
             Dbscan db = new Dbscan(cos, stats, maxLen);
             Hierarchical hr = new Hierarchical(cos, stats, maxLen);
             Kmeans km = new Kmeans(cos, stats, maxLen);
 
-            //List<Group> dbscanResult = db.Compute(initialGroup, 0.25, 3);
+            Console.WriteLine("===============================================================");
+
+            start = DateTime.Now;
             List<Group> hierarchicalResult = hr.Compute(initialGroup,randomTopicsCounter, Hierarchical.Distance.AVG);
+            t1 = (DateTime.Now - start);
+            
+            start = DateTime.Now;
             List<Group> kMeansResult = km.Compute(initialGroup, randomTopicsCounter, kMeansIt);
+            t2 = (DateTime.Now - start);
+
+            PrintStats("KMeans", t1, kMeansResult);
+            PrintStats("Hierachical", t1, kMeansResult);
 
 
-            IGroupEvaluator groupEvaluator = new MedianCoverageForDominanceTopic();
-
-            Console.WriteLine("kmeans srednia dominacja = " + groupEvaluator.Eval(kMeansResult));
-            Console.WriteLine("hierarchical srednia dominacja = " + groupEvaluator.Eval(hierarchicalResult));
-
+            Console.WriteLine("===================== Powiązane topiki ==============================");
             HighRelatedTopics htopics = new HighRelatedTopics(hierarchicalResult);
             List<string[]> related = htopics.getHighRelatedTopics(8);
 
@@ -65,6 +74,23 @@ namespace TextMining.Evaluation.Experiments
             //ExperimentStats.PrintDetailsString(kMeansResult);
 
 
+        }
+
+        private static void PrintStats(string name, TimeSpan t1, List<Group> result)
+        {
+            IGroupEvaluator groupEvaluator1 = new MedianCoverageForDominanceTopic();
+            IGroupEvaluator groupEvaluator2 = new TopicSpitCount();
+            IGroupEvaluator groupEvaluator3 = new MedianTopicSplit();
+
+            Console.WriteLine("========================================================================");
+            Console.WriteLine(" ---== "  + name +  " ==---");
+            Console.WriteLine("  -- czas działania = " + t1);
+            Console.WriteLine("  -- średnia dominacja = " + groupEvaluator1.Eval(result));
+            Console.WriteLine("  -- suma rozbicia topików = " + groupEvaluator2.Eval(result));
+            Console.WriteLine("  -- średnia rozbicia topików = " + groupEvaluator3.Eval(result));
+            Console.WriteLine("---------------------");
+            Console.WriteLine("Zawartość grup");
+            ExperimentStats.PrintDetailsString(result);
         }
 
         private List<string> getRandomTopics(int size)
