@@ -13,9 +13,9 @@ namespace TextMining.Evaluation.Experiments
     {
         public void Run()
         {
-            int randomTopicsCounter = 2;
-            int maxLen = 2000;
-            int kMeansIt = 3;
+            const int randomTopicsCounter = 2;
+            const int maxLen = 2000;
+            const int kMeansIt = 3;
 
 
             WordsStats stats = new WordsStats(Words.ComputeWords(DataStore.Instance.GetAllNews()));
@@ -56,7 +56,7 @@ namespace TextMining.Evaluation.Experiments
             t2 = (DateTime.Now - start);
 
             PrintStats("KMeans", t1, kMeansResult);
-            PrintStats("Hierachical", t1, kMeansResult);
+            PrintStats("Hierachical", t2, hierarchicalResult);
 
 
             Console.WriteLine("===================== Powiązane topiki ==============================");
