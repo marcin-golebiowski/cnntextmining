@@ -22,9 +22,6 @@ namespace TextMining.Evaluation.Experiments
             stats.Compute();
 
             Console.WriteLine("Words Stats - computed");
-            GroupFactory factory = new GroupFactory();
-
-
             List<string> randomTopics = getRandomTopics(randomTopicsCounter);
 
 

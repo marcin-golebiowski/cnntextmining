@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data.SqlClient;
 using TextMining.DataLoading;
 using TextMining.TextTools;
 
@@ -7,6 +6,10 @@ namespace TextMining.Evaluation
 {
     public class GroupFactory
     {
+        private GroupFactory()
+        {
+        }
+
         public static Group CreateGroupWithAllNews()
         {
             var result = new Group("INITIAL");
