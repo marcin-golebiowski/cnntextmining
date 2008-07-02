@@ -46,13 +46,10 @@ namespace TextMining.Evaluation.Experiments
             List<Group> kMeansResult = km.Compute(initialGroup, randomTopicsCounter, kMeansIt);
 
 
-            int kDominance = 3;
+            IGroupEvaluator groupEvaluator = new MedianCoverageForDominanceTopic();
 
-            Console.WriteLine("Jakosc grupowania kmeans = " + ClusteringMeasure.compute(randomTopics, kMeansResult, kDominance));
-            Console.WriteLine("Jakosc grupowania hierarchical = " + ClusteringMeasure.compute(randomTopics, hierarchicalResult, kDominance));
-
-            Console.WriteLine("kmeans srednia dominacja = " + MedianCoverageForDominanceTopic.compute(kMeansResult));
-            Console.WriteLine("hierarchical srednia dominacja = " + MedianCoverageForDominanceTopic.compute(hierarchicalResult));
+            Console.WriteLine("kmeans srednia dominacja = " + groupEvaluator.Eval(kMeansResult));
+            Console.WriteLine("hierarchical srednia dominacja = " + groupEvaluator.Eval(hierarchicalResult));
 
 
             //ExperimentStats.PrintDetailsString(dbscanResult);
