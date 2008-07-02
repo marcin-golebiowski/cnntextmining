@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TextMining.Evaluation;
 using TextMining.TextTools;
 
@@ -25,7 +24,7 @@ namespace TextMining.Clustering
             this.maxLen = maxLen;
         }
 
-        public List<Group> Compute(Group news, int k, Distance d)
+        public List<Group> Compute(Group news, uint k, Distance d)
         {
             //Console.WriteLine("Obliczanie odlegosci");
             double[,] distances = computeDistances(news);

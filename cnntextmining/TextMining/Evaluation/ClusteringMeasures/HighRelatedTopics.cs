@@ -21,7 +21,7 @@ namespace TextMining.Evaluation.ClusteringMeasures
         }
 
         // Tablica 2-elementowa, 2 topici blisko zwiazane ze soba
-        public List<string[]> getHighRelatedTopics(int count)
+        public List<string[]> getHighRelatedTopics(uint count)
         {
             List<string[]> result = new List<string[]>();
 
@@ -36,7 +36,7 @@ namespace TextMining.Evaluation.ClusteringMeasures
 
         public List<string[]> getHighRelatedTopics()
         {
-            return getHighRelatedTopics(relatedTopics.Count);
+            return getHighRelatedTopics((uint)relatedTopics.Count);
         }
 
 

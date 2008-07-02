@@ -10,23 +10,32 @@ namespace TextMining.Evaluation.Experiments
 {
     class FinalExperiment : IExperiment
     {
-        private readonly int relatedToWrite;
-        private readonly int topicCount;
+        private readonly uint relatedToWrite;
+        private readonly uint topicCount;
         private readonly string[] topics;
-        private readonly int kMeansIterations;
-        const int maxLen = 2000;
+        private readonly uint kMeansIterations;
+        private const int maxLen = 2000;
+
+        private ushort comparatorId;
+        private IComparator[] comparators = new IComparator[]
+                                                {
+                                                    new CosinusMetricComparator(), new EuclidesMetricComparator(),
+                                                    new JaccardMetricCompartator()
+                                                };
 
 
-        public FinalExperiment(string[] topics, int kMeansIterations, int relatedToWrite)
+        public FinalExperiment(string[] topics, uint kMeansIterations, uint relatedToWrite, ushort comparatorId)
         {
             this.topics = topics;
             this.kMeansIterations = kMeansIterations;
             this.relatedToWrite = relatedToWrite;
+            this.comparatorId = comparatorId;
         }
 
-        public FinalExperiment(int topicCount, int kMeansIterations, int relatedToWrite)
+        public FinalExperiment(uint topicCount, uint kMeansIterations, uint relatedToWrite, ushort comparatorId)
         {
             this.relatedToWrite = relatedToWrite;
+            this.comparatorId = comparatorId;
             this.topicCount = topicCount;
             this.kMeansIterations = kMeansIterations;
         }
@@ -62,17 +71,14 @@ namespace TextMining.Evaluation.Experiments
             }
 
             Console.WriteLine("Rozmiar grupy: " + initialGroup.Count);
-            CosinusMetricComparator cos = new CosinusMetricComparator();
-            EuclidesMetricComparator eu = new EuclidesMetricComparator();
-            JaccardMetricCompartator ja = new JaccardMetricCompartator();
+        ;
 
             DateTime start;
             TimeSpan t1, t2;
             
 
-            Dbscan db = new Dbscan(cos, stats, maxLen);
-            Hierarchical hr = new Hierarchical(cos, stats, maxLen);
-            Kmeans km = new Kmeans(cos, stats, maxLen);
+            Hierarchical hr = new Hierarchical(comparators[comparatorId], stats, maxLen);
+            Kmeans km = new Kmeans(comparators[comparatorId], stats, maxLen);
 
             Console.WriteLine("========================================================================");
 
@@ -86,11 +92,6 @@ namespace TextMining.Evaluation.Experiments
 
             PrintStats("KMeans", t1, kMeansResult);
             PrintStats("Hierachical", t2, hierarchicalResult);
-
-
-            //ExperimentStats.PrintDetailsString(dbscanResult);
-            //ExperimentStats.PrintDetailsString(hierarchicalResult);
-            //ExperimentStats.PrintDetailsString(kMeansResult);
         }
 
         private  void PrintStats(string name, TimeSpan t1, List<Group> result)
@@ -120,7 +121,7 @@ namespace TextMining.Evaluation.Experiments
             }
         }
 
-        private static List<string> GetRandomTopics(int size)
+        private static List<string> GetRandomTopics(uint size)
         {
             List<News> news = DataStore.Instance.GetAllNews();
 
