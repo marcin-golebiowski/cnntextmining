@@ -43,7 +43,9 @@ namespace TextMining.Evaluation.Experiments
 
         public void Run()
         {
-
+            Console.WriteLine("========================================================================");
+            Console.WriteLine(" Metoda porównania: " + comparators[comparatorId].GetType());
+            Console.WriteLine("========================================================================");
             WordsStats stats = new WordsStats(Words.ComputeWords(DataStore.Instance.GetAllNews()));
             stats.Compute();
 
