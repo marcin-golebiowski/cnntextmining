@@ -10,6 +10,7 @@ namespace TextMining.Evaluation.Experiments
 {
     class FinalExperiment : IExperiment
     {
+        private readonly bool onlyKMeans;
         private readonly uint relatedToWrite;
         private readonly uint topicCount;
         private readonly string[] topics;
@@ -24,16 +25,18 @@ namespace TextMining.Evaluation.Experiments
                                                 };
 
 
-        public FinalExperiment(string[] topics, uint kMeansIterations, uint relatedToWrite, ushort comparatorId)
+        public FinalExperiment(bool onlyKMeans, string[] topics, uint kMeansIterations, uint relatedToWrite, ushort comparatorId)
         {
+            this.onlyKMeans = onlyKMeans;
             this.topics = topics;
             this.kMeansIterations = kMeansIterations;
             this.relatedToWrite = relatedToWrite;
             this.comparatorId = comparatorId;
         }
 
-        public FinalExperiment(uint topicCount, uint kMeansIterations, uint relatedToWrite, ushort comparatorId)
+        public FinalExperiment(bool onlyKMeans, uint topicCount, uint kMeansIterations, uint relatedToWrite, ushort comparatorId)
         {
+            this.onlyKMeans = onlyKMeans;
             this.relatedToWrite = relatedToWrite;
             this.comparatorId = comparatorId;
             this.topicCount = topicCount;
@@ -86,17 +89,20 @@ namespace TextMining.Evaluation.Experiments
 
             Console.WriteLine("========================================================================");
 
-            start = DateTime.Now;
-            List<Group> hierarchicalResult = hr.Compute(initialGroup, topicCount != 0 ? topicCount : (uint)topics.Length, 
-                Hierarchical.Distance.AVG);
-            t1 = (DateTime.Now - start);
-            
+            if (!onlyKMeans)
+            {
+                start = DateTime.Now;
+                 List<Group> hierarchicalResult = hr.Compute(initialGroup,topicCount != 0 ? topicCount : (uint) topics.Length,
+                                                            Hierarchical.Distance.AVG);
+                t1 = (DateTime.Now - start);
+                PrintStats("Hierachical", t1, hierarchicalResult, 0);
+            }
+
             start = DateTime.Now;
             List<Group> kMeansResult = km.Compute(initialGroup, topicCount != 0 ? topicCount : (uint)topics.Length, kMeansIterations);
             t2 = (DateTime.Now - start);
-
             PrintStats("KMeans", t2, kMeansResult, kMeansIterations);
-            PrintStats("Hierachical", t1, hierarchicalResult, 0);
+
 
             Console.WriteLine("========================================================================");
             Console.WriteLine("Czas działania: " + (DateTime.Now - expSt));

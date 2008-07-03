@@ -21,7 +21,11 @@ namespace TextMining.Evaluation.ClusteringMeasures
                         dominanceCount = tmp;
                     }
                 }
-                coverage += dominanceCount / (double)g.Count;
+
+                if (g.Count != 0)
+                {
+                    coverage += dominanceCount/(double) g.Count;
+                }
             }
             return coverage / groups.Count;
         }
