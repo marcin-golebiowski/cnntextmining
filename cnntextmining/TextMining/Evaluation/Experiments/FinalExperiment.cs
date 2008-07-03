@@ -129,11 +129,6 @@ namespace TextMining.Evaluation.Experiments
             Console.WriteLine(" --- Powiązane topiki ---");
             HighRelatedTopics htopics = new HighRelatedTopics(result);
             List<string[]> related = htopics.getHighRelatedTopics(relatedToWrite);
-
-            foreach (string[] pair in related)
-            {
-                Console.WriteLine(pair[0] + "\n" + pair[1] + "\n");
-            }
         }
 
         private static List<string> GetRandomTopics(uint size)
