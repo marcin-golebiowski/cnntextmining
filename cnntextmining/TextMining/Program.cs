@@ -43,10 +43,10 @@ namespace TextMining
                 return;
             }
 
-            if (!ushort.TryParse(args[3], out d) && d != 1 && d!= 2 && d!=3)
+            if (!ushort.TryParse(args[3], out d) )
             {
 
-                Console.WriteLine("Third argument is not 1, 2 or 3");
+                Console.WriteLine("Third argument is not number");
                 return;
             }
                 if (!int.TryParse(args[4], out e) && e != 1 && e!= 0)
