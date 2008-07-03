@@ -14,4 +14,7 @@
     <VerifyUploadedFiles>true</VerifyUploadedFiles>
     <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <StartArguments>"http://topics.edition.cnn.com/topics/vacations;http://topics.edition.cnn.com/topics/wireless_technology" 2 1 1</StartArguments>
+  </PropertyGroup>
 </Project>

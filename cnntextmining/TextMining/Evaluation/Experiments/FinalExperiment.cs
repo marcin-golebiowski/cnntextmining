@@ -85,11 +85,12 @@ namespace TextMining.Evaluation.Experiments
             Console.WriteLine("========================================================================");
 
             start = DateTime.Now;
-            List<Group> hierarchicalResult = hr.Compute(initialGroup, topicCount, Hierarchical.Distance.AVG);
+            List<Group> hierarchicalResult = hr.Compute(initialGroup, topicCount != 0 ? topicCount : (uint)topics.Length, 
+                Hierarchical.Distance.AVG);
             t1 = (DateTime.Now - start);
             
             start = DateTime.Now;
-            List<Group> kMeansResult = km.Compute(initialGroup, topicCount, kMeansIterations);
+            List<Group> kMeansResult = km.Compute(initialGroup, topicCount != 0 ? topicCount : (uint)topics.Length, kMeansIterations);
             t2 = (DateTime.Now - start);
 
             PrintStats("KMeans", t1, kMeansResult);
