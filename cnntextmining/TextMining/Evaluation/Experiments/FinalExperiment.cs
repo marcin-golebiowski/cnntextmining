@@ -93,8 +93,8 @@ namespace TextMining.Evaluation.Experiments
             List<Group> kMeansResult = km.Compute(initialGroup, topicCount != 0 ? topicCount : (uint)topics.Length, kMeansIterations);
             t2 = (DateTime.Now - start);
 
-            PrintStats("KMeans", t1, kMeansResult);
-            PrintStats("Hierachical", t2, hierarchicalResult);
+            PrintStats("KMeans", t2, kMeansResult);
+            PrintStats("Hierachical", t1, hierarchicalResult);
         }
 
         private  void PrintStats(string name, TimeSpan t1, List<Group> result)
