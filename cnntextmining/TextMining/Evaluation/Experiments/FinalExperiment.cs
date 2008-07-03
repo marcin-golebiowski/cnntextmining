@@ -43,6 +43,8 @@ namespace TextMining.Evaluation.Experiments
 
         public void Run()
         {
+            DateTime expSt = DateTime.Now;
+
             Console.WriteLine("========================================================================");
             Console.WriteLine(" Metoda porównania: " + comparators[comparatorId].GetType());
             Console.WriteLine("========================================================================");
@@ -95,6 +97,10 @@ namespace TextMining.Evaluation.Experiments
 
             PrintStats("KMeans", t2, kMeansResult);
             PrintStats("Hierachical", t1, hierarchicalResult);
+
+            Console.WriteLine("========================================================================");
+            Console.WriteLine("Czas działania: " + (DateTime.Now - expSt));
+
         }
 
         private  void PrintStats(string name, TimeSpan t1, List<Group> result)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 
 namespace TextMining.TextTools
@@ -20,7 +21,7 @@ namespace TextMining.TextTools
         {
             if (stopWords.Count == 0)
             {
-                string[] words = File.ReadAllLines("data/stopWords.txt");
+                string[] words = File.ReadAllLines(Path.GetFullPath(ConfigurationManager.AppSettings["stopWords"]));
 
                 foreach (string w in words)
                 {

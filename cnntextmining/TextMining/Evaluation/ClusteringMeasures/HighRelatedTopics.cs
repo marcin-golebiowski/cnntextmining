@@ -25,7 +25,7 @@ namespace TextMining.Evaluation.ClusteringMeasures
         {
             List<string[]> result = new List<string[]>();
 
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < relatedTopics.Count; i++)
             {
                 result.Add(new string[] { relatedTopics[i].topic1, relatedTopics[i].topic2 });
                 Console.WriteLine(relatedTopics[i].topic1 + "\n" + relatedTopics[i].topic2 + "\ndist = " + relatedTopics[i].distance + "\n");

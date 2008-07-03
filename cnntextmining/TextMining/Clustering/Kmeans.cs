@@ -21,6 +21,7 @@ namespace TextMining.Clustering
 
 
         public List<Group> Compute(Group news, uint K, uint maxIterations)
+        
         {
             var rand = new Random();
             var centroids = new Vector[K];
