@@ -95,15 +95,15 @@ namespace TextMining.Evaluation.Experiments
             List<Group> kMeansResult = km.Compute(initialGroup, topicCount != 0 ? topicCount : (uint)topics.Length, kMeansIterations);
             t2 = (DateTime.Now - start);
 
-            PrintStats("KMeans", t2, kMeansResult);
-            PrintStats("Hierachical", t1, hierarchicalResult);
+            PrintStats("KMeans", t2, kMeansResult, kMeansIterations);
+            PrintStats("Hierachical", t1, hierarchicalResult, 0);
 
             Console.WriteLine("========================================================================");
             Console.WriteLine("Czas działania: " + (DateTime.Now - expSt));
 
         }
 
-        private  void PrintStats(string name, TimeSpan t1, List<Group> result)
+        private  void PrintStats(string name, TimeSpan t1, List<Group> result, uint iter)
         {
             IGroupEvaluator groupEvaluator1 = new MedianCoverageForDominanceTopic();
             IGroupEvaluator groupEvaluator2 = new TopicSpitCount();
@@ -111,6 +111,12 @@ namespace TextMining.Evaluation.Experiments
 
             Console.WriteLine("========================================================================");
             Console.WriteLine(" --------==== " + name + " ====--------");
+
+            if (iter != 0)
+            {
+                Console.WriteLine("  -- liczba iteracji => " + iter);
+            }
+
             Console.WriteLine("  -- czas działania => " + t1);
             Console.WriteLine("  -- średnia dominacja => " + groupEvaluator1.Eval(result));
             Console.WriteLine("  -- suma rozbicia topików => " + groupEvaluator2.Eval(result));
